@@ -1,0 +1,31 @@
+inherited statsForm_LgXhdpiPh: TstatsForm_LgXhdpiPh
+  ClientHeight = 199
+  Constraints.MaxHeight = 200.000000000000000000
+  Constraints.MaxWidth = 200.000000000000000000
+  Constraints.MinHeight = 200.000000000000000000
+  Constraints.MinWidth = 200.000000000000000000
+  FormFactor.Width = 200
+  FormFactor.Height = 200
+  DesignerMasterStyle = 3
+  inherited winsLabel: TLabel
+    Position.Y = 71.000000000000000000
+  end
+  inherited gamesLabel: TLabel
+    Position.Y = 40.000000000000000000
+  end
+  inherited streakLabel: TLabel
+    Position.Y = 102.000000000000000000
+  end
+  inherited headLabel: TLabel
+    Margins.Bottom = 1.000000000000000000
+    Position.X = 59.000000000000000000
+    Position.Y = 8.000000000000000000
+  end
+  inherited Switcher: TSwitch
+    Enabled = False
+    Position.Y = 162.000000000000000000
+  end
+  inherited lastStreakLabel: TLabel
+    Position.Y = 132.000000000000000000
+  end
+end

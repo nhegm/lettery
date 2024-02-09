@@ -1,0 +1,94 @@
+object meaningForm1: TmeaningForm1
+  Left = 0
+  Top = 0
+  BorderStyle = Single
+  Caption = 'meaningForm1'
+  ClientHeight = 300
+  ClientWidth = 300
+  Fill.Color = xFF003049
+  Fill.Kind = Solid
+  Position = Designed
+  SystemStatusBar.BackgroundColor = xFF669BBC
+  StyleLookup = 'pushpanel'
+  FormStyle = Popup
+  Constraints.MaxHeight = 600.000000000000000000
+  Constraints.MaxWidth = 300.000000000000000000
+  Constraints.MinHeight = 300.000000000000000000
+  Constraints.MinWidth = 300.000000000000000000
+  FormFactor.Width = 300
+  FormFactor.Height = 300
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnShow = FormShow
+  Touch.GestureManager = GestureManager1
+  OnGesture = FormGesture
+  DesignerMasterStyle = 0
+  object meaningText: TLabel
+    AutoSize = True
+    StyledSettings = [Family, Size, Style]
+    Position.X = 20.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 260.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = xFFFDF0D5
+    TextSettings.HorzAlign = Center
+    Text = 'meaningText'
+    TabOrder = 0
+  end
+  object ScrollBar: TScrollBar
+    Touch.GestureManager = GestureManager1
+    Align = Right
+    HitTest = False
+    Max = 300.000000000000000000
+    SmallChange = 40.000000000000000000
+    Orientation = Vertical
+    Position.X = 282.000000000000000000
+    Size.Width = 12.000000000000000000
+    Size.Height = 300.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'ScrollBarStyle1'
+    TabOrder = 1
+    Visible = False
+    OnChange = ScrollBarChange
+  end
+  object GestureManager1: TGestureManager
+    Sensitivity = 100.000000000000000000
+    Left = 8
+    Top = 24
+    GestureData = <
+      item
+        Control = Owner
+        Collection = <
+          item
+            GestureID = sgiUp
+          end
+          item
+            GestureID = sgiDown
+          end>
+      end
+      item
+        Control = ScrollBar
+        Collection = <
+          item
+            Action = ScrollUp
+            GestureID = sgiUp
+          end
+          item
+            Action = ScrollDown
+            GestureID = sgiDown
+          end>
+      end>
+  end
+  object ActionList1: TActionList
+    Left = 56
+    Top = 24
+    object ScrollDown: TAction
+      Text = 'Action1'
+      OnExecute = ScrollDownExecute
+    end
+    object ScrollUp: TAction
+      Text = 'Action2'
+      OnExecute = ScrollUpExecute
+    end
+  end
+end

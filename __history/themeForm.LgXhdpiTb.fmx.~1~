@@ -1,0 +1,12 @@
+inherited setForm_LgXhdpiTb: TsetForm_LgXhdpiTb
+  ClientHeight = 828
+  ClientWidth = 480
+  StyleLookup = 'pushpanel'
+  Visible = True
+  DesignerMasterStyle = 0
+  inherited Label1: TLabel
+    Size.Width = 480.000000000000000000
+    TextSettings.Trimming = None
+    Text = #1062#1074#1077#1090#1086#1074#1072#1103' '#1089#1093#1077#1084#1072
+  end
+end

@@ -1,0 +1,173 @@
+﻿inherited MainForm_NmXhdpiPh: TMainForm_NmXhdpiPh
+  ClientHeight = 616
+  ClientWidth = 400
+  DesignerMasterStyle = 0
+  inherited R13: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R55: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R65: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R35: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R45: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R25: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R15: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R54: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R64: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R34: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R44: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R24: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R14: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R53: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R63: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R33: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R43: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R23: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R52: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R62: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R32: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R42: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R22: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R12: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R51: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R61: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R31: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R41: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited R21: TButton
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited meaning: TButton [33]
+  end
+  inherited ThemeButton: TButton [34]
+  end
+  inherited R11: TButton [35]
+    TextSettings.Font.StyleExt = {00020000000000000004000000}
+  end
+  inherited й: TButton [36]
+  end
+  inherited ц: TButton [37]
+  end
+  inherited у: TButton [38]
+  end
+  inherited к: TButton [39]
+  end
+  inherited е: TButton [40]
+  end
+  inherited н: TButton [41]
+  end
+  inherited г: TButton [42]
+  end
+  inherited ш: TButton [43]
+  end
+  inherited ф: TButton [44]
+  end
+  inherited ы: TButton [45]
+  end
+  inherited в: TButton [46]
+  end
+  inherited а: TButton [47]
+  end
+  inherited п: TButton [48]
+  end
+  inherited р: TButton [49]
+  end
+  inherited о: TButton [50]
+  end
+  inherited л: TButton [51]
+  end
+  inherited я: TButton [52]
+  end
+  inherited ч: TButton [53]
+  end
+  inherited с: TButton [54]
+  end
+  inherited м: TButton [55]
+  end
+  inherited и: TButton [56]
+  end
+  inherited т: TButton [57]
+  end
+  inherited ь: TButton [58]
+  end
+  inherited б: TButton [59]
+  end
+  inherited щ: TButton [60]
+  end
+  inherited з: TButton [61]
+  end
+  inherited х: TButton [62]
+  end
+  inherited ъ: TButton [63]
+  end
+  inherited д: TButton [64]
+  end
+  inherited ж: TButton [65]
+  end
+  inherited э: TButton [66]
+  end
+  inherited enter: TButton [67]
+  end
+  inherited ю: TButton [68]
+  end
+  inherited deleteBtn: TButton [69]
+  end
+  inherited ё: TButton [70]
+  end
+  inherited InfoLabel: TLabel [71]
+  end
+  inherited FlashLight: TRectangle [72]
+  end
+end

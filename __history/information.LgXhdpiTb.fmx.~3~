@@ -1,0 +1,5 @@
+inherited infoForm_LgXhdpiTb: TinfoForm_LgXhdpiTb
+  ClientHeight = 828
+  ClientWidth = 480
+  DesignerMasterStyle = 0
+end

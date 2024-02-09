@@ -1,0 +1,168 @@
+object setForm: TsetForm
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = Single
+  Caption = 'Form2'
+  ClientHeight = 428
+  ClientWidth = 300
+  Fill.Kind = Solid
+  FormStyle = Popup
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Orientations = [Portrait]
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object Label1: TLabel
+    AutoSize = True
+    StyledSettings = []
+    Position.X = 96.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 114.399993896484400000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'buttonstylelabel'
+    TextSettings.HorzAlign = Center
+    Text = 'Color Scheme'
+    TabOrder = 0
+  end
+  object azul: TRoundRect
+    Locked = True
+    Position.X = 41.000000000000000000
+    Position.Y = 97.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 34.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = azulClick
+    object Text1: TText
+      Align = Center
+      Locked = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'azul'
+      OnClick = Text1Click
+    end
+  end
+  object day: TRoundRect
+    Position.X = 41.000000000000000000
+    Position.Y = 139.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 34.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = dayClick
+    object Text2: TText
+      Align = Center
+      Locked = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'day'
+      OnClick = Text2Click
+    end
+  end
+  object violet: TRoundRect
+    Position.X = 41.000000000000000000
+    Position.Y = 195.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 34.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = violetClick
+    object Text3: TText
+      Align = Center
+      Locked = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'violet'
+      OnClick = Text3Click
+    end
+  end
+  object returnButton: TButton
+    StyledSettings = [Family, Style, FontColor]
+    Margins.Left = 1.000000000000000000
+    Margins.Top = 1.000000000000000000
+    Margins.Right = 1.000000000000000000
+    Margins.Bottom = 1.000000000000000000
+    Position.X = 56.000000000000000000
+    Position.Y = 264.000000000000000000
+    Size.Width = 90.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    Text = #1074#1077#1088#1085#1091#1090#1100#1089#1103
+    TextSettings.Font.Size = 14.000000000000000000
+    Visible = False
+    OnClick = returnButtonClick
+  end
+  object barbie: TRoundRect
+    Position.X = 41.000000000000000000
+    Position.Y = 251.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 34.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = barbieClick
+    object Text4: TText
+      Align = Center
+      Locked = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'barbie'
+      OnClick = Text4Click
+    end
+  end
+  object console: TRoundRect
+    Position.X = 41.000000000000000000
+    Position.Y = 293.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 34.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = consoleClick
+    object Text5: TText
+      Align = Center
+      Locked = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'console'
+      OnClick = Text5Click
+    end
+  end
+  object latinum: TRoundRect
+    Position.X = 41.000000000000000000
+    Position.Y = 341.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 34.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = latinumClick
+    object Text6: TText
+      Align = Center
+      Locked = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'latinum'
+      OnClick = Text6Click
+    end
+  end
+  object greek: TRoundRect
+    Position.X = 41.000000000000000000
+    Position.Y = 383.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 34.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = greekClick
+    object Text7: TText
+      Align = Center
+      Locked = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'greek'
+      OnClick = Text7Click
+    end
+  end
+end

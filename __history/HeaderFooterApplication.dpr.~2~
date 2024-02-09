@@ -1,0 +1,20 @@
+program HeaderFooterApplication;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  HeaderFooterTemplate in 'HeaderFooterTemplate.pas' {MainForm},
+  information in 'information.pas',
+  languageForm in 'languageForm.pas',
+  meaningForm in 'meaningForm.pas',
+  statistics in 'statistics.pas',
+  themeForm in 'themeForm.pas',
+  Unit3 in 'Unit3.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TMainForm, MainForm);
+  Application.Run;
+end.

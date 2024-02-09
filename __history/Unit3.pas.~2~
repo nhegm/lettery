@@ -1,0 +1,91 @@
+unit Unit3;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Gestures,
+  System.Actions, FMX.ActnList, FMX.StdCtrls, FMX.Controls.Presentation;
+
+type
+  TForm3 = class(TForm)
+    GestureManager1: TGestureManager;
+    ActionList1: TActionList;
+    ScrollBar: TScrollBar;
+    meaningText: TLabel;
+    Up: TAction;
+    Down: TAction;
+    procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
+      var Handled: Boolean);
+    procedure FormShow(Sender: TObject);
+    procedure ScrollBarChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form3: TForm3;
+
+implementation
+
+uses HeaderFooterTemplate;
+
+{$R *.fmx}
+const
+  posY = 100;
+var
+  meaningString : String;
+
+procedure TForm3.FormShow(Sender: TObject);
+begin
+
+  Fill.Color := cinco_cartas.bckgrndColor[ColorsSetNumber];
+  meaningText.TextSettings.FontColor := cinco_cartas.boardNKeyTextColorsDef[ColorsSetNumber];
+  Form3.Top:=50;
+  Form3.Left:=70;
+  Form3.Width:=round(meaningText.Width)+40;
+  meaningString := cinco_cartas.meaningOfTheWord;
+  meaningText.Text := AnsiToUTF8 (meaningString);
+
+  if meaningText.height+12<400
+    then begin
+      meaningText.Position.Y := 0;
+      Form3.ScrollBar.Visible := false;
+      Form3.height:=round(meaningText.height) + 8;
+    end
+    else begin
+      Form3.height:=400;
+      Form3.ScrollBar.Visible:=true;
+      ScrollBar.Min := 0;
+      ScrollBar.Value := 0;
+      ScrollBar.Max := Form3.meaningText.Height - Form3.height + 8;
+    end;
+  Form3.Active := true;
+  Form2.Active := false;
+
+end;
+
+procedure TForm3.ScrollBarChange(Sender: TObject);
+begin
+  meaningText.Position.Y := - ScrollBar.Value;
+end;
+
+procedure TForm3.FormGesture(Sender: TObject;
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+  var GestureString: string;
+      dist: integer;
+begin
+  GestureToIdent(EventInfo.GestureID , GestureString);
+  if GestureString = 'sgiDown'
+    then begin
+      meaningText.Position.Y := - EventInfo.Distance;
+    end;
+  if EventInfo.GestureID = sgiUp
+    then begin
+      meaningText.Position.Y := + EventInfo.Distance;
+    end;
+end;
+
+end.
