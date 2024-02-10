@@ -2126,7 +2126,7 @@ begin
   vocabFill;
 
           // Данный параметр нужен для тестирования. Задаёт определённое по счёту слово.
-  numberOfTheword := 2;                               // акция - abbey - abaco - 2 слово
+//  numberOfTheword := 2;                               // акция - abbey - abaco - 2 слово
           //
 
   InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
