@@ -634,7 +634,6 @@
                 <DeployFile LocalName="Android64\Debug\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest"/>
                 <DeployFile LocalName="Android64\Debug\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest">
                     <Platform Name="Android64">
-                        <Enabled>false</Enabled>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -848,13 +847,6 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="Rus5Mean.txt" Configuration="Debug" Class="File">
-                    <Platform Name="Android64">
-                        <RemoteDir>.\assets\internal\</RemoteDir>
-                        <RemoteName>Rus5Mean.txt</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Rus5Mean.txt" Configuration="Debug" Class="File">
                     <Platform Name="OSX64">
                         <RemoteDir>Contents\MacOS\</RemoteDir>
                         <RemoteName>Rus5Mean.txt</RemoteName>
@@ -870,13 +862,6 @@
                 </DeployFile>
                 <DeployFile LocalName="Rus5Word.txt" Configuration="Debug" Class="File">
                     <Platform Name="Android">
-                        <RemoteDir>.\assets\internal\</RemoteDir>
-                        <RemoteName>Rus5Word.txt</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Rus5Word.txt" Configuration="Debug" Class="File">
-                    <Platform Name="Android64">
                         <RemoteDir>.\assets\internal\</RemoteDir>
                         <RemoteName>Rus5Word.txt</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -934,6 +919,20 @@
                 <DeployFile LocalName="temp\AndroidManifest.xml" Configuration="Debug" Class="File">
                     <Platform Name="Android64">
                         <RemoteName>AndroidManifest.xml</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="temp\Rus5Mean.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Android64">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <RemoteName>Rus5Mean.txt</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="temp\Rus5Word.txt" Configuration="Debug" Class="File">
+                    <Platform Name="Android64">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <RemoteName>Rus5Word.txt</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

@@ -47,6 +47,15 @@
     TextSettings.FontColor = claNull
     TextSettings.Trimming = None
     OnClick = infoClick
+    object InfoAnimation: TFloatAnimation
+      AnimationType = InOut
+      Duration = 1.500000000000000000
+      Interpolation = Circular
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
   end
   object Lang: TButton
     StyledSettings = []
@@ -60,6 +69,15 @@
     TextSettings.FontColor = xFFFDF0D5
     TextSettings.Trimming = None
     OnClick = LangClick
+    object LangAnimation: TFloatAnimation
+      AnimationType = InOut
+      Duration = 1.500000000000000000
+      Interpolation = Circular
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
   end
   object stats: TButton
     StyledSettings = [Family, Style, FontColor]
@@ -1289,7 +1307,7 @@
     end
   end
   object meaning: TButton
-    StyledSettings = [Family, FontColor]
+    StyledSettings = []
     Position.X = 177.000000000000000000
     Position.Y = 15.000000000000000000
     Size.Width = 32.000000000000000000
@@ -1297,17 +1315,20 @@
     Size.PlatformDefault = False
     TabOrder = 5
     Text = #55358#56800
+    TextSettings.Font.Family = 'Comic Sans MS'
     TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.WordWrap = True
     TextSettings.Trimming = None
     OnClick = meaningClick
-    object BrainAnimation: TColorAnimation
-      AutoReverse = True
-      Duration = 0.500000000000000000
+    object BrainDissapearance: TFloatAnimation
+      AnimationType = InOut
+      Duration = 1.500000000000000000
+      Interpolation = Circular
       Loop = True
-      PropertyName = 'TintColor'
-      StartValue = claNull
-      StopValue = xFFFFFFB7
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
     end
   end
 end

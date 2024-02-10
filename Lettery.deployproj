@@ -148,6 +148,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="temp\Rus5Word.txt" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Rus5Word.txt</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="Eng5Mean.txt" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\assets\internal\</RemoteDir>
             <RemoteName>Eng5Mean.txt</RemoteName>
@@ -162,15 +171,6 @@
             <RemoteName>styles.xml</RemoteName>
             <DeployClass>AndroidSplashStyles</DeployClass>
             <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Rus5Mean.txt" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Rus5Mean.txt</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -203,6 +203,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="Android64\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\</RemoteDir>
+            <RemoteName>AndroidManifest.xml</RemoteName>
+            <DeployClass>ProjectAndroidManifest</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="temp\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
@@ -226,15 +235,6 @@
             <RemoteName>ic_notification.png</RemoteName>
             <DeployClass>Android_NotificationIcon48</DeployClass>
             <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Rus5Word.txt" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Rus5Word.txt</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -379,6 +379,15 @@
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage426</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\Rus5Mean.txt" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Rus5Mean.txt</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>

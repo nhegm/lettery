@@ -92,4 +92,7 @@ inherited MainForm_iPhone4in: TMainForm_iPhone4in
   inherited R11: TButton
     TextSettings.Font.StyleExt = {00020000000000000004000000}
   end
+  inherited meaning: TButton
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+  end
 end

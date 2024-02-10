@@ -87,7 +87,9 @@ type
     FlashLightMeaning: TRectangle;
     RectAnimation1: TColorAnimation;
     ColorAnimation1: TColorAnimation;
-    BrainAnimation: TColorAnimation;
+    BrainDissapearance: TFloatAnimation;
+    InfoAnimation: TFloatAnimation;
+    LangAnimation: TFloatAnimation;
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure deleteBtnClick(Sender: TObject);
@@ -148,7 +150,7 @@ const                                                                   // 1    
     boardNKeyTextColorsGrey: array   [1..colorsMax] of TAlphaColor = ( $FF6c757d , $FF495057 , $FFd6a9db , $FFcbcbcb , $FFFFFFFF, $FF6C757D, $FFd6d6d6 );
     boardNKeyTextColorsRed: array    [1..colorsMax] of TAlphaColor = ( $FFFFB3C6 , $FFba181b , $FFff5d73 , $FFa9a2a6 , $FF000000, $FFDC1934, $FFDFBA89 );
     barsColors:             array    [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FF495057 , $FF725ac1 , $FFff037d , $FF000080, $FFAB172B, $FF1C85F6 );
-  sizeRUS = 4856;
+  sizeRUS = 4844;
   sizeENG = 3193;
   sizeESP = 3595;
   sizeLAT = 3;
@@ -644,7 +646,7 @@ begin
   keys[36].Position.X := keys[35].Position.X + keys[35].Width + padX;
   keys[41].Position.X := keys[36].Position.X + keys[36].Width + padX;
   keys[34].Position.X := keys[41].Position.X + keys[41].Width + padX;
-  keys[37].Position.X := keys[34].Position.X + keys[34].Width + padX;
+  keys[37].Position.X := screen.Width - keys[37].Width - padX;
 {$ENDIF}
 
 {$IFDEF MSWINDOWS}
@@ -1328,6 +1330,8 @@ procedure TMainForm.FormCreate(Sender: TObject);
 begin
 
   readIniFile;
+  if VocNumber = 0 then InfoAnimation.Enabled := true;       // infoAnimation on first run
+  if VocNumber = 0 then LangAnimation.Enabled := true;       // infoAnimation on first run
   if VocNumber = 0 then VocNumber := 2;
   if ColorsSetNumber = 0 then ColorsSetNumber := 6;
 
@@ -1354,10 +1358,6 @@ begin
 
   {$IF Defined(ANDROID)}
   keyboardPosition;
-//  infoLabelProperties;
-//  boardSizeCalc;
-//  topButtonsProperties;
-//  topButtonsPositions;
   {$ENDIF}
 
   {$IFDEF MSWINDOWS}
@@ -2031,11 +2031,7 @@ end;
 
 procedure TMainForm.meaningClick(Sender: TObject);
 begin
-  FlashLightMeaning.Visible := false;
-  RectAnimation1.Enabled := false;
-
-  BrainAnimation.Enabled := false;
-
+  BrainDissapearance.Enabled := false;
   meaningForm1.Show;
 end;
 
@@ -2047,11 +2043,13 @@ end;
 
 procedure TMainForm.langClick(Sender: TObject);
 begin
+  LangAnimation.Enabled := false;
   language.show;
 end;
 
 procedure TMainForm.infoClick(Sender: TObject);
 begin
+  InfoAnimation.Enabled := false;
   informationForm.Show;
 end;
 
@@ -2080,11 +2078,10 @@ begin
           statsFileWriteWon;
           BoardSuccessColoring;
           {$IFDEF ANDROID}
-            BrainAnimation.Enabled := true;
+            BrainDissapearance.Enabled := true;
           {$ENDIF}
           {$IFDEF MSWINDOWS}
-            FlashLightMeaning.Visible := true;
-            BrainAnimation.Enabled := true;
+            BrainDissapearance.Enabled := true;
           {$ENDIF}
         end else if rovv=6 then begin
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];       // розовый
@@ -2129,7 +2126,7 @@ begin
   vocabFill;
 
           // Данный параметр нужен для тестирования. Задаёт определённое по счёту слово.
-//  numberOfTheword := 47;                               // акция - abbey - abaco - 2 слово
+  numberOfTheword := 2;                               // акция - abbey - abaco - 2 слово
           //
 
   InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
