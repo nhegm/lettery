@@ -2084,7 +2084,7 @@ begin
           {$ENDIF}
           {$IFDEF MSWINDOWS}
             FlashLightMeaning.Visible := true;
-            BrainAnimation1.Enabled := true;
+            BrainAnimation.Enabled := true;
           {$ENDIF}
         end else if rovv=6 then begin
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];       // розовый
@@ -2129,7 +2129,7 @@ begin
   vocabFill;
 
           // Данный параметр нужен для тестирования. Задаёт определённое по счёту слово.
-//  numberOfTheword := 2;                               // акция - abbey - abaco - 2 слово
+//  numberOfTheword := 47;                               // акция - abbey - abaco - 2 слово
           //
 
   InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];

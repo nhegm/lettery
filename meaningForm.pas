@@ -9,12 +9,13 @@ uses
   FMX.Layouts, Math, System.Actions, FMX.ActnList, FMX.StdActns, FMX.Gestures,
   System.Sensors, System.Sensors.Components, FMX.Memo.Types, FMX.ScrollBox,
   FMX.Memo, IdIntercept, IdBaseComponent, IdLogBase, IdLogEvent,
-  FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Intf, FireDAC.Comp.Client;
+  FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Intf, FireDAC.Comp.Client, FMX.InertialMovement;
 
 type
   TmeaningForm1 = class(TForm)
     meaningText: TLabel;
     ScrollBar: TScrollBar;
+    ScrollBox: TScrollBox;
 
     procedure FormShow(Sender: TObject);
     procedure ScrollBarChange(Sender: TObject);
@@ -48,23 +49,40 @@ begin
   meaningText.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   meaningForm1.Top:=50;
   meaningForm1.Left:=70;
-  meaningForm1.Width:=round(meaningText.Width)+40;
+  meaningText.TextSettings.Font.Size := 18;
   meaningString := HeaderFooterTemplate.meaningOfTheWord;
   meaningText.Text := AnsiToUTF8 (meaningString);
 
-  if meaningText.height+12<400
-    then begin
-      meaningText.Position.Y := 0;
-      meaningForm1.ScrollBar.Visible := false;
-      meaningForm1.height:=round(meaningText.height) + 8;
-    end
-    else begin
-      meaningForm1.height:=400;
-      meaningForm1.ScrollBar.Visible:=true;
-      ScrollBar.Min := 0;
-      ScrollBar.Value := 0;
-      ScrollBar.Max := meaningText.Height - meaningForm1.height + 8;
+  {$IFDEF ANDROID}
+    ScrollBox.Height := meaningText.Height;
+    meaningForm1.Width := round(ScrollBox.Width) + 16;
+    if ScrollBox.height + 16 < 300
+      then meaningForm1.height := round (ScrollBox.Height + 16);
+    if ScrollBox.height + 16 >= 300
+      then begin
+        meaningForm1.Height := 300;
+        ScrollBox.Height := 284;
+        ScrollBox.AniCalculations.TouchTracking := [ttVertical];
+        ScrollBox.AniCalculations.Animation := True;
     end;
+  {$ENDIF}
+
+  {$IFDEF MSWINDOWS}
+    meaningForm1.Width:=round(meaningText.Width)+40;
+    if meaningText.height+12<400
+      then begin
+        meaningText.Position.Y := 0;
+        meaningForm1.ScrollBar.Visible := false;
+        meaningForm1.height:=round(meaningText.height) + 8;
+      end
+      else begin
+        meaningForm1.height:=400;
+        meaningForm1.ScrollBar.Visible:=true;
+        ScrollBar.Min := 0;
+        ScrollBar.Value := 0;
+        ScrollBar.Max := meaningText.Height - meaningForm1.height + 8;
+      end;
+  {$ENDIF}
   meaningForm1.Active := true;
   MainForm.Active := false;
 end;
