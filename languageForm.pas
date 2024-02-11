@@ -9,16 +9,13 @@ uses
 
 type
   Tlanguage = class(TForm)
-    okButton: TButton;
     langButton1: TButton;
     langButton2: TButton;
     langButton4: TButton;
     procedure langButton1Click(Sender: TObject);
     procedure langButton2Click(Sender: TObject);
     procedure langButton4Click(Sender: TObject);
-    procedure okButtonClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure FormDeactivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,18 +36,6 @@ uses HeaderFooterTemplate;
       padY: single;
 
 {$R *.fmx}
-
-//procedure TlanguageForm.okButtonClick(Sender: TObject);
-//begin
-//  for I := 1 to 5 do
-//    if vocChangeClick[i] = true
-//      then HeaderFooterTemplate.VocNumber := i;
-//end;
-
-procedure Tlanguage.FormDeactivate(Sender: TObject);
-begin
-  MainForm.Active := true;
-end;
 
 procedure Tlanguage.FormShow(Sender: TObject);
 begin
@@ -79,15 +64,10 @@ begin
     langButton[i].Position.Y := langButton[i-1].Position.Y + langButton[i-1].Height + padY;
   for I := 1 to 3 do
     langButton[i].Position.X := (language.Width - langButton[i].Width)/2;
-  okButton.Position.Y := langButton[3].Position.Y + langButton[3].Height + padY;
-  okButton.Position.X := (language.Width - okButton.Width)/2;
   for I := 1 to 3 do begin
     langButton[i].TintColor := HeaderFooterTemplate.boardNKeyColorsDef[ColorsSetNumber];
     langButton[i].TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   end;
-
-  okButton.TintColor := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
-  okButton.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
 
   for I := 1 to 2 do begin
     if VocNumber = i
@@ -129,16 +109,6 @@ begin
   langButton2.Enabled := true;
   langButton1.Enabled := true;
   languageChanged := true;
-end;
-
-procedure Tlanguage.okButtonClick(Sender: TObject);
-begin
-{$IF Defined(ANDROID)}
-  language.Close;
-{$ELSEIF Defined(MSWINDOWS)}
-  language.Destroy;
-{$ENDIF}
-
 end;
 
 end.

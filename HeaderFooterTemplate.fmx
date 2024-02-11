@@ -12,7 +12,6 @@
   FormFactor.Devices = []
   OnActivate = FormActivate
   OnCreate = FormCreate
-  OnMouseDown = FormMouseDown
   DesignerMasterStyle = 3
   object R13: TButton
     StyledSettings = []

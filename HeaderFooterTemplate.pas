@@ -133,8 +133,6 @@ type
     procedure юClick(Sender: TObject);
     procedure яClick(Sender: TObject);
     procedure infoClick(Sender: TObject);
-    procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Single);
   private
     { Private declarations }
   public
@@ -1382,12 +1380,6 @@ begin
 
 end;
 
-procedure TMainForm.FormMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Single);
-begin
-  FormActivate(Sender);
-end;
-
 procedure BoardSuccessColoring;
 begin
   for I := 1 to 5 do begin
@@ -1768,6 +1760,8 @@ begin
 
   {$IFDEF ANDROID}
   keyboardPosition;
+  if languageChanged = true
+    then BrainDissapearance.Enabled := false;
   {$ENDIF}
 
   {$IFDEF MSWINDOWS}
@@ -2118,12 +2112,14 @@ begin
   col:=0;
   start.Enabled:=false;
   meaning.Enabled:=false;
+  BrainDissapearance.Enabled := false;
   keyboardEnable;
   meaningsFill;
   BoardDefState;
   BoardDefColor;
   KeyboardDefColor;
   vocabFill;
+  languageChanged := false;
 
           // Данный параметр нужен для тестирования. Задаёт определённое по счёту слово.
 //  numberOfTheword := 2;                               // акция - abbey - abaco - 2 слово
