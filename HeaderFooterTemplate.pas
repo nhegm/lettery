@@ -141,12 +141,12 @@ type
 const                                                                   // 1         // 2        // 3         //4          //5        //6        //7
   colorsMax = 7;                                                        // azul     // day     // violet   // Barbie   // Console // latinum // greek
     bckgrndColor: array              [1..colorsMax] of TAlphaColor = ( $FF003049 , $FFfdfdfd , $FF725ac1 , $FFFDECF4 , $FF000080, $FFFDF0D5, $FFffffff );
-    boardNKeyColorsDef: array        [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FFd2d2d2 , $FFf7ece1 , $FFff67b1 , $FFC0C0C0, $FFAB172B, $FF1C85F6 );
-    boardNKeyTextColorsDef: array    [1..colorsMax] of TAlphaColor = ( $FFFDF0D5 , $FF000000 , $FFfdfffc , $FFff037d , $FFDB00FF, $FF000000, $FF865746 );
-    boardNKeyTextColorsYellow: array [1..colorsMax] of TAlphaColor = ( $FFffea00 , $FFffc000 , $FFffff3f , $FFf0f405 , $FFFFFF00, $FF00C8FA, $FFffee32 );
+    boardNKeyColorsDef: array        [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FFd2d2d2 , $FFf7ece1 , $FFff67b1 , $FFDB00FF, $FFAB172B, $FF1C85F6 );
+    boardNKeyTextColorsDef: array    [1..colorsMax] of TAlphaColor = ( $FFFDF0D5 , $FF000000 , $FFfdfffc , $FFff037d , $FF00ffdb, $FF000000, $FF865746 );
+    boardNKeyTextColorsYellow: array [1..colorsMax] of TAlphaColor = ( $FFffea00 , $FFffc000 , $FFffff3f , $FFf0f405 , $FFffdb00, $FF00C8FA, $FFffee32 );
     boardNKeyTextColorsGreen: array  [1..colorsMax] of TAlphaColor = ( $FF5bf36d , $FF40916c , $FF80ed99 , $FF73C4FE , $FF00FF33, $FF7B2CBF, $FF02c39a );
     boardNKeyTextColorsGrey: array   [1..colorsMax] of TAlphaColor = ( $FF6c757d , $FF495057 , $FFd6a9db , $FFcbcbcb , $FFFFFFFF, $FF6C757D, $FFd6d6d6 );
-    boardNKeyTextColorsRed: array    [1..colorsMax] of TAlphaColor = ( $FFFFB3C6 , $FFba181b , $FFff5d73 , $FFa9a2a6 , $FF000000, $FFDC1934, $FFDFBA89 );
+    boardNKeyTextColorsRed: array    [1..colorsMax] of TAlphaColor = ( $FFFFB3C6 , $FFba181b , $FFff5d73 , $FFa9a2a6 , $FFF0F0F0, $FFDC1934, $FFDFBA89 );
     barsColors:             array    [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FF495057 , $FF725ac1 , $FFff037d , $FF000080, $FFAB172B, $FF1C85F6 );
   sizeRUS = 4844;
   sizeENG = 3193;
@@ -1382,18 +1382,30 @@ end;
 
 procedure BoardSuccessColoring;
 begin
+{$IFDEF ANDROID}
   for I := 1 to 5 do begin
     board[rovv,i].TintColor := boardNKeyTextColorsGreen[ColorsSetNumber];
     board[rovv,i].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
   end;
+{$ENDIF}
+{$IFDEF MSWINDOWS}
+  for I := 1 to 5 do
+    board[rovv,i].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
+{$ENDIF}
 end;
 
 procedure BoardFailColoring;
 begin
+{$IFDEF ANDROID}
   for I := 1 to 5 do begin
     board[rovv,i].TintColor := boardNKeyTextColorsRed[ColorsSetNumber];
     board[rovv,i].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
   end;
+{$ENDIF}
+{$IFDEF MSWINDOWS}
+  for I := 1 to 5 do
+    board[rovv,i].TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];
+{$ENDIF}
 end;
 
 procedure keyboardDisable;
@@ -1410,7 +1422,7 @@ end;
 
 procedure keyboardColoring;
 begin
-
+{$IFDEF ANDROID}
   if VocNumber = 1 then begin
 
     for j := 1 to 5 do
@@ -1476,7 +1488,74 @@ begin
                                     and (keys[27].TintColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then
                    keys[27].TintColor := boardNKeyTextColorsGrey[ColorsSetNumber];
   end;
+{$ENDIF}
+{$IFDEF MSWINDOWS}
+  if VocNumber = 1 then begin
 
+    for j := 1 to 5 do
+      for i := 1 to 32 do
+        if (ord(words[rovv][j])=1071+i) then                                // 223 было
+          if ask[rovv,j]=2
+            then keys[i].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber]
+            else if (ask[rovv,j]=1) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then
+              keys[i].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber]
+                 else if (ask[rovv,j]=0) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                                    and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then
+                   keys[i].TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];
+    for j := 1 to 5 do
+      if (words[rovv][j] = #1105) then                                  //  (row[j] = 'ё')
+        if ask[rovv,j]=2 then
+          keys[33].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber]
+            else if (ask[rovv,j]=1) and (keys[33].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then
+              keys[33].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber]
+                 else if (ask[rovv,j]=0) and (keys[33].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                                    and (keys[33].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then
+                   keys[33].TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];
+
+  end;
+
+  if (VocNumber = 2) or (VocNumber = 3) then begin
+
+    for j := 1 to 5 do
+      for i := 1 to 33 do begin
+        if (ord(words[rovv][j])=96+i) then begin
+          if ask[rovv,j]=2
+            then keys[i].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
+          if (ask[rovv,j]=1) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+            then keys[i].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber];
+          if (ask[rovv,j]=0) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                             and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
+            then keys[i].TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];
+        end;
+      end;
+
+  end;
+
+    if VocNumber = 4 then begin
+
+    for j := 1 to 5 do
+      for i := 1 to 33 do begin
+        if (ord(words[rovv][j])=96+i) then begin
+          if ask[rovv,j]=2
+            then keys[i].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
+          if (ask[rovv,j]=1) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+            then keys[i].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber];
+          if (ask[rovv,j]=0) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                             and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
+            then keys[i].TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];
+        end;
+      end;
+    for j := 1 to 5 do
+      if (words[rovv][j] = 'ñ') then
+        if ask[rovv,j]=2 then
+          keys[27].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber]
+            else if (ask[rovv,j]=1) and (keys[27].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then
+              keys[27].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber]
+                 else if (ask[rovv,j]=0) and (keys[27].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                                    and (keys[27].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then
+                   keys[27].TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];
+  end;
+{$ENDIF}
 end;
 
 procedure BoardDefState;
@@ -1524,7 +1603,7 @@ end;
 
 procedure keyboardColorsRefresh;
 begin
-
+{$IFDEF ANDROID}
   if VocNumber = 1 then begin
     for i := 1 to rovv do
       for j := 1 to 5 do
@@ -1608,7 +1687,93 @@ begin
       then BoardSuccessColoring
       else if rovv=6 then BoardFailColoring;
   end;
+{$ENDIF}
+{$IFDEF MSWINDOWS}
+  if VocNumber = 1 then begin
+    for i := 1 to rovv do
+      for j := 1 to 5 do
+        if board[i,j].Text <> '' then
+          if words[i] <> '' then
+            if (ord(words[i][j]) > 1071) and (ord(words[i][j]) < 1104) then begin
+              if board[i,j].TextSettings.FontColor = boardNKeyTextColorsGreen[ColorsSetNumber]
+                then keys[ord(words[i][j]) - 1071].TextSettings.FontColor:= boardNKeyTextColorsGreen[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsYellow[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 1071].TextSettings.FontColor<> boardNKeyTextColorsGreen[ColorsSetNumber])
+                then keys[ord(words[i][j]) - 1071].TextSettings.FontColor:= boardNKeyTextColorsYellow[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 1071].TextSettings.FontColor<> boardNKeyTextColorsGreen[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 1071].TextSettings.FontColor<> boardNKeyTextColorsYellow[ColorsSetNumber])
+                then keys[ord(words[i][j]) - 1071].TextSettings.FontColor:= boardNKeyTextColorsGrey[colorsSetNumber]
+            end else begin
+              if board[i,j].TextSettings.FontColor = boardNKeyTextColorsGreen[ColorsSetNumber]
+                then keys[33].TextSettings.FontColor:= boardNKeyTextColorsGreen[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsYellow[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 1071].TextSettings.FontColor<> boardNKeyTextColorsGreen[ColorsSetNumber])
+                then keys[33].TextSettings.FontColor:= boardNKeyTextColorsYellow[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 1071].TextSettings.FontColor<> boardNKeyTextColorsGreen[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 1071].TextSettings.FontColor<> boardNKeyTextColorsYellow[ColorsSetNumber])
+                then keys[33].TextSettings.FontColor:= boardNKeyTextColorsGrey[colorsSetNumber];
+              end;
+    if wordGuessedRight
+      then BoardSuccessColoring;
+    if wordGuessedWrong
+      then BoardFailColoring;
+  end;
 
+
+  if (VocNumber = 2) or (VocNumber = 3) then begin
+    for i := 1 to rovv do
+      for j := 1 to 5 do
+        if board[i,j].Text <> '' then
+          if words[i] <> '' then
+            if (ord(words[i][j]) > 96) and (ord(words[i][j]) < 123) then begin
+              if board[i,j].TextSettings.FontColor = boardNKeyTextColorsGreen[ColorsSetNumber]
+                then keys[ord(words[i][j]) - 96].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsYellow[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 96].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                then keys[ord(words[i][j]) - 96].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 96].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 96].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
+                then keys[ord(words[i][j]) - 96].TextSettings.FontColor := boardNKeyTextColorsGrey[colorsSetNumber]
+            end;
+    if wordGuessedRight
+      then BoardSuccessColoring
+      else if rovv=6 then BoardFailColoring;
+  end;
+
+  if VocNumber = 4 then begin
+    for i := 1 to rovv do
+      for j := 1 to 5 do
+        if board[i,j].Text <> '' then
+          if words[i] <> '' then
+            if (ord(words[i][j]) > 96) and (ord(words[i][j]) < 123) then begin
+              if board[i,j].TextSettings.FontColor = boardNKeyTextColorsGreen[ColorsSetNumber]
+                then keys[ord(words[i][j]) - 96].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsYellow[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 96].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                then keys[ord(words[i][j]) - 96].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 96].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) and
+                 (keys[ord(words[i][j]) - 96].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
+                then keys[ord(words[i][j]) - 96].TextSettings.FontColor := boardNKeyTextColorsGrey[colorsSetNumber]
+            end else begin
+              if board[i,j].TextSettings.FontColor = boardNKeyTextColorsGreen[ColorsSetNumber]
+                then keys[27].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsYellow[ColorsSetNumber]) and
+                 (keys[27].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                then keys[27].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber];
+              if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
+                 (keys[27].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) and
+                 (keys[27].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
+                then keys[27].TextSettings.FontColor := boardNKeyTextColorsGrey[colorsSetNumber];
+              end;
+    if wordGuessedRight
+      then BoardSuccessColoring
+      else if rovv=6 then BoardFailColoring;
+  end;
+{$ENDIF}
 end;
 
 procedure rowLettersDelete;
@@ -2085,7 +2250,8 @@ begin
           endRoundBtns;
           statsReadAll;
           statsFileWriteLost;
-          BoardFailColoring
+          BoardFailColoring;
+          BrainDissapearance.Enabled := true;
         end;
 
         if (rovv<6) and not wordGuessedRight then
