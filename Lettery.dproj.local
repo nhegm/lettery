@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<ActiveMobileDevice>
-		<NoProfile Android="" Android64="18dac8fe"/>
+		<NoProfile Android="" Android64=""/>
 	</ActiveMobileDevice>
 	<Transactions>
     <Transaction>1899.12.30 00:00:00.000.522,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.138,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.975,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.778,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.678,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.882,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.135,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.153,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.678,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.455,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\info.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\infoForm.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.402,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.392,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\statistics.pas=</Transaction>
@@ -33,7 +33,7 @@
     <Transaction>1899.12.30 00:00:00.000.267,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\meaningForm.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.953,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\meaningForm.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.827,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\meaningForm.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.153,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.882,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.297,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.pas=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.541,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.414,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit1.pas</Transaction>
