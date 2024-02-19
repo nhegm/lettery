@@ -1,6 +1,7 @@
 ﻿inherited MainForm_LgXhdpiTb: TMainForm_LgXhdpiTb
   ClientHeight = 828
   ClientWidth = 480
+  OnSaveState = FormSaveState
   DesignerMasterStyle = 3
   inherited ц: TButton
     Position.X = 40.000000000000000000

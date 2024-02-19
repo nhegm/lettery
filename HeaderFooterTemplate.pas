@@ -133,6 +133,8 @@ type
     procedure юClick(Sender: TObject);
     procedure яClick(Sender: TObject);
     procedure infoClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormSaveState(Sender: TObject);
   private                                                                                               // 00ffdb      FF00FF33
     { Private declarations }
   public
@@ -170,19 +172,21 @@ const
       textAnotherTryRus='Попробуйте другое слово'; textAnotherTryEng='Try another word'; textAnotherTryLat=''; textAnotherTryEsp='Pruebe otra palabra, por favor'; textAnotherTryFra='';
       textStartRus='Я сказала: "Стартуем!"'; textStartEng='Let`s start the game!'; textStartLat=''; textStartEsp='¡Empezamos el juego!'; textStartFra='';
       textGreetingsRus='Приветули'; textGreetingsEng='Greetings'; textGreetingsLat=''; textGreetingsEsp='¡Hola!'; textGreetingsFra='';
+      textPreviousRus='Кажется, у вас есть неотгаданное слово'; textPreviousEng='The last word is waiting you to guess'; textPreviousLat=''; textPreviousEsp='La palabra anteriora está esperando'; textPreviousFra='';
 
       textCongrats: array [1..5] of String = (textCongratsRus, textCongratsEng, textCongratsLat, textCongratsEsp, textCongratsFra);
       textFails: array [1..5] of String = (textFailRus, textFailEng, textFailLat, textFailEsp, textFailFra);
       textTries: array [1..5] of String = (textAnotherTryRus, textAnotherTryEng, textAnotherTryLat, textAnotherTryEsp, textAnotherTryFra);
       textStarts: array [1..5] of String = (textStartRus, textStartEng, textStartLat, textStartEsp, textStartFra);
       textGreetings: array [1..5] of String = (textGreetingsRus, textGreetingsEng, textGreetingsLat, textGreetingsEsp, textGreetingsFra);
+      textPrevious: array [1..5] of String = (textPreviousRus, textPreviousEng, textPreviousLat, textPreviousEsp, textPreviousFra);
 
 var StreakTemp1, StreakTemp2: integer;
     input, stat, statL: text;                              // input - read from vocabulary, stat - read from statistics file
     i, j, k, l, numberOfTheword, keyNumber, size: integer;  // разные счетчики wins - победы, games - все игры
-    vocab, meanings: array of String;         // массив всего словаря и массив значений
+    vocab, meanings: array of String;         // массив всего словаря и массив значений слов
     words: array [1..6] of string;              // массив со всеми ответами
-    wordExists, wordGuessedRight, wordGuessedWrong: boolean;
+    wordExists, wordGuessedRight, wordGuessedWrong, wordNotGuessed: boolean;
     ask: array [1..6,1..5] of integer;
     ques: array [1..6,1..5] of integer;
     keys: array [1..42] of TButton;
@@ -193,10 +197,14 @@ var StreakTemp1, StreakTemp2: integer;
     col, rovv: byte;
     fileNameWord, fileNameMean: string;
     kbrdKeys: array [1..3,1..12] of TButton;
-    padY, padX, colorTemp, vocabTemp : integer;
+    padY, padX: integer;
     kbrdWidth, kbrdHeight: integer;
     boardHeight, boardWidth, boardDivVar: integer;
     ini: TIniFile;
+    theWordTemp, theWord, boardWordsTemp, askRead, charTemp: string;
+    boardWords : array [1..6] of String;
+    askTemp: array [1..6] of String;
+    wordQuantity, vocabTemp, numberOfThewordTemp, colorTemp : integer;
 implementation
 
 uses statistics, meaningForm, themeForm, languageForm, infoForm;
@@ -213,7 +221,7 @@ Result := TPath.Combine(TPath.GetDocumentsPath, AssetName);
 {$ENDIF}
 
 {$IFDEF MSWINDOWS}
-Result := TPath.Combine(TPath.GetLibraryPath, AssetName);
+Result := TPath.Combine(TPath.GetAppPath + PathDelim, AssetName);
 {$ENDIF}
 
 {$IFDEF IOS}
@@ -225,33 +233,68 @@ Result := TPath.Combine(TPath.GetAppPath, AssetName);
 {$ENDIF}
 end;
 
-procedure readIniFile;
+procedure WriteSettingsIniFile;
 begin
 
+  {$IFDEF ANDROID}
+    ini := TIniFile.Create(GetMyFile('settings.ini'));
+  {$ENDIF}
+  {$IFDEF MSWINDOWS}
+    ini := TIniFile.Create(TPath.GetAppPath + PathDelim + 'settings.ini');
+  {$ENDIF}
+  if ini.SectionExists('session')                                           // очищаем раздел ini файла session
+    then ini.EraseSection('session');
+  wordQuantity := 0;
+  try
+    ini.WriteInteger('settings','ColorsSetNumber',ColorsSetNumber);
+    ini.WriteInteger('settings','VocNumber',VocNumber);
+    if wordNotGuessed = true then begin
+      ini.WriteInteger('session','numberOfTheword',numberOfTheword);
+      ini.WriteString('session','theWord',theWord);
 
-    ini := TIniFile.Create(TPath.GetDocumentsPath + PathDelim + 'config.ini');
-    try
-      VocNumber := ini.ReadInteger('INFO','VocNumber',vocabTemp);
-      ColorsSetNumber := ini.ReadInteger('INFO','ColorsSetNumber',colorTemp);
-    finally
-      ini.Free;
+      for i:=1 to rovv do
+        if Words[i].Length > 0 then begin
+          boardWords[i] := board[i,1].Text + board[i,2].Text + board[i,3].Text + board[i,4].Text + board[i,5].Text;
+          askTemp[i] := intToStr(ask[i,1]) + intToStr(ask[i,2]) + intToStr(ask[i,3]) + intToStr(ask[i,4]) + intToStr(ask[i,5]);
+          INI.WriteString('session' , 'Board' + intToStr(i) , boardWords[i]);
+          INI.WriteString('session' , 'Ask' + intToStr(i) , askTemp[i]);
+          wordQuantity := i;
+        end;
+      INI.WriteInteger('session' , 'wordQuantity' , wordQuantity);
+      ini.WriteBool('session' , 'wordNotGuessed' , wordNotGuessed);
     end;
-
+  finally
+    ini.Free;
+  end;
 end;
 
-procedure writeIniFile;
+procedure ReadSettingsIniFile;
 begin
 
-
-    ini := TIniFile.Create(TPath.GetDocumentsPath + PathDelim + 'config.ini');
-    try
-      ini.WriteInteger('INFO','VocNumber',vocabTemp);
-      ini.WriteInteger('INFO','ColorsSetNumber',colorTemp);
-    finally
-      ini.Free;
+  {$IFDEF ANDROID}
+    ini := TIniFile.Create(GetMyFile('settings.ini'));
+  {$ENDIF}
+  {$IFDEF MSWINDOWS}
+    ini := TIniFile.Create(TPath.GetAppPath + PathDelim + 'settings.ini');
+  {$ENDIF}
+  try
+    ColorsSetNumber := ini.ReadInteger('settings','ColorsSetNumber',ColorsSetNumber);
+    VocNumber := ini.ReadInteger('settings','VocNumber',VocNumber);
+    wordNotGuessed := ini.ReadBool('session','wordNotGuessed',wordNotGuessed);
+    if wordNotGuessed then begin
+      numberOfTheword := ini.ReadInteger('session','numberOfTheword',numberOfTheword);
+      theWord := ini.ReadString('session','theWord',theWord);
+      wordQuantity := INI.ReadInteger('session','wordQuantity',wordQuantity);
+      if wordQuantity > 0 then begin
+        for i:=1 to wordQuantity do begin
+          boardWords[i] := INI.ReadString('session' , 'Board' + intToStr(i) , boardWords[i]);
+          askTemp[i] := INI.ReadString('session' , 'Ask' + intToStr(i) , askTemp[i]);
+        end;
+      end;
     end;
-
-
+  finally
+    ini.Free;
+  end;
 end;
 
 procedure vocabularyChange;
@@ -1129,10 +1172,10 @@ begin
   if VocNumber = 1 then begin
     AssignFile(input,GetMyFile(fileNameMean));
     reset(input);
-    numberOfTheword:=0;
+    i:=0;
     while not eof(input) do begin
-      inc(numberOfTheword);
-      readln(input,meanings[numberOfTheword]);
+      inc(i);
+      readln(input,meanings[i]);
     end;
   end;
   if VocNumber > 1 then begin
@@ -1146,10 +1189,10 @@ begin
 {$IFDEF MSWINDOWS}
   AssignFile(input,GetMyFile(fileNameMean));
   reset(input);
-  numberOfTheword:=0;
+  i:=0;
   while not eof(input) do begin
-    inc(numberOfTheword);
-    readln(input,meanings[numberOfTheword]);
+    inc(i);
+    readln(input,meanings[i]);
   end;
 {$ENDIF}
 
@@ -1169,6 +1212,7 @@ begin
     for i := 0 to length(meanTemp)-1 do
       meanings[i+1] := meanTemp[i];
   end;
+
 {$ENDIF}
 
 {$IFDEF IOS}
@@ -1196,31 +1240,34 @@ begin
   if VocNumber = 1 then begin
     AssignFile(input,GetMyFile(fileNameWord));
     reset(input);
-    numberOfTheword:=0;
+    i:=0;
     while not eof(input) do begin
-      inc(numberOfTheword);
-      readln(input,vocab[numberOfTheword]);
+      inc(i);
+      readln(input,vocab[i]);
     end;
-    numberOfTheword := random(numberOfTheword) + 1;
+    if numberOfTheword = 0 then
+      numberOfTheword := random(i) + 1;
   end;
   if VocNumber > 1 then begin
     var vocabTemp := TFile.ReadAllLines(GetMyFile(fileNameWord), TEncoding.UTF8);
     setLength(vocab, length(vocabTemp)+1);
     for i := 0 to length(vocabTemp)-1 do
       vocab[i+1] := vocabTemp[i];
-    numberOfTheword := random(length(vocab)) + 1;
+    if numberOfTheword = 0 then
+      numberOfTheword := random(length(vocab)) + 1;
   end;
 {$ENDIF}
 
 {$IFDEF MSWINDOWS}
   AssignFile(input,GetMyFile(fileNameWord));
   reset(input);
-  numberOfTheword:=0;
+  i:=0;
   while not eof(input) do begin
-    inc(numberOfTheword);
-    readln(input,vocab[numberOfTheword]);
+    inc(i);
+    readln(input,vocab[i]);
   end;
-  numberOfTheword := random(numberOfTheword) + 1;
+  if numberOfTheword = 0 then
+    numberOfTheword := random(i) + 1;
 {$ENDIF}
 
 {$IFDEF MACOS}
@@ -1242,6 +1289,7 @@ begin
     numberOfTheword := random(length(vocab)) + 1;
   end;
 {$ENDIF}
+  theWord := vocab[numberOfTheword];
 end;
 
 procedure IsWordFromVocabulary;
@@ -1321,62 +1369,6 @@ begin
       keys[i].Visible := false;
 
   end;
-
-end;
-
-procedure TMainForm.FormCreate(Sender: TObject);
-begin
-
-  readIniFile;
-  if VocNumber = 0 then InfoAnimation.Enabled := true;       // infoAnimation on first run
-  if VocNumber = 0 then LangAnimation.Enabled := true;       // infoAnimation on first run
-  if VocNumber = 0 then VocNumber := 2;
-  if ColorsSetNumber = 0 then ColorsSetNumber := 6;
-
-  Fill.Color := bckgrndColor[ColorsSetNumber];               // bckgrnd color
-
-  keys[1]:=а;   keys[2]:=б;   keys[3]:=в;   keys[4]:=г;   keys[5]:=д;   keys[6]:=е;   keys[7]:=ж;   keys[8]:=з;
-  keys[9]:=и;   keys[10]:=й;  keys[11]:=к;  keys[12]:=л;  keys[13]:=м;  keys[14]:=н;  keys[15]:=о;  keys[16]:=п;
-  keys[17]:=р;  keys[18]:=с;  keys[19]:=т;  keys[20]:=у;  keys[21]:=ф;  keys[22]:=х;  keys[23]:=ц;  keys[24]:=ч;
-  keys[25]:=ш;  keys[26]:=щ;  keys[27]:=ъ;  keys[28]:=ы;  keys[29]:=ь;  keys[30]:=э;  keys[31]:=ю;  keys[32]:=я;
-  keys[33]:=ё;  keys[34]:=ThemeButton;      keys[35]:=stats;            keys[36]:=meaning;          keys[38]:=start;
-  keys[37]:=info;  keys[39]:=deleteBtn;  keys[40]:=Enter;  keys[41]:=Lang;
-
-  board[1,1]:=R11;  board[1,2]:=R12; board[1,3]:=R13; board[1,4]:=R14; board[1,5]:=R15;
-  board[2,1]:=R21;  board[2,2]:=R22; board[2,3]:=R23; board[2,4]:=R24; board[2,5]:=R25;
-  board[3,1]:=R31;  board[3,2]:=R32; board[3,3]:=R33; board[3,4]:=R34; board[3,5]:=R35;
-  board[4,1]:=R41;  board[4,2]:=R42; board[4,3]:=R43; board[4,4]:=R44; board[4,5]:=R45;
-  board[5,1]:=R51;  board[5,2]:=R52; board[5,3]:=R53; board[5,4]:=R54; board[5,5]:=R55;
-  board[6,1]:=R61;  board[6,2]:=R62; board[6,3]:=R63; board[6,4]:=R64; board[6,5]:=R65;
-
-  vocabularyChange;
-  keyboardArrays;
-  kbrdTextChange;
-  statsReadAll;
-
-  {$IF Defined(ANDROID)}
-  keyboardPosition;
-  {$ENDIF}
-
-  {$IFDEF MSWINDOWS}
-  keyboardPosition;
-  infoLabelProperties;
-  boardSizeCalc;
-  topButtonsProperties;
-  topButtonsPositions;
-
-  topButtonsFlashing;
-  {$ENDIF}
-
-  meaning.Enabled:=false;
-  InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
-  InfoLabel.Text := textGreetings[VocNumber];
-  FormActivate(Self);
-
-  {$IF Defined(ANDROID)}
-  TAndroidHelper.Activity.getWindow.setStatusBarColor(barsColors[ColorsSetNumber]);
-  TAndroidHelper.Activity.getWindow.setNavigationBarColor(barsColors[ColorsSetNumber]);
-  {$ENDIF}
 
 end;
 
@@ -1593,7 +1585,6 @@ begin
   {$ELSEIF Defined(MSWINDOWS)}
     for I := 1 to 33 do begin
       keys[i].TextSettings.FontColor := $FF000000;
-      keys[i].Tintcolor := $FFc1121f;
     end;
 
   {$ENDIF}
@@ -1847,6 +1838,7 @@ begin
   if col = 5
     then keys[40].Enabled := true
     else keys[40].Enabled := false;
+
 end;
 
 procedure endRoundBtns;
@@ -1862,7 +1854,6 @@ begin
 end;
 
 procedure vocabularyChange;
-
 begin
 
   case VocNumber of
@@ -1889,8 +1880,6 @@ begin
        fileNameMean := 'Esp5Mean.txt';
   end;
   end;
-  BoardDefColor;
-  KeyboardDefColor;
 
 end;
 
@@ -1907,17 +1896,110 @@ begin
 
 end;
 
+procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  WriteSettingsIniFile;
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+
+  keys[1]:=а;   keys[2]:=б;   keys[3]:=в;   keys[4]:=г;   keys[5]:=д;   keys[6]:=е;   keys[7]:=ж;   keys[8]:=з;
+  keys[9]:=и;   keys[10]:=й;  keys[11]:=к;  keys[12]:=л;  keys[13]:=м;  keys[14]:=н;  keys[15]:=о;  keys[16]:=п;
+  keys[17]:=р;  keys[18]:=с;  keys[19]:=т;  keys[20]:=у;  keys[21]:=ф;  keys[22]:=х;  keys[23]:=ц;  keys[24]:=ч;
+  keys[25]:=ш;  keys[26]:=щ;  keys[27]:=ъ;  keys[28]:=ы;  keys[29]:=ь;  keys[30]:=э;  keys[31]:=ю;  keys[32]:=я;
+  keys[33]:=ё;  keys[39]:=deleteBtn;        keys[40]:=Enter;
+  keys[34]:=ThemeButton;      keys[35]:=stats;            keys[36]:=meaning;          keys[37]:=info;
+  keys[38]:=start;            keys[41]:=Lang;
+
+  board[1,1]:=R11;  board[1,2]:=R12; board[1,3]:=R13; board[1,4]:=R14; board[1,5]:=R15;
+  board[2,1]:=R21;  board[2,2]:=R22; board[2,3]:=R23; board[2,4]:=R24; board[2,5]:=R25;
+  board[3,1]:=R31;  board[3,2]:=R32; board[3,3]:=R33; board[3,4]:=R34; board[3,5]:=R35;
+  board[4,1]:=R41;  board[4,2]:=R42; board[4,3]:=R43; board[4,4]:=R44; board[4,5]:=R45;
+  board[5,1]:=R51;  board[5,2]:=R52; board[5,3]:=R53; board[5,4]:=R54; board[5,5]:=R55;
+  board[6,1]:=R61;  board[6,2]:=R62; board[6,3]:=R63; board[6,4]:=R64; board[6,5]:=R65;
+
+  ReadSettingsIniFile;
+
+                              // recovering previous session
+  if wordNotGuessed then begin
+    infoLabel.Text:=textPrevious[VocNumber];
+    BoardDefColor;
+    KeyboardDefColor;
+    for i := 1 to wordQuantity do begin
+      for j := 1 to 5 do
+        board[i,j].Text := boardWords[i][j];
+      words[i] := boardWords[i];
+    end;
+    for i := 1 to wordQuantity do
+      for j := 1 to 5 do
+        ask[i,j] := StrToInt(copy(askTemp[i], j , 1));
+    rovv := wordQuantity + 1;
+    keys[38].Enabled := false;
+    meaning.Enabled:=false;
+    keyboardEnable;
+    vocabularyChange;
+    vocabFill;
+    meaningsFill;
+    boardColorsRefresh;
+    keyboardColorsRefresh;
+    meaningOfTheWord:=meanings[numberOfTheword];
+  end;
+                              ///////////////////////////////
+
+  if VocNumber = 0 then InfoAnimation.Enabled := true;       // infoAnimation on first run
+  if VocNumber = 0 then LangAnimation.Enabled := true;       // infoAnimation on first run
+  if VocNumber = 0 then VocNumber := 2;
+  if ColorsSetNumber = 0 then ColorsSetNumber := 6;
+
+  Fill.Color := bckgrndColor[ColorsSetNumber];               // bckgrnd color
+
+  keyboardArrays;
+  kbrdTextChange;
+  statsReadAll;
+
+  {$IF Defined(ANDROID)}
+  keyboardPosition;
+  {$ENDIF}
+
+  {$IFDEF MSWINDOWS}
+  keyboardPosition;
+  infoLabelProperties;
+  boardSizeCalc;
+  topButtonsProperties;
+  topButtonsPositions;
+  topButtonsFlashing;
+  {$ENDIF}
+
+  meaning.Enabled:=false;
+  InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
+  InfoLabel.Text := textGreetings[VocNumber];
+
+  FormActivate(Self);
+
+  {$IF Defined(ANDROID)}
+  TAndroidHelper.Activity.getWindow.setStatusBarColor(barsColors[ColorsSetNumber]);
+  TAndroidHelper.Activity.getWindow.setNavigationBarColor(barsColors[ColorsSetNumber]);
+  {$ENDIF}
+end;
+
+procedure TMainForm.FormSaveState(Sender: TObject);
+begin
+  WriteSettingsIniFile;
+end;
+
 procedure TMainForm.FormActivate(Sender: TObject);
 begin
-  colorTemp := ColorsSetNumber;
-  vocabTemp := VocNumber;
-  writeIniFile;
-
   Fill.Color := bckgrndColor[ColorsSetNumber];
   infoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
   infoLabel.Text := '';
   if (keys[38].Enabled) and (board [1,1].Text = '') then
     infoLabel.Text:=textGreetings[VocNumber];
+
+            // Данный параметр нужен для тестирования. Выводит нужное сообщение в инфо строку.
+//  InfoLabel.Text := intToStr(numberOfTheword) + ' - ' + TheWord;
+            //
+
   vocabularyChange;
   keyboardArrays;
   keyboardPosition;
@@ -2106,7 +2188,7 @@ end;
 
 procedure TMainForm.сClick(Sender: TObject);
 begin
- kbrdBtnPress[18]:=true;
+  kbrdBtnPress[18]:=true;
   kbrdClick;
   deleteBtn.Enabled:=true;
 end;
@@ -2231,6 +2313,7 @@ begin
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
           InfoLabel.Text:=textCongrats[VocNumber];
           wordGuessedRight := true;
+          wordNotGuessed := false;
           keyboardDisable;
           endRoundBtns;
           statsReadAll;
@@ -2246,6 +2329,7 @@ begin
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];       // розовый
           InfoLabel.Text:=textFails[VocNumber]+vocab[numberOfTheword];
           wordGuessedWrong := true;
+          wordNotGuessed := false;
           keyboardDisable;
           endRoundBtns;
           statsReadAll;
@@ -2274,6 +2358,8 @@ begin
   startButtonCondition := true;
   wordGuessedRight := false;
   wordGuessedWrong := false;
+  wordNotGuessed := true;
+  numberOfTheword := 0;
   rovv:=1;
   col:=0;
   start.Enabled:=false;
@@ -2295,7 +2381,7 @@ begin
   InfoLabel.Text := textStarts[VocNumber];
 
           // Данный параметр нужен для тестирования. Выводит нужное сообщение в инфо строку.
-//  InfoLabel.Text := inttostr ( boardHeight ) + ' ' + inttostr ( round (board[1,1].Height ));
+//  InfoLabel.Text := intToStr(numberOfTheword) + ' - ' + TheWord;
           //
 
   meaningOfTheWord:=meanings[numberOfTheword];
@@ -2310,7 +2396,6 @@ begin
   rowLettersDelete;
   for I := 1 to 6 do
     words[i]:='';
-
 end;
 
 end.

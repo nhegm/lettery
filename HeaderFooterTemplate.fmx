@@ -12,6 +12,7 @@
   FormFactor.Devices = []
   OnActivate = FormActivate
   OnCreate = FormCreate
+  OnClose = FormClose
   DesignerMasterStyle = 3
   object R13: TButton
     StyledSettings = []
