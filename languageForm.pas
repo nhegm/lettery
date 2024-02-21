@@ -40,6 +40,7 @@ uses HeaderFooterTemplate;
 procedure Tlanguage.FormShow(Sender: TObject);
 begin
 
+  languageChanged := false;
   FullScreen := false;
   {$IF Defined(ANDROID)}
   width := 138;
@@ -50,7 +51,6 @@ begin
   Height := 180;
   width := 200;
   {$ENDIF}
-
 
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
 
@@ -68,20 +68,8 @@ begin
     langButton[i].TintColor := HeaderFooterTemplate.boardNKeyColorsDef[ColorsSetNumber];
     langButton[i].TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   end;
-
-  for I := 1 to 2 do begin
-    if VocNumber = i
-      then langButton[i].Enabled := false
-      else langButton[i].Enabled := true
-  end;
-  if VocNumber = 4
-    then langButton[3].Enabled := false
-    else begin
-      langButton[1].Enabled := true;
-      langButton[2].Enabled := true;
-    end;
-  language.Active := true;
-  MainForm.Active := false;
+      language.Active := true;
+      MainForm.Active := false;
 end;
 
 procedure Tlanguage.langButton1Click(Sender: TObject);
@@ -91,6 +79,12 @@ begin
   langButton2.Enabled := true;
   langButton4.Enabled := true;
   languageChanged := true;
+  if VocNumber = 1
+    then langButton[1].Enabled := false;
+  if VocNumber = 2
+    then langButton[2].Enabled := false;
+  if VocNumber = 4
+    then langButton[3].Enabled := false;
 end;
 
 procedure Tlanguage.langButton2Click(Sender: TObject);
@@ -100,6 +94,12 @@ begin
   langButton1.Enabled := true;
   langButton4.Enabled := true;
   languageChanged := true;
+  if VocNumber = 1
+    then langButton[1].Enabled := false;
+  if VocNumber = 2
+    then langButton[2].Enabled := false;
+  if VocNumber = 4
+    then langButton[3].Enabled := false;
 end;
 
 procedure Tlanguage.langButton4Click(Sender: TObject);
@@ -109,6 +109,12 @@ begin
   langButton2.Enabled := true;
   langButton1.Enabled := true;
   languageChanged := true;
+  if VocNumber = 1
+    then langButton[1].Enabled := false;
+  if VocNumber = 2
+    then langButton[2].Enabled := false;
+  if VocNumber = 4
+    then langButton[3].Enabled := false;
 end;
 
 end.

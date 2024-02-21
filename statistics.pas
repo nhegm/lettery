@@ -102,9 +102,6 @@ procedure TstatsForm.FormShow(Sender: TObject);
 begin
   elementsSettings;
   SwitcherSwitch(self);
-
-  statsForm.Active := true;
-  MainForm.Active := false;
 end;
 
 procedure TstatsForm.SwitcherSwitch(Sender: TObject);

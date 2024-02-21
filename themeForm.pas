@@ -78,6 +78,7 @@ var i,j: integer;
 procedure TsetForm.FormCreate(Sender: TObject);
 begin
 
+  themeChanged := false;
   {$IF Defined(ANDROID)}
     setForm.width := 150;
     setForm.height := 340;
@@ -139,7 +140,7 @@ end;
 
 procedure TsetForm.FormShow(Sender: TObject);
 begin
-
+  themeChanged := false;
   setForm.width := 150;
   setForm.height := 340;
   {$IF Defined(ANDROID)}
@@ -157,10 +158,8 @@ begin
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
 
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
-
-  setForm.Active := true;
-  MainForm.Active := false;
-
+      setForm.Active := true;
+      MainForm.Active := false;
 end;
 
 procedure TsetForm.greekClick(Sender: TObject);
@@ -168,6 +167,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 7;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.latinumClick(Sender: TObject);
@@ -175,6 +187,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 6;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.azulClick(Sender: TObject);
@@ -182,35 +207,79 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 1;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.dayClick(Sender: TObject);
 begin
-
   HeaderFooterTemplate.ColorsSetNumber := 2;
-//  Form2.Active := true;
-
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
-
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.violetClick(Sender: TObject);
 begin
   HeaderFooterTemplate.ColorsSetNumber := 3;
-//  Form2.Active := true;
-
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.barbieClick(Sender: TObject);
 begin
   HeaderFooterTemplate.ColorsSetNumber := 4;
-//  Form2.Active := true;
-
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.consoleClick(Sender: TObject);
@@ -218,6 +287,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 5;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.Text1Click(Sender: TObject);
@@ -225,6 +307,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 1;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.Text2Click(Sender: TObject);
@@ -232,6 +327,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 2;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.Text3Click(Sender: TObject);
@@ -239,6 +347,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 3;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.Text4Click(Sender: TObject);
@@ -246,6 +367,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 4;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.Text5Click(Sender: TObject);
@@ -253,6 +387,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 5;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.Text6Click(Sender: TObject);
@@ -260,6 +407,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 6;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 procedure TsetForm.Text7Click(Sender: TObject);
@@ -267,6 +427,19 @@ begin
   HeaderFooterTemplate.ColorsSetNumber := 7;
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to 7 do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
 end;
 
 end.

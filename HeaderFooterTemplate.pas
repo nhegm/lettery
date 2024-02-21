@@ -163,7 +163,7 @@ var
   winsL, gamesL, winStreakL, currentWinStreakL, lastGameWonL, lastStreakL, lastLangGame: integer;
   meaningOfTheWord, otvet: String;                      // meaning transfering to meaningForm
   VocNumber: byte;
-  startButtonCondition, languageChanged: boolean;
+  startButtonCondition, languageChanged, themeChanged: boolean;
 const
 
       statFileNames: array [0..4] of string = ('stats.txt', 'statsRus.txt', 'statsEng.txt', 'statsLat.txt', 'statsEsp.txt');
@@ -1936,6 +1936,7 @@ begin
         ask[i,j] := StrToInt(copy(askTemp[i], j , 1));
     rovv := wordQuantity + 1;
     keys[38].Enabled := false;
+    keys[41].Enabled := false;
     meaning.Enabled:=false;
     keyboardEnable;
     vocabularyChange;

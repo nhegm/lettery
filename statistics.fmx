@@ -74,6 +74,7 @@ object statsForm: TstatsForm
     Size.Width = 44.000000000000000000
     Size.Height = 26.000000000000000000
     Size.PlatformDefault = False
+    StyleLookup = 'switchstyle'
     TabOrder = 6
     TabStop = False
     ParentShowHint = False

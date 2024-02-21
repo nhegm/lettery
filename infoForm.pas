@@ -167,7 +167,6 @@ begin
   informationForm.Top := round(Screen.Height-informationForm.Height) div 2;
 end;
 
-
 procedure TinformationForm.FormCreate(Sender: TObject);
 begin
   buttons[1] := b1;
@@ -183,8 +182,6 @@ end;
 procedure TinformationForm.FormShow(Sender: TObject);
 begin
   elementsShow;
-  informationForm.Active := true;
-  MainForm.Active := false;
 end;
 
 end.

@@ -83,8 +83,6 @@ begin
         ScrollBar.Max := meaningText.Height - meaningForm1.height + 8;
       end;
   {$ENDIF}
-  meaningForm1.Active := true;
-  MainForm.Active := false;
 end;
 
 procedure TmeaningForm1.ScrollBarChange(Sender: TObject);
