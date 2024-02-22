@@ -68,6 +68,9 @@ begin
     langButton[i].TintColor := HeaderFooterTemplate.boardNKeyColorsDef[ColorsSetNumber];
     langButton[i].TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   end;
+  if VocNumber = 4
+    then langButton[3].Enabled := false
+    else langButton[VocNumber].Enabled := false;
       language.Active := true;
       MainForm.Active := false;
 end;

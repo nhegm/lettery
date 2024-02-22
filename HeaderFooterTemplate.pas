@@ -1896,6 +1896,41 @@ begin
 
 end;
 
+procedure ThemeRefresh;
+begin
+  MainForm.Fill.Color := bckgrndColor[ColorsSetNumber];
+  MainForm.infoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
+  BoardDefColor;
+  KeyboardDefColor;
+  boardColorsRefresh;
+{$IF Defined(ANDROID)}
+  TAndroidHelper.Activity.getWindow.setStatusBarColor(barsColors[ColorsSetNumber]);
+  TAndroidHelper.Activity.getWindow.setNavigationBarColor(barsColors[ColorsSetNumber]);
+{$ENDIF}
+end;
+
+procedure LanguageKbrdRefresh;
+begin
+  vocabularyChange;
+  keyboardArrays;
+  kbrdTextChange;
+  keyboardPosition;
+{$IFDEF MSWINDOWS}
+  infoLabelProperties;
+  boardSizeCalc;
+  topButtonsProperties;
+  topButtonsPositions;
+  topButtonsFlashing;
+{$ENDIF}
+
+{$IFDEF ANDROID}
+  if languageChanged
+    then MainForm.BrainDissapearance.Enabled := false;
+{$ENDIF}
+
+  statsReadAll;
+end;
+
 procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   WriteSettingsIniFile;
@@ -1920,7 +1955,7 @@ begin
   board[6,1]:=R61;  board[6,2]:=R62; board[6,3]:=R63; board[6,4]:=R64; board[6,5]:=R65;
 
   ReadSettingsIniFile;
-
+  statsReadAll;
                               // recovering previous session
   if wordNotGuessed then begin
     infoLabel.Text:=textPrevious[VocNumber];
@@ -1952,19 +1987,18 @@ begin
   if VocNumber = 0 then LangAnimation.Enabled := true;       // infoAnimation on first run
   if VocNumber = 0 then VocNumber := 2;
   if ColorsSetNumber = 0 then ColorsSetNumber := 6;
-
+  keyboardArrays;
   Fill.Color := bckgrndColor[ColorsSetNumber];               // bckgrnd color
-
+  vocabularyChange;
+  vocabFill;
   keyboardArrays;
   kbrdTextChange;
-  statsReadAll;
-
-  {$IF Defined(ANDROID)}
+  BoardDefColor;
+  KeyboardDefColor;
   keyboardPosition;
-  {$ENDIF}
+  meaning.Enabled:=false;
 
   {$IFDEF MSWINDOWS}
-  keyboardPosition;
   infoLabelProperties;
   boardSizeCalc;
   topButtonsProperties;
@@ -1972,7 +2006,6 @@ begin
   topButtonsFlashing;
   {$ENDIF}
 
-  meaning.Enabled:=false;
   InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
   InfoLabel.Text := textGreetings[VocNumber];
 
@@ -2001,41 +2034,19 @@ begin
 //  InfoLabel.Text := intToStr(numberOfTheword) + ' - ' + TheWord;
             //
 
-  vocabularyChange;
-  keyboardArrays;
-  keyboardPosition;
-  kbrdTextChange;
-
-  {$IFDEF ANDROID}
-  keyboardPosition;
-  if languageChanged = true
-    then BrainDissapearance.Enabled := false;
-  {$ENDIF}
-
-  {$IFDEF MSWINDOWS}
-  keyboardPosition;
-  infoLabelProperties;
-  boardSizeCalc;
-  topButtonsProperties;
-  topButtonsPositions;
-  {$ENDIF}
-
-  statsReadAll;
-
-  BoardDefColor;
-  KeyboardDefColor;
-  boardColorsRefresh;
   if wordGuessedRight
     then BoardSuccessColoring;
   if wordGuessedWrong
     then BoardFailColoring;
   if not wordGuessedRight and not wordGuessedWrong
     then keyboardColorsRefresh;
+
   MainForm.Active := true;
-  {$IF Defined(ANDROID)}
-  TAndroidHelper.Activity.getWindow.setStatusBarColor(barsColors[ColorsSetNumber]);
-  TAndroidHelper.Activity.getWindow.setNavigationBarColor(barsColors[ColorsSetNumber]);
-  {$ENDIF}
+
+  if themeChanged
+    then ThemeRefresh;
+  if languageChanged
+    then LanguageKbrdRefresh;
 end;
 
 procedure TMainForm.йClick(Sender: TObject);
