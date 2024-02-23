@@ -434,7 +434,7 @@ begin
   statsFileReadL;
 end;
 
-procedure keyboardArrays;
+procedure kbrdArrays;
 begin
 
     kbrdBtnPress[1]:=false;   kbrdBtnPress[2]:=false;   kbrdBtnPress[3]:=false;   kbrdBtnPress[4]:=false;   kbrdBtnPress[5]:=false;   kbrdBtnPress[6]:=false;   kbrdBtnPress[7]:=false;   kbrdBtnPress[8]:=false;
@@ -742,7 +742,7 @@ begin
 
 end;
 
-procedure keyboardPosition;
+procedure kbrdPosition;
 begin
 
 {$IFDEF ANDROID}
@@ -795,6 +795,7 @@ begin
         else kbrdKeys[1,j].Position.X := kbrdKeys[1,j-1].Position.X + kbrdWidth;
     end;
     kbrdKeys[2,12].TextSettings.Font.Size := kbrdHeight;
+    Keys[39].TextSettings.Font.Size := round(kbrdHeight / 2) + 4;
 
     infoLabelProperties;
     boardSizeCalc;
@@ -847,6 +848,7 @@ begin
     end;
 
     kbrdKeys[3,9].TextSettings.Font.Size := kbrdHeight;
+    Keys[39].TextSettings.Font.Size := round(kbrdHeight / 2) + 4;
 
     infoLabelProperties;
     boardSizeCalc;
@@ -898,7 +900,7 @@ begin
         else kbrdKeys[1,i].Position.X := kbrdKeys[1,i-1].Position.X + kbrdWidth;
     end;
     kbrdKeys[2,10].TextSettings.Font.Size := kbrdHeight;
-    kbrdKeys[3,9].TextSettings.Font.Size := kbrdHeight * 2;
+    Keys[39].TextSettings.Font.Size := round(kbrdHeight / 2) + 4;
 
     infoLabelProperties;
     boardSizeCalc;
@@ -1400,19 +1402,19 @@ begin
 {$ENDIF}
 end;
 
-procedure keyboardDisable;
+procedure kbrdDisable;
 begin
   for I := 1 to 33 do
     keys[i].Enabled:=false;
 end;
 
-procedure keyboardEnable;
+procedure kbrdEnable;
 begin
   for I := 1 to 33 do
     keys[i].Enabled:=true;
 end;
 
-procedure keyboardColoring;
+procedure kbrdColoring;
 begin
 {$IFDEF ANDROID}
   if VocNumber = 1 then begin
@@ -1568,7 +1570,7 @@ begin
 
 end;
 
-procedure KeyboardDefColor;
+procedure kbrdDefColor;
 begin
 
   {$IF Defined(ANDROID)}
@@ -1592,7 +1594,7 @@ begin
 
 end;
 
-procedure keyboardColorsRefresh;
+procedure kbrdColorsRefresh;
 begin
 {$IFDEF ANDROID}
   if VocNumber = 1 then begin
@@ -1795,7 +1797,7 @@ begin
 
 end;
 
-procedure BoardNKeyboardColoring (number: integer);
+procedure BoardNkbrdColoring (number: integer);
 begin
 
   words[number]:=letters;
@@ -1805,7 +1807,7 @@ begin
     if ask[number,i]=2 then board[number,i].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];              //green
     if ask[number,i]=1 then board[number,i].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber];              //yellow bright
   end;
-  keyboardColoring;
+  kbrdColoring;
 end;
 
 procedure boardColorsRefresh;
@@ -1901,8 +1903,9 @@ begin
   MainForm.Fill.Color := bckgrndColor[ColorsSetNumber];
   MainForm.infoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
   BoardDefColor;
-  KeyboardDefColor;
+  kbrdDefColor;
   boardColorsRefresh;
+  kbrdColorsRefresh;
 {$IF Defined(ANDROID)}
   TAndroidHelper.Activity.getWindow.setStatusBarColor(barsColors[ColorsSetNumber]);
   TAndroidHelper.Activity.getWindow.setNavigationBarColor(barsColors[ColorsSetNumber]);
@@ -1912,9 +1915,9 @@ end;
 procedure LanguageKbrdRefresh;
 begin
   vocabularyChange;
-  keyboardArrays;
+  kbrdArrays;
   kbrdTextChange;
-  keyboardPosition;
+  kbrdPosition;
 {$IFDEF MSWINDOWS}
   infoLabelProperties;
   boardSizeCalc;
@@ -1926,9 +1929,21 @@ begin
 {$IFDEF ANDROID}
   if languageChanged
     then MainForm.BrainDissapearance.Enabled := false;
+  if languageChanged and not wordNotGuessed and (board[1][1].Text <> '') then
+    kbrdDefColor;
 {$ENDIF}
 
   statsReadAll;
+end;
+
+procedure FormRefresh;
+begin
+  MainForm.meaning.Enabled:=false;
+  vocabularyChange;
+  kbrdEnable;
+  kbrdArrays;
+  kbrdPosition;
+  kbrdTextChange;
 end;
 
 procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -1960,7 +1975,7 @@ begin
   if wordNotGuessed then begin
     infoLabel.Text:=textPrevious[VocNumber];
     BoardDefColor;
-    KeyboardDefColor;
+    kbrdDefColor;
     for i := 1 to wordQuantity do begin
       for j := 1 to 5 do
         board[i,j].Text := boardWords[i][j];
@@ -1972,44 +1987,38 @@ begin
     rovv := wordQuantity + 1;
     keys[38].Enabled := false;
     keys[41].Enabled := false;
-    meaning.Enabled:=false;
-    keyboardEnable;
-    vocabularyChange;
+    FormRefresh;
+    kbrdEnable;
     vocabFill;
     meaningsFill;
     boardColorsRefresh;
-    keyboardColorsRefresh;
+    kbrdColorsRefresh;
     meaningOfTheWord:=meanings[numberOfTheword];
+    InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
+    InfoLabel.Text := textPrevious[VocNumber];
   end;
                               ///////////////////////////////
+  if not wordNotGuessed then begin
+    if VocNumber = 0 then InfoAnimation.Enabled := true;       // infoAnimation on first run
+    if VocNumber = 0 then LangAnimation.Enabled := true;       // infoAnimation on first run
+    if VocNumber = 0 then VocNumber := 2;
+    if ColorsSetNumber = 0 then ColorsSetNumber := 6;
+    Fill.Color := bckgrndColor[ColorsSetNumber];               // bckgrnd color
+    FormRefresh;
+    BoardDefColor;
+    kbrdDefColor;
 
-  if VocNumber = 0 then InfoAnimation.Enabled := true;       // infoAnimation on first run
-  if VocNumber = 0 then LangAnimation.Enabled := true;       // infoAnimation on first run
-  if VocNumber = 0 then VocNumber := 2;
-  if ColorsSetNumber = 0 then ColorsSetNumber := 6;
-  keyboardArrays;
-  Fill.Color := bckgrndColor[ColorsSetNumber];               // bckgrnd color
-  vocabularyChange;
-  vocabFill;
-  keyboardArrays;
-  kbrdTextChange;
-  BoardDefColor;
-  KeyboardDefColor;
-  keyboardPosition;
-  meaning.Enabled:=false;
+    InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
+    InfoLabel.Text := textGreetings[VocNumber];
+  end;
 
   {$IFDEF MSWINDOWS}
-  infoLabelProperties;
-  boardSizeCalc;
-  topButtonsProperties;
-  topButtonsPositions;
-  topButtonsFlashing;
+    infoLabelProperties;
+    boardSizeCalc;
+    topButtonsProperties;
+    topButtonsPositions;
+    topButtonsFlashing;
   {$ENDIF}
-
-  InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
-  InfoLabel.Text := textGreetings[VocNumber];
-
-  FormActivate(Self);
 
   {$IF Defined(ANDROID)}
   TAndroidHelper.Activity.getWindow.setStatusBarColor(barsColors[ColorsSetNumber]);
@@ -2039,7 +2048,7 @@ begin
   if wordGuessedWrong
     then BoardFailColoring;
   if not wordGuessedRight and not wordGuessedWrong
-    then keyboardColorsRefresh;
+    then kbrdColorsRefresh;
 
   MainForm.Active := true;
 
@@ -2320,13 +2329,13 @@ begin
     enter.Enabled := false;
     if wordExists then begin
       if words[rovv]='' then begin
-        BoardNKeyboardColoring(rovv);
+        BoardNkbrdColoring(rovv);
         if words[rovv]=vocab[numberOfTheword] then begin
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
           InfoLabel.Text:=textCongrats[VocNumber];
           wordGuessedRight := true;
           wordNotGuessed := false;
-          keyboardDisable;
+          kbrdDisable;
           endRoundBtns;
           statsReadAll;
           statsFileWriteWon;
@@ -2342,7 +2351,7 @@ begin
           InfoLabel.Text:=textFails[VocNumber]+vocab[numberOfTheword];
           wordGuessedWrong := true;
           wordNotGuessed := false;
-          keyboardDisable;
+          kbrdDisable;
           endRoundBtns;
           statsReadAll;
           statsFileWriteLost;
@@ -2363,7 +2372,6 @@ begin
  end;
 
 procedure TMainForm.startClick(Sender: TObject);
-
 begin
 
   keys[41].Enabled := false;
@@ -2377,12 +2385,12 @@ begin
   start.Enabled:=false;
   meaning.Enabled:=false;
   BrainDissapearance.Enabled := false;
-  keyboardEnable;
-  meaningsFill;
+  kbrdEnable;
   BoardDefState;
   BoardDefColor;
-  KeyboardDefColor;
+  kbrdDefColor;
   vocabFill;
+  meaningsFill;
   languageChanged := false;
 
           // Данный параметр нужен для тестирования. Задаёт определённое по счёту слово.
