@@ -3,6 +3,12 @@
   ClientWidth = 480
   OnSaveState = FormSaveState
   DesignerMasterStyle = 3
+  inherited start: TButton
+    Margins.Left = 5.000000000000000000
+    Margins.Top = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+  end
   inherited ц: TButton
     Position.X = 40.000000000000000000
   end

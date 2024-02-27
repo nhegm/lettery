@@ -87,6 +87,7 @@ const
   contactInfoEsp = 'Si tiene alguna sugerencia no dude en contactarme: nhegmus@gmail.com';
   contactInfoFra = 'Bonjour';
   arraycontactInfo: array [1..5] of String = (contactInfoRus, contactInfoEng, contactInfoLat, contactInfoEsp, contactInfoFra);
+
 var
   buttons: array [1..3] of TButton;                  // array for 3 examples of boards
   btnDescriptions: array [1..3] of TLabel;           // array for 3 descriptions for these boards

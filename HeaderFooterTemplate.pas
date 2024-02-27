@@ -90,6 +90,7 @@ type
     BrainDissapearance: TFloatAnimation;
     InfoAnimation: TFloatAnimation;
     LangAnimation: TFloatAnimation;
+    StartAnimation: TFloatAnimation;
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure deleteBtnClick(Sender: TObject);
@@ -150,11 +151,11 @@ const                                                                   // 1    
     boardNKeyTextColorsGrey: array   [1..colorsMax] of TAlphaColor = ( $FF6c757d , $FF495057 , $FFd6a9db , $FFcbcbcb , $FF000000, $FF6C757D, $FFd6d6d6 );
     boardNKeyTextColorsRed: array    [1..colorsMax] of TAlphaColor = ( $FFFFB3C6 , $FFba181b , $FFff5d73 , $FFa9a2a6 , $FFF0F0F0, $FFDC1934, $FFDFBA89 );
     barsColors:             array    [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FF495057 , $FF725ac1 , $FFff037d , $FF000080, $FFAB172B, $FF1C85F6 );
-  sizeRUS = 4844;
-  sizeENG = 3193;
-  sizeESP = 3595;
-  sizeLAT = 3;
-  sizeFRA = 2;
+  sizeRUS = 4844;      // vocNumber - 1
+  sizeENG = 3193;      //           - 2
+  sizeLAT = 3;         //           - 3
+  sizeESP = 3595;      //           - 4
+  sizeFRA = 2;         //           - 5
   vocabSize: array [1..5] of integer = (sizeRUS, sizeENG, sizeLAT, sizeESP, sizeFRA);
 
 var
@@ -165,21 +166,20 @@ var
   VocNumber: byte;
   startButtonCondition, languageChanged, themeChanged: boolean;
 const
+  statFileNames: array [0..4] of string = ('stats.ngm', 'statsRus.ngm', 'statsEng.ngm', 'statsLat.ngm', 'statsEsp.ngm');
+  textCongratsRus='Ура! Ура! Молоденчик!'; textCongratsEng='Great job!'; textCongratsLat=''; textCongratsEsp='¡Que trabajo tan excelente!'; textCongratsFra='';
+  textFailRus='Вы не угадали слово '; textFailEng='The word was '; textFailLat=''; textFailEsp='La palabra correcta - '; textFailFra='';
+  textAnotherTryRus='Попробуйте другое слово'; textAnotherTryEng='Try another word'; textAnotherTryLat=''; textAnotherTryEsp='Pruebe otra palabra, por favor'; textAnotherTryFra='';
+  textStartRus='Я сказала: "Стартуем!"'; textStartEng='Let`s start the game!'; textStartLat=''; textStartEsp='¡Empezamos el juego!'; textStartFra='';
+  textGreetingsRus='Приветули'; textGreetingsEng='Greetings'; textGreetingsLat=''; textGreetingsEsp='¡Hola!'; textGreetingsFra='';
+  textPreviousRus='Кажется, у вас есть неотгаданное слово'; textPreviousEng='The last word is waiting you to guess'; textPreviousLat=''; textPreviousEsp='La palabra anteriora está esperando'; textPreviousFra='';
 
-      statFileNames: array [0..4] of string = ('stats.txt', 'statsRus.txt', 'statsEng.txt', 'statsLat.txt', 'statsEsp.txt');
-      textCongratsRus='Ура! Ура! Молоденчик!'; textCongratsEng='Great job!'; textCongratsLat=''; textCongratsEsp='¡Que trabajo tan excelente!'; textCongratsFra='';
-      textFailRus='Вы не угадали слово '; textFailEng='The word was '; textFailLat=''; textFailEsp='La palabra correcta - '; textFailFra='';
-      textAnotherTryRus='Попробуйте другое слово'; textAnotherTryEng='Try another word'; textAnotherTryLat=''; textAnotherTryEsp='Pruebe otra palabra, por favor'; textAnotherTryFra='';
-      textStartRus='Я сказала: "Стартуем!"'; textStartEng='Let`s start the game!'; textStartLat=''; textStartEsp='¡Empezamos el juego!'; textStartFra='';
-      textGreetingsRus='Приветули'; textGreetingsEng='Greetings'; textGreetingsLat=''; textGreetingsEsp='¡Hola!'; textGreetingsFra='';
-      textPreviousRus='Кажется, у вас есть неотгаданное слово'; textPreviousEng='The last word is waiting you to guess'; textPreviousLat=''; textPreviousEsp='La palabra anteriora está esperando'; textPreviousFra='';
-
-      textCongrats: array [1..5] of String = (textCongratsRus, textCongratsEng, textCongratsLat, textCongratsEsp, textCongratsFra);
-      textFails: array [1..5] of String = (textFailRus, textFailEng, textFailLat, textFailEsp, textFailFra);
-      textTries: array [1..5] of String = (textAnotherTryRus, textAnotherTryEng, textAnotherTryLat, textAnotherTryEsp, textAnotherTryFra);
-      textStarts: array [1..5] of String = (textStartRus, textStartEng, textStartLat, textStartEsp, textStartFra);
-      textGreetings: array [1..5] of String = (textGreetingsRus, textGreetingsEng, textGreetingsLat, textGreetingsEsp, textGreetingsFra);
-      textPrevious: array [1..5] of String = (textPreviousRus, textPreviousEng, textPreviousLat, textPreviousEsp, textPreviousFra);
+  textCongrats: array [1..5] of String = (textCongratsRus, textCongratsEng, textCongratsLat, textCongratsEsp, textCongratsFra);
+  textFails: array [1..5] of String = (textFailRus, textFailEng, textFailLat, textFailEsp, textFailFra);
+  textTries: array [1..5] of String = (textAnotherTryRus, textAnotherTryEng, textAnotherTryLat, textAnotherTryEsp, textAnotherTryFra);
+  textStarts: array [1..5] of String = (textStartRus, textStartEng, textStartLat, textStartEsp, textStartFra);
+  textGreetings: array [1..5] of String = (textGreetingsRus, textGreetingsEng, textGreetingsLat, textGreetingsEsp, textGreetingsFra);
+  textPrevious: array [1..5] of String = (textPreviousRus, textPreviousEng, textPreviousLat, textPreviousEsp, textPreviousFra);
 
 var StreakTemp1, StreakTemp2: integer;
     input, stat, statL: text;                              // input - read from vocabulary, stat - read from statistics file
@@ -195,7 +195,7 @@ var StreakTemp1, StreakTemp2: integer;
     letters: array [1..5] of char;
     kbrdBtnPress: array [1..33] of boolean;
     col, rovv: byte;
-    fileNameWord, fileNameMean: string;
+    fileNameWord, fileNameMean, infoLabelText: string;
     kbrdKeys: array [1..3,1..12] of TButton;
     padY, padX: integer;
     kbrdWidth, kbrdHeight: integer;
@@ -993,8 +993,10 @@ begin
 
   if VocNumber = 4
     then begin
+      padX := 4;
+      padY := 6;
       kbrdWidth := 44;
-      kbrdHeight := 30;
+      kbrdHeight := kbrdWidth;
       kbrdKeys[3,9] := keys[39];
       kbrdKeys[2,10] := keys[40];
       for I := 1 to 3 do
@@ -1005,28 +1007,25 @@ begin
       kbrdKeys[1,10].Width := kbrdWidth;
       kbrdKeys[1,10].Height := kbrdHeight;
       kbrdKeys[2,10].Width := kbrdWidth;
+      kbrdKeys[2,10].Height := kbrdKeys[1,10].Height * 2 + padY;
 
-      padX := 4;
-      padY := 4;
-                                                                                                             // отступы между клавишами
-      for I := 1 to 10 do begin                                                                              // 1-ый ряд
-        kbrdKeys[1,i].Position.Y := board[6,5].Position.Y + board[6,5].Height + padY*2 + 20;
-        if i = 1
-          then kbrdKeys[1,i].Position.X := padX
-          else kbrdKeys[1,i].Position.X := kbrdKeys[1,i-1].Position.X + kbrdWidth;
-      end;
-      for j := 1 to 10 do begin                                                                              // 2-ой ряд
-        kbrdKeys[2,j].Position.Y := kbrdKeys[1,1].Position.Y + kbrdHeight + padY / 2;
-        if j = 1
-          then kbrdKeys[2,j].Position.X := padX
-          else kbrdKeys[2,j].Position.X := kbrdKeys[2,j-1].Position.X + kbrdWidth;
-      end;
-      kbrdKeys[2,10].Height := kbrdKeys[2,9].Height*2 + padY / 2;
-      for j := 1 to 9 do begin                                                                              // 3-ий ряд
-        kbrdKeys[3,j].Position.Y := kbrdKeys[2,1].Position.Y + kbrdHeight + padY / 2;
+      for j := 1 to 9 do begin
+        kbrdKeys[3,j].Position.Y := MainForm.ClientHeight - kbrdHeight - padY;
         if j = 1
           then kbrdKeys[3,j].Position.X := padX
-          else kbrdKeys[3,j].Position.X := kbrdKeys[3,j-1].Position.X + kbrdWidth;
+          else kbrdKeys[3,j].Position.X := kbrdKeys[3,j-1].Position.X + kbrdWidth + padX;
+      end;
+      for j := 1 to 10 do begin
+        kbrdKeys[2,j].Position.Y := kbrdKeys[3,1].Position.Y - kbrdHeight - padY;
+        if j = 1
+          then kbrdKeys[2,j].Position.X := padX
+          else kbrdKeys[2,j].Position.X := kbrdKeys[2,j-1].Position.X + kbrdWidth + padX;
+      end;
+      for I := 1 to 10 do begin
+        kbrdKeys[1,i].Position.Y := kbrdKeys[2,1].Position.Y - kbrdHeight - padY;
+        if i = 1
+          then kbrdKeys[1,i].Position.X := padX
+          else kbrdKeys[1,i].Position.X := kbrdKeys[1,i-1].Position.X + kbrdWidth + padX;
       end;
   end;
 {$ENDIF}
@@ -1857,29 +1856,28 @@ end;
 
 procedure vocabularyChange;
 begin
-
   case VocNumber of
   1: begin
-       setlength (vocab,sizeRUS+1);
-       setlength (meanings,sizeRUS+1);
-       size := sizeRUS;
-       fileNameWord := 'Rus5Word.txt';
-       fileNameMean := 'Rus5Mean.txt';
+    setlength (vocab,sizeRUS+1);
+    setlength (meanings,sizeRUS+1);
+    size := sizeRUS;
+    fileNameWord := 'Rus5Word.ngm';
+    fileNameMean := 'Rus5Mean.ngm';
   end;
   2: begin
        setlength (vocab,sizeENG+1);
        setlength (meanings,sizeENG+1);
        size := sizeENG;
-       fileNameWord := 'Eng5Word.txt';
-       fileNameMean := 'Eng5Mean.txt';
+       fileNameWord := 'Eng5Word.ngm';
+       fileNameMean := 'Eng5Mean.ngm';
   end;
   3: begin setlength (vocab,sizeLAT+1); setlength (meanings,sizeLAT+1); size := sizeLAT; end;
   4: begin
        setlength (vocab,sizeESP+1);
        setlength (meanings,sizeESP+1);
        size := sizeESP;
-       fileNameWord := 'Esp5Word.txt';
-       fileNameMean := 'Esp5Mean.txt';
+       fileNameWord := 'Esp5Word.ngm';
+       fileNameMean := 'Esp5Mean.ngm';
   end;
   end;
 
@@ -1918,6 +1916,8 @@ begin
   kbrdArrays;
   kbrdTextChange;
   kbrdPosition;
+  MainForm.InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
+  MainForm.InfoLabel.Text := '';
 {$IFDEF MSWINDOWS}
   infoLabelProperties;
   boardSizeCalc;
@@ -1925,14 +1925,14 @@ begin
   topButtonsPositions;
   topButtonsFlashing;
 {$ENDIF}
-
 {$IFDEF ANDROID}
-  if languageChanged
-    then MainForm.BrainDissapearance.Enabled := false;
-  if languageChanged and not wordNotGuessed and (board[1][1].Text <> '') then
-    kbrdDefColor;
+  MainForm.BrainDissapearance.Enabled := false;
 {$ENDIF}
-
+  BoardDefColor;
+  BoardDefState;
+  kbrdDefColor;
+  MainForm.StartAnimation.Enabled := true;
+  keys[36].Enabled := false;
   statsReadAll;
 end;
 
@@ -1973,7 +1973,6 @@ begin
   statsReadAll;
                               // recovering previous session
   if wordNotGuessed then begin
-    infoLabel.Text:=textPrevious[VocNumber];
     BoardDefColor;
     kbrdDefColor;
     for i := 1 to wordQuantity do begin
@@ -1987,6 +1986,7 @@ begin
     rovv := wordQuantity + 1;
     keys[38].Enabled := false;
     keys[41].Enabled := false;
+    startButtonCondition := true;
     FormRefresh;
     kbrdEnable;
     vocabFill;
@@ -2002,12 +2002,13 @@ begin
     if VocNumber = 0 then InfoAnimation.Enabled := true;       // infoAnimation on first run
     if VocNumber = 0 then LangAnimation.Enabled := true;       // infoAnimation on first run
     if VocNumber = 0 then VocNumber := 2;
-    if ColorsSetNumber = 0 then ColorsSetNumber := 6;
+    if ColorsSetNumber = 0 then ColorsSetNumber := 2;
     Fill.Color := bckgrndColor[ColorsSetNumber];               // bckgrnd color
     FormRefresh;
     BoardDefColor;
     kbrdDefColor;
-
+    kbrdDisable;
+    StartAnimation.Enabled := true;
     InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
     InfoLabel.Text := textGreetings[VocNumber];
   end;
@@ -2034,23 +2035,10 @@ end;
 procedure TMainForm.FormActivate(Sender: TObject);
 begin
   Fill.Color := bckgrndColor[ColorsSetNumber];
-  infoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
-  infoLabel.Text := '';
-  if (keys[38].Enabled) and (board [1,1].Text = '') then
-    infoLabel.Text:=textGreetings[VocNumber];
 
             // Данный параметр нужен для тестирования. Выводит нужное сообщение в инфо строку.
 //  InfoLabel.Text := intToStr(numberOfTheword) + ' - ' + TheWord;
             //
-
-  if wordGuessedRight
-    then BoardSuccessColoring;
-  if wordGuessedWrong
-    then BoardFailColoring;
-  if not wordGuessedRight and not wordGuessedWrong
-    then kbrdColorsRefresh;
-
-  MainForm.Active := true;
 
   if themeChanged
     then ThemeRefresh;
@@ -2385,6 +2373,7 @@ begin
   start.Enabled:=false;
   meaning.Enabled:=false;
   BrainDissapearance.Enabled := false;
+  StartAnimation.Enabled := false;
   kbrdEnable;
   BoardDefState;
   BoardDefColor;
@@ -2394,14 +2383,14 @@ begin
   languageChanged := false;
 
           // Данный параметр нужен для тестирования. Задаёт определённое по счёту слово.
-//  numberOfTheword := 2;                               // акция - abbey - abaco - 2 слово
+//  numberOfTheword := Length(vocab) - 1;                               // акция - abbey - abaco - 2 слово
           //
 
   InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
   InfoLabel.Text := textStarts[VocNumber];
 
           // Данный параметр нужен для тестирования. Выводит нужное сообщение в инфо строку.
-//  InfoLabel.Text := intToStr(numberOfTheword) + ' - ' + TheWord;
+//  InfoLabel.Text := vocab[Length(vocab) - 1];
           //
 
   meaningOfTheWord:=meanings[numberOfTheword];

@@ -4,8 +4,8 @@
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
     <PropertyGroup>
-        <DeviceId Condition="'$(Platform)'=='Android'"/>
-        <DeviceId Condition="'$(Platform)'=='Android64'">18dac8fe</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android'">2d5060e</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android64'"/>
         <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
         <DeviceId Condition="'$(Platform)'=='iOSSimARM64'"/>
     </PropertyGroup>
@@ -112,15 +112,6 @@
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='Android64'">
-        <DeployFile Include="Esp5Word.txt" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Esp5Word.txt</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="$(BDS)\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\library\lib\mips\</RemoteDir>
             <RemoteName>libLettery.so</RemoteName>
@@ -148,27 +139,9 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Esp5Mean.txt" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="temp\dicts\Rus5Mean.ngm" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Esp5Mean.txt</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="temp\Rus5Word.txt" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Rus5Word.txt</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Eng5Mean.txt" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Eng5Mean.txt</RemoteName>
+            <RemoteName>Rus5Mean.ngm</RemoteName>
             <DeployClass>File</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
@@ -275,9 +248,9 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Eng5Word.txt" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="temp\dicts\Esp5Mean.ngm" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Eng5Word.txt</RemoteName>
+            <RemoteName>Esp5Mean.ngm</RemoteName>
             <DeployClass>File</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
@@ -298,6 +271,15 @@
             <RemoteName>strings.xml</RemoteName>
             <DeployClass>Android_Strings</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\dicts\Eng5Word.ngm" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Eng5Word.ngm</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -334,6 +316,15 @@
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon96</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\dicts\Eng5Mean.ngm" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Eng5Mean.ngm</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -392,9 +383,9 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="temp\Rus5Mean.txt" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="temp\dicts\Rus5Word.ngm" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Rus5Mean.txt</RemoteName>
+            <RemoteName>Rus5Word.ngm</RemoteName>
             <DeployClass>File</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
@@ -415,6 +406,15 @@
             <RemoteName>ic_notification.png</RemoteName>
             <DeployClass>Android_NotificationIcon72</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\dicts\Esp5Word.ngm" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Esp5Word.ngm</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -440,15 +440,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Rus5Mean.txt" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Rus5Mean.txt</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="temp\lettery-icons\lettery470.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\res\drawable-normal\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
@@ -458,9 +449,18 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Esp5Word.txt" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="temp\dicts\Esp5Mean.ngm" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Esp5Word.txt</RemoteName>
+            <RemoteName>Esp5Mean.ngm</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\dicts\Eng5Mean.ngm" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Eng5Mean.ngm</RemoteName>
             <DeployClass>File</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
@@ -494,9 +494,9 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Esp5Mean.txt" Condition="'$(Config)'=='Debug'">
+        <DeployFile Include="temp\dicts\Rus5Mean.ngm" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Esp5Mean.txt</RemoteName>
+            <RemoteName>Rus5Mean.ngm</RemoteName>
             <DeployClass>File</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
@@ -584,15 +584,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Rus5Word.txt" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Rus5Word.txt</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="temp\lettery-icons\icon192.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\res\drawable-xxxhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
@@ -605,15 +596,6 @@
         <DeployFile Include="temp\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Eng5Mean.txt" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Eng5Mean.txt</RemoteName>
             <DeployClass>File</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
@@ -634,6 +616,15 @@
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon144</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\dicts\Esp5Word.ngm" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Esp5Word.ngm</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -683,15 +674,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Eng5Word.txt" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Eng5Word.txt</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="Android\Debug\libLettery.so" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\library\lib\armeabi-v7a\</RemoteDir>
             <RemoteName>libLettery.so</RemoteName>
@@ -711,6 +693,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="temp\dicts\Eng5Word.ngm" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Eng5Word.ngm</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_96x96.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\res\drawable-xxxhdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
@@ -725,6 +716,15 @@
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage640</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\dicts\Rus5Word.ngm" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Rus5Word.ngm</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>

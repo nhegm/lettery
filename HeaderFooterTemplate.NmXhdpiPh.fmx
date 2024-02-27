@@ -5,6 +5,12 @@ inherited MainForm_NmXhdpiPh: TMainForm_NmXhdpiPh
   inherited R13: TButton
     TextSettings.Font.StyleExt = {00020000000000000004000000}
   end
+  inherited start: TButton
+    Margins.Left = 5.000000000000000000
+    Margins.Top = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+  end
   inherited R55: TButton
     TextSettings.Font.StyleExt = {00020000000000000004000000}
   end

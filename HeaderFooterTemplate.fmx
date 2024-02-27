@@ -103,6 +103,14 @@
     Text = 'start'
     TextSettings.Trimming = None
     OnClick = startClick
+    object StartAnimation: TFloatAnimation
+      AutoReverse = True
+      Duration = 0.600000023841857900
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
   end
   object R55: TButton
     StyledSettings = []
