@@ -1,6 +1,7 @@
 object meaningForm1: TmeaningForm1
   Left = 0
   Top = 0
+  BorderIcons = []
   BorderStyle = Single
   Caption = 'meaning'
   ClientHeight = 300

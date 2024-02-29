@@ -27,6 +27,8 @@ type
     Text6: TText;
     greek: TRoundRect;
     Text7: TText;
+    x_men: TRoundRect;
+    Text8: TText;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure azulClick(Sender: TObject);
@@ -42,8 +44,11 @@ type
     procedure Text5Click(Sender: TObject);
     procedure latinumClick(Sender: TObject);
     procedure Text6Click(Sender: TObject);
-    procedure Text7Click(Sender: TObject);
     procedure greekClick(Sender: TObject);
+    procedure Text7Click(Sender: TObject);
+    procedure x_menClick(Sender: TObject);
+    procedure Text8Click(Sender: TObject);
+
 
   private
     { Private declarations }
@@ -81,12 +86,12 @@ begin
   themeChanged := false;
   {$IF Defined(ANDROID)}
     setForm.width := 150;
-    setForm.height := 340;
+    setForm.height := 370;
     setForm.Visible := false;
   {$ELSEIF Defined(MSWINDOWS)}
     setForm.StyleLookup := DefaultFormStyleLookup;
     width := 300;
-    height := 500;
+    height := 530;
   {$ENDIF}
 
   themeButton[1] := azul;
@@ -96,6 +101,7 @@ begin
   themeButton[5] := console;
   themeButton[6] := latinum;
   themeButton[7] := greek;
+  themeButton[8] := x_men;
   buttonText[1] := Text1;
   buttonText[2] := Text2;
   buttonText[3] := Text3;
@@ -103,6 +109,7 @@ begin
   buttonText[5] := Text5;
   buttonText[6] := Text6;
   buttonText[7] := Text7;
+  buttonText[8] := Text8;
 
   Label1.Position.X := (setForm.Width - Label1.Width)/2;
   Label1.Position.Y := 8;
@@ -142,7 +149,7 @@ procedure TsetForm.FormShow(Sender: TObject);
 begin
   themeChanged := false;
   setForm.width := 150;
-  setForm.height := 340;
+  setForm.height := 370;
   {$IF Defined(ANDROID)}
     Left := round((screen.Width - setForm.width)/2);
     Top := 50;
@@ -168,7 +175,27 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
+end;
+
+procedure TsetForm.x_menClick(Sender: TObject);
+begin
+  HeaderFooterTemplate.ColorsSetNumber := 8;
+  Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
+  setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -188,7 +215,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -208,7 +235,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -228,7 +255,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -248,7 +275,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -268,7 +295,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -288,7 +315,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -308,7 +335,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -328,7 +355,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -348,7 +375,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -368,7 +395,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -388,7 +415,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -408,7 +435,7 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;
@@ -428,7 +455,27 @@ begin
   Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   themeChanged := true;
-  for i := 1 to 7 do
+  for i := 1 to colorsMax do
+    if i = ColorsSetNumber
+      then begin
+        themeButton[i].HitTest := false;
+        buttonText[i].HitTest := false;
+      end
+      else
+        if themeButton[i].HitTest = false
+          then begin
+            themeButton[i].HitTest := true;
+            buttonText[i].HitTest := true;
+          end;
+end;
+
+procedure TsetForm.Text8Click(Sender: TObject);
+begin
+  HeaderFooterTemplate.ColorsSetNumber := 8;
+  Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
+  setForm.Label1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  themeChanged := true;
+  for i := 1 to colorsMax do
     if i = ColorsSetNumber
       then begin
         themeButton[i].HitTest := false;

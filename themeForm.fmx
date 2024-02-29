@@ -4,7 +4,7 @@ object setForm: TsetForm
   BorderIcons = []
   BorderStyle = Single
   Caption = 'themes'
-  ClientHeight = 428
+  ClientHeight = 532
   ClientWidth = 300
   Fill.Kind = Solid
   FormStyle = Popup
@@ -165,6 +165,23 @@ object setForm: TsetForm
       Size.PlatformDefault = False
       Text = 'greek'
       OnClick = Text7Click
+    end
+  end
+  object x_men: TRoundRect
+    Position.X = 41.000000000000000000
+    Position.Y = 425.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 34.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = x_menClick
+    object Text8: TText
+      Align = Center
+      Locked = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'x-men'
+      OnClick = Text8Click
     end
   end
 end

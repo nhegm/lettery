@@ -1,6 +1,7 @@
 object informationForm: TinformationForm
   Left = 0
   Top = 0
+  BorderIcons = []
   BorderStyle = Single
   Caption = 'info'
   ClientHeight = 328

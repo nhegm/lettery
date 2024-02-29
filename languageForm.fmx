@@ -1,6 +1,7 @@
 object language: Tlanguage
   Left = 0
   Top = 0
+  BorderIcons = []
   BorderStyle = Single
   Caption = 'language'
   ClientHeight = 480

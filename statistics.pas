@@ -54,14 +54,16 @@ const
 
 procedure elementsSettings;
 begin
+{$IFDEF ANDROID}
   statsForm.height:= 200;
   statsForm.width:= 220;
+{$ENDIF}
   statsForm.Top:=50;
   statsForm.Left:=100;
   statsForm.Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   statsForm.headLabel.TextSettings.Font.Size := 14;
-  statsForm.headLabel.Position.Y := 10;
   statsForm.headLabel.Position.X := (statsForm.Width - statsForm.headLabel.Width) / 2;
+  statsForm.headLabel.Position.Y := 10;
   statsForm.gamesLabel.Position.X := (statsForm.Width - statsForm.gamesLabel.Width) / 2;
   statsForm.gamesLabel.Position.Y := statsForm.headLabel.Position.Y + 30;
   statsForm.winsLabel.Position.X := (statsForm.Width - statsForm.winsLabel.Width) / 2;
@@ -73,6 +75,9 @@ begin
   statsForm.Switcher.Enabled := true;
   statsForm.Switcher.Position.X := (statsForm.Width - statsForm.Switcher.Width) / 2;
   statsForm.Switcher.Position.Y := statsForm.lastStreakLabel.Position.Y + 30;
+{$IFDEF MSWINDOWS}
+  statsForm.height:= round (statsForm.Switcher.Position.Y + 50);
+{$ENDIF}
   statsForm.gamesLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   statsForm.winsLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   statsForm.streakLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
