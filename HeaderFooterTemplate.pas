@@ -144,13 +144,13 @@ type
 const                                                                   // 1         // 2        // 3         //4          //5        //6        //7       //8
   colorsMax = 8;                                                        // azul     // day     // violet   // Barbie   // Console // latinum // greek   // x-men
     bckgrndColor: array              [1..colorsMax] of TAlphaColor = ( $FF003049 , $FFfdfdfd , $FF725ac1 , $FFFDECF4 , $FF000080, $FFFDF0D5, $FFffffff, $ffFFE85C );
-    boardNKeyColorsDef: array        [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FFd2d2d2 , $FFf7ece1 , $FFff67b1 , $FFDB00FF, $FFAB172B, $FF1C85F6, $ff4298F5 );
+    boardNKeyColorsDef: array        [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FFd2d2d2 , $FFf7ece1 , $FFff67b1 , $FFDB00FF, $FFAB172B, $FF1C85F6, $ff00b4d8 );
     boardNKeyTextColorsDef: array    [1..colorsMax] of TAlphaColor = ( $FFFDF0D5 , $FF000000 , $FFfdfffc , $FFff037d , $FFF0F0F0, $FF000000, $FF865746, $ff000000 );
     boardNKeyTextColorsYellow: array [1..colorsMax] of TAlphaColor = ( $FFffea00 , $FFffc000 , $FFffff3f , $FFf0f405 , $FFffdb00, $FF00C8FA, $FFffee32, $ffFAF761 );
     boardNKeyTextColorsGreen: array  [1..colorsMax] of TAlphaColor = ( $FF5bf36d , $FF40916c , $FF80ed99 , $FF73C4FE , $FF00ffdb, $FF7B2CBF, $FF02c39a, $ff48A06F );
     boardNKeyTextColorsGrey: array   [1..colorsMax] of TAlphaColor = ( $FF6c757d , $FF495057 , $FFd6a9db , $FFcbcbcb , $FF000000, $FF6C757D, $FFd6d6d6, $ff9FB1C0 );
     boardNKeyTextColorsRed: array    [1..colorsMax] of TAlphaColor = ( $FFFFB3C6 , $FFba181b , $FFff5d73 , $FFa9a2a6 , $FFF0F0F0, $FFDC1934, $FFDFBA89, $ffE8403E );
-    barsColors:             array    [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FF495057 , $FF725ac1 , $FFff037d , $FF000080, $FFAB172B, $FF1C85F6, $ff0065D3 );
+    barsColors:             array    [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FF495057 , $FF725ac1 , $FFff037d , $FF000080, $FFAB172B, $FF1C85F6, $ff7FCD99 );
   sizeRUS = 4844;      // vocNumber - 1
   sizeENG = 3193;      //           - 2
   sizeLAT = 3;         //           - 3

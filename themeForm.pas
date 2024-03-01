@@ -85,8 +85,8 @@ begin
 
   themeChanged := false;
   {$IF Defined(ANDROID)}
-    setForm.width := 150;
-    setForm.height := 370;
+    setForm.width := 275;
+    setForm.height := 220;
     setForm.Visible := false;
   {$ELSEIF Defined(MSWINDOWS)}
     setForm.StyleLookup := DefaultFormStyleLookup;
@@ -115,11 +115,22 @@ begin
   Label1.Position.Y := 8;
   Label1.Height := 24;
   padY := 8;
+  padX := 25;
+
   themeButton[1].Position.Y := Label1.Position.Y + Label1.Height + padY;
-  for I := 2 to HeaderFooterTemplate.colorsMax do
+  for I := 2 to HeaderFooterTemplate.colorsMax div 2 do
     themeButton[i].Position.Y := themeButton[i-1].Position.Y + themeButton[i-1].Height + padY;
-  for I := 1 to HeaderFooterTemplate.colorsMax do
-    themeButton[i].Position.X := (setForm.Width - themeButton[i].Width)/2;
+
+  themeButton[5].Position.Y := Label1.Position.Y + Label1.Height + padY;
+  for I := 6 to HeaderFooterTemplate.colorsMax do
+    themeButton[i].Position.Y := themeButton[i-1].Position.Y + themeButton[i-1].Height + padY;
+
+  for I := 1 to HeaderFooterTemplate.colorsMax div 2 do
+    themeButton[i].Position.X := padX;
+
+  for I := 5 to HeaderFooterTemplate.colorsMax do
+    themeButton[i].Position.X := themeButton[1].Position.X + themeButton[1].Width + padX;
+
   returnButton.Position.Y := themeButton[colorsMax].Position.Y + themeButton[colorsMax].Height + padY;
   returnButton.Position.X := (setForm.Width - returnButton.Width)/2;
 
@@ -148,8 +159,8 @@ end;
 procedure TsetForm.FormShow(Sender: TObject);
 begin
   themeChanged := false;
-  setForm.width := 150;
-  setForm.height := 370;
+  setForm.width := 275;
+  setForm.height := 220;
   {$IF Defined(ANDROID)}
     Left := round((screen.Width - setForm.width)/2);
     Top := 50;

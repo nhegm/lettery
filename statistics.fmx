@@ -10,6 +10,7 @@ object statsForm: TstatsForm
   Fill.Kind = Solid
   Position = Designed
   StyleLookup = 'pushpanel'
+  FormStyle = Popup
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]

@@ -180,7 +180,7 @@ object setForm: TsetForm
       Size.Width = 57.000000000000000000
       Size.Height = 28.000000000000000000
       Size.PlatformDefault = False
-      Text = 'x-men'
+      Text = 'X'
       OnClick = Text8Click
     end
   end
