@@ -1610,16 +1610,16 @@ begin
               if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
                  (keys[ord(words[i][j]) - 1071].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) and
                  (keys[ord(words[i][j]) - 1071].TintColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
-                then keys[ord(words[i][j]) - 1071].TintColor := boardNKeyTextColorsGrey[colorsSetNumber]
+                then keys[ord(words[i][j]) - 1071].TintColor := boardNKeyTextColorsGrey[colorsSetNumber];
             end else begin
               if board[i,j].TextSettings.FontColor = boardNKeyTextColorsGreen[ColorsSetNumber]
                 then keys[33].TintColor := boardNKeyTextColorsGreen[ColorsSetNumber];
               if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsYellow[ColorsSetNumber]) and
-                 (keys[ord(words[i][j]) - 1071].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
-                then keys[33].TintColor := boardNKeyTextColorsYellow[ColorsSetNumber];
+                 (keys[33].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                then keys[33].TintColor := boardNKeyTextColorsYellow[ColorsSetNumber];                       // здеся ошибка, ниже   ord(words[i][j]) - 1071
               if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
-                 (keys[ord(words[i][j]) - 1071].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) and
-                 (keys[ord(words[i][j]) - 1071].TintColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
+                 (keys[33].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) and
+                 (keys[33].TintColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
                 then keys[33].TintColor := boardNKeyTextColorsGrey[colorsSetNumber];
               end;
     if wordGuessedRight
