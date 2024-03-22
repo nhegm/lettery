@@ -91,6 +91,126 @@ type
     InfoAnimation: TFloatAnimation;
     LangAnimation: TFloatAnimation;
     StartAnimation: TFloatAnimation;
+    FadeMoveR11: TFloatAnimation;
+    FadePosR11: TFloatAnimation;
+    AppearMoveR11: TFloatAnimation;
+    AppearPosR11: TFloatAnimation;
+    AppearMoveR12: TFloatAnimation;
+    AppearPosR12: TFloatAnimation;
+    FadeMoveR12: TFloatAnimation;
+    FadePosR12: TFloatAnimation;
+    AppearMoveR13: TFloatAnimation;
+    AppearPosR13: TFloatAnimation;
+    FadeMoveR13: TFloatAnimation;
+    FadePosR13: TFloatAnimation;
+    AppearMoveR14: TFloatAnimation;
+    AppearPosR14: TFloatAnimation;
+    FadeMoveR14: TFloatAnimation;
+    FadePosR14: TFloatAnimation;
+    AppearMoveR15: TFloatAnimation;
+    AppearPosR15: TFloatAnimation;
+    FadeMoveR15: TFloatAnimation;
+    FadePosR15: TFloatAnimation;
+    AppearMoveR21: TFloatAnimation;
+    FadeMoveR21: TFloatAnimation;
+    AppearPosR21: TFloatAnimation;
+    FadePosR21: TFloatAnimation;
+    AppearMoveR22: TFloatAnimation;
+    AppearPosR22: TFloatAnimation;
+    FadeMoveR22: TFloatAnimation;
+    FadePosR22: TFloatAnimation;
+    AppearMoveR23: TFloatAnimation;
+    AppearPosR23: TFloatAnimation;
+    FadeMoveR23: TFloatAnimation;
+    FadePosR23: TFloatAnimation;
+    AppearMoveR24: TFloatAnimation;
+    AppearPosR24: TFloatAnimation;
+    FadeMoveR24: TFloatAnimation;
+    FadePosR24: TFloatAnimation;
+    AppearMoveR25: TFloatAnimation;
+    AppearPosR25: TFloatAnimation;
+    FadeMoveR25: TFloatAnimation;
+    FadePosR25: TFloatAnimation;
+    AppearMoveR31: TFloatAnimation;
+    AppearPosR31: TFloatAnimation;
+    FadeMoveR31: TFloatAnimation;
+    FadePosR31: TFloatAnimation;
+    AppearMoveR32: TFloatAnimation;
+    AppearPosR32: TFloatAnimation;
+    FadeMoveR32: TFloatAnimation;
+    FadePosR32: TFloatAnimation;
+    AppearMoveR33: TFloatAnimation;
+    AppearPosR33: TFloatAnimation;
+    FadeMoveR33: TFloatAnimation;
+    FadePosR33: TFloatAnimation;
+    AppearMoveR34: TFloatAnimation;
+    AppearPosR34: TFloatAnimation;
+    FadeMoveR34: TFloatAnimation;
+    FadePosR34: TFloatAnimation;
+    AppearMoveR35: TFloatAnimation;
+    AppearPosR35: TFloatAnimation;
+    FadeMoveR35: TFloatAnimation;
+    FadePosR35: TFloatAnimation;
+    AppearMoveR41: TFloatAnimation;
+    AppearPosR41: TFloatAnimation;
+    FadeMoveR41: TFloatAnimation;
+    FadePosR41: TFloatAnimation;
+    AppearMoveR42: TFloatAnimation;
+    AppearPosR42: TFloatAnimation;
+    FadeMoveR42: TFloatAnimation;
+    FadePosR42: TFloatAnimation;
+    AppearMoveR43: TFloatAnimation;
+    AppearPosR43: TFloatAnimation;
+    FadeMoveR43: TFloatAnimation;
+    FadePosR43: TFloatAnimation;
+    AppearMoveR44: TFloatAnimation;
+    AppearPosR44: TFloatAnimation;
+    FadeMoveR44: TFloatAnimation;
+    FadePosR44: TFloatAnimation;
+    AppearMoveR45: TFloatAnimation;
+    AppearPosR45: TFloatAnimation;
+    FadeMoveR45: TFloatAnimation;
+    FadePosR45: TFloatAnimation;
+    AppearMoveR51: TFloatAnimation;
+    AppearPosR51: TFloatAnimation;
+    FadeMoveR51: TFloatAnimation;
+    FadePosR51: TFloatAnimation;
+    AppearMoveR52: TFloatAnimation;
+    AppearPosR52: TFloatAnimation;
+    FadeMoveR52: TFloatAnimation;
+    FadePosR52: TFloatAnimation;
+    AppearMoveR53: TFloatAnimation;
+    AppearPosR53: TFloatAnimation;
+    FadeMoveR53: TFloatAnimation;
+    FadePosR53: TFloatAnimation;
+    AppearMoveR54: TFloatAnimation;
+    AppearPosR54: TFloatAnimation;
+    FadeMoveR54: TFloatAnimation;
+    FadePosR54: TFloatAnimation;
+    AppearMoveR55: TFloatAnimation;
+    AppearPosR55: TFloatAnimation;
+    FadeMoveR55: TFloatAnimation;
+    FadePosR55: TFloatAnimation;
+    AppearMoveR61: TFloatAnimation;
+    AppearPosR61: TFloatAnimation;
+    FadeMoveR61: TFloatAnimation;
+    FadePosR61: TFloatAnimation;
+    AppearMoveR62: TFloatAnimation;
+    AppearPosR62: TFloatAnimation;
+    FadeMoveR62: TFloatAnimation;
+    FadePosR62: TFloatAnimation;
+    AppearMoveR63: TFloatAnimation;
+    AppearPosR63: TFloatAnimation;
+    FadeMoveR63: TFloatAnimation;
+    FadePosR63: TFloatAnimation;
+    FadePosR64: TFloatAnimation;
+    AppearMoveR64: TFloatAnimation;
+    AppearPosR64: TFloatAnimation;
+    FadeMoveR64: TFloatAnimation;
+    AppearMoveR65: TFloatAnimation;
+    AppearPosR65: TFloatAnimation;
+    FadeMoveR65: TFloatAnimation;
+    FadePosR65: TFloatAnimation;
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure deleteBtnClick(Sender: TObject);
@@ -205,6 +325,11 @@ var StreakTemp1, StreakTemp2: integer;
     boardWords : array [1..6] of String;
     askTemp: array [1..6] of String;
     wordQuantity, vocabTemp, numberOfThewordTemp, colorTemp : integer;
+    boardAnimationArrayAppearMove: array [1..6,1..5] of TFloatAnimation;
+    boardAnimationArrayAppearPos: array [1..6,1..5] of TFloatAnimation;
+    boardAnimationArrayFadeMove: array [1..6,1..5] of TFloatAnimation;
+    boardAnimationArrayFadePos: array [1..6,1..5] of TFloatAnimation;
+
 implementation
 
 uses statistics, meaningForm, themeForm, languageForm, infoForm;
@@ -213,6 +338,66 @@ uses statistics, meaningForm, themeForm, languageForm, infoForm;
 {$R *.iPhone4in.fmx IOS}
 {$R *.NmXhdpiPh.fmx ANDROID}
 {$R *.LgXhdpiTb.fmx ANDROID}
+
+procedure boardAnimationStart(rowNumber : integer);
+var
+  delayFade: array [1..5] of real;
+  delayAppear: array [1..5] of real;
+  delayStep, durFade, durAppear: real;
+begin
+  delayStep := 0.2;
+  durFade := 0.4;
+  durAppear := 0.5;
+  delayFade[1] := 0;
+  delayAppear[1] := 0.4;
+  for i := 2 to 5 do begin
+    delayFade[i] := delayFade[i-1] + delayStep;
+    delayAppear[i] := delayAppear[i-1] + delayStep;
+  end;
+  for i := 1 to 5 do begin
+    boardAnimationArrayAppearMove[rowNumber,i].Delay := delayAppear[i];
+    boardAnimationArrayAppearPos[rowNumber,i].Delay := delayAppear[i];
+    boardAnimationArrayFadeMove[rowNumber,i].Delay := delayFade[i];
+    boardAnimationArrayFadePos[rowNumber,i].Delay := delayFade[i];
+
+    boardAnimationArrayAppearMove[rowNumber,i].Duration := durAppear;
+    boardAnimationArrayAppearPos[rowNumber,i].Duration := durAppear;
+    boardAnimationArrayFadeMove[rowNumber,i].Duration := durFade;
+    boardAnimationArrayFadePos[rowNumber,i].Duration := durFade;
+
+    boardAnimationArrayAppearMove[rowNumber,i].PropertyName := 'Scale.X';
+    boardAnimationArrayAppearPos[rowNumber,i].PropertyName := 'Position.X';
+    boardAnimationArrayFadeMove[rowNumber,i].PropertyName := 'Scale.X';
+    boardAnimationArrayFadePos[rowNumber,i].PropertyName := 'Position.X';
+
+    boardAnimationArrayAppearMove[rowNumber,i].StartValue := 0;
+    boardAnimationArrayAppearPos[rowNumber,i].StartValue := board[rowNumber,i].Position.X;
+    boardAnimationArrayFadeMove[rowNumber,i].StartValue := -1;
+    boardAnimationArrayFadePos[rowNumber,i].StartValue := board[rowNumber,i].Position.X + board[rowNumber,i].Width;
+
+    boardAnimationArrayAppearMove[rowNumber,i].StopValue := 1;
+    boardAnimationArrayAppearPos[rowNumber,i].StopValue := board[rowNumber,i].Position.X;
+    boardAnimationArrayFadeMove[rowNumber,i].StopValue := 0;
+    boardAnimationArrayFadePos[rowNumber,i].StopValue := board[rowNumber,i].Position.X + board[rowNumber,i].Width;
+
+    boardAnimationArrayAppearMove[rowNumber,i].AnimationType := TAnimationType.In;
+    boardAnimationArrayAppearPos[rowNumber,i].AnimationType := TAnimationType.In;
+    boardAnimationArrayFadeMove[rowNumber,i].AnimationType := TAnimationType.Out;
+    boardAnimationArrayFadePos[rowNumber,i].AnimationType := TAnimationType.Out;
+
+    boardAnimationArrayAppearMove[rowNumber,i].Interpolation := TInterpolationType.Cubic;
+    boardAnimationArrayAppearPos[rowNumber,i].Interpolation := TInterpolationType.Exponential;
+    boardAnimationArrayFadeMove[rowNumber,i].Interpolation := TInterpolationType.Sinusoidal;
+    boardAnimationArrayFadePos[rowNumber,i].Interpolation := TInterpolationType.Exponential;
+  end;
+
+  for i := 1 to 5 do begin
+    boardAnimationArrayAppearMove[rowNumber,i].Start;
+    boardAnimationArrayAppearPos[rowNumber,i].Start;
+    boardAnimationArrayFadeMove[rowNumber,i].Start;
+    boardAnimationArrayFadePos[rowNumber,i].Start;
+  end;
+end;
 
 function GetMyFile(const AssetName : string) : string;
 begin
@@ -1390,10 +1575,11 @@ end;
 procedure BoardFailColoring;
 begin
 {$IFDEF ANDROID}
-  for I := 1 to 5 do begin
-    board[rovv,i].TintColor := boardNKeyTextColorsRed[ColorsSetNumber];
-    board[rovv,i].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
-  end;
+  if words[6]<>'' then
+    for I := 1 to 5 do begin
+      board[6,i].TintColor := boardNKeyTextColorsRed[ColorsSetNumber];
+      board[6,i].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
+    end;
 {$ENDIF}
 {$IFDEF MSWINDOWS}
   for I := 1 to 5 do
@@ -1969,6 +2155,34 @@ begin
   board[5,1]:=R51;  board[5,2]:=R52; board[5,3]:=R53; board[5,4]:=R54; board[5,5]:=R55;
   board[6,1]:=R61;  board[6,2]:=R62; board[6,3]:=R63; board[6,4]:=R64; board[6,5]:=R65;
 
+  boardAnimationArrayAppearMove[1,1]:=AppearMoveR11;  boardAnimationArrayAppearMove[1,2]:=AppearMoveR12; boardAnimationArrayAppearMove[1,3]:=AppearMoveR13; boardAnimationArrayAppearMove[1,4]:=AppearMoveR14; boardAnimationArrayAppearMove[1,5]:=AppearMoveR15;
+  boardAnimationArrayAppearMove[2,1]:=AppearMoveR21;  boardAnimationArrayAppearMove[2,2]:=AppearMoveR22; boardAnimationArrayAppearMove[2,3]:=AppearMoveR23; boardAnimationArrayAppearMove[2,4]:=AppearMoveR24; boardAnimationArrayAppearMove[2,5]:=AppearMoveR25;
+  boardAnimationArrayAppearMove[3,1]:=AppearMoveR31;  boardAnimationArrayAppearMove[3,2]:=AppearMoveR32; boardAnimationArrayAppearMove[3,3]:=AppearMoveR33; boardAnimationArrayAppearMove[3,4]:=AppearMoveR34; boardAnimationArrayAppearMove[3,5]:=AppearMoveR35;
+  boardAnimationArrayAppearMove[4,1]:=AppearMoveR41;  boardAnimationArrayAppearMove[4,2]:=AppearMoveR42; boardAnimationArrayAppearMove[4,3]:=AppearMoveR43; boardAnimationArrayAppearMove[4,4]:=AppearMoveR44; boardAnimationArrayAppearMove[4,5]:=AppearMoveR45;
+  boardAnimationArrayAppearMove[5,1]:=AppearMoveR51;  boardAnimationArrayAppearMove[5,2]:=AppearMoveR52; boardAnimationArrayAppearMove[5,3]:=AppearMoveR53; boardAnimationArrayAppearMove[5,4]:=AppearMoveR54; boardAnimationArrayAppearMove[5,5]:=AppearMoveR55;
+  boardAnimationArrayAppearMove[6,1]:=AppearMoveR61;  boardAnimationArrayAppearMove[6,2]:=AppearMoveR62; boardAnimationArrayAppearMove[6,3]:=AppearMoveR63; boardAnimationArrayAppearMove[6,4]:=AppearMoveR64; boardAnimationArrayAppearMove[6,5]:=AppearMoveR65;
+
+  boardAnimationArrayAppearPos[1,1]:=AppearPosR11;  boardAnimationArrayAppearPos[1,2]:=AppearPosR12; boardAnimationArrayAppearPos[1,3]:=AppearPosR13; boardAnimationArrayAppearPos[1,4]:=AppearPosR14; boardAnimationArrayAppearPos[1,5]:=AppearPosR15;
+  boardAnimationArrayAppearPos[2,1]:=AppearPosR21;  boardAnimationArrayAppearPos[2,2]:=AppearPosR22; boardAnimationArrayAppearPos[2,3]:=AppearPosR23; boardAnimationArrayAppearPos[2,4]:=AppearPosR24; boardAnimationArrayAppearPos[2,5]:=AppearPosR25;
+  boardAnimationArrayAppearPos[3,1]:=AppearPosR31;  boardAnimationArrayAppearPos[3,2]:=AppearPosR32; boardAnimationArrayAppearPos[3,3]:=AppearPosR33; boardAnimationArrayAppearPos[3,4]:=AppearPosR34; boardAnimationArrayAppearPos[3,5]:=AppearPosR35;
+  boardAnimationArrayAppearPos[4,1]:=AppearPosR41;  boardAnimationArrayAppearPos[4,2]:=AppearPosR42; boardAnimationArrayAppearPos[4,3]:=AppearPosR43; boardAnimationArrayAppearPos[4,4]:=AppearPosR44; boardAnimationArrayAppearPos[4,5]:=AppearPosR45;
+  boardAnimationArrayAppearPos[5,1]:=AppearPosR51;  boardAnimationArrayAppearPos[5,2]:=AppearPosR52; boardAnimationArrayAppearPos[5,3]:=AppearPosR53; boardAnimationArrayAppearPos[5,4]:=AppearPosR54; boardAnimationArrayAppearPos[5,5]:=AppearPosR55;
+  boardAnimationArrayAppearPos[6,1]:=AppearPosR61;  boardAnimationArrayAppearPos[6,2]:=AppearPosR62; boardAnimationArrayAppearPos[6,3]:=AppearPosR63; boardAnimationArrayAppearPos[6,4]:=AppearPosR64; boardAnimationArrayAppearPos[6,5]:=AppearPosR65;
+
+  boardAnimationArrayFadeMove[1,1]:=FadeMoveR11;  boardAnimationArrayFadeMove[1,2]:=FadeMoveR12; boardAnimationArrayFadeMove[1,3]:=FadeMoveR13; boardAnimationArrayFadeMove[1,4]:=FadeMoveR14; boardAnimationArrayFadeMove[1,5]:=FadeMoveR15;
+  boardAnimationArrayFadeMove[2,1]:=FadeMoveR21;  boardAnimationArrayFadeMove[2,2]:=FadeMoveR22; boardAnimationArrayFadeMove[2,3]:=FadeMoveR23; boardAnimationArrayFadeMove[2,4]:=FadeMoveR24; boardAnimationArrayFadeMove[2,5]:=FadeMoveR25;
+  boardAnimationArrayFadeMove[3,1]:=FadeMoveR31;  boardAnimationArrayFadeMove[3,2]:=FadeMoveR32; boardAnimationArrayFadeMove[3,3]:=FadeMoveR33; boardAnimationArrayFadeMove[3,4]:=FadeMoveR34; boardAnimationArrayFadeMove[3,5]:=FadeMoveR35;
+  boardAnimationArrayFadeMove[4,1]:=FadeMoveR41;  boardAnimationArrayFadeMove[4,2]:=FadeMoveR42; boardAnimationArrayFadeMove[4,3]:=FadeMoveR43; boardAnimationArrayFadeMove[4,4]:=FadeMoveR44; boardAnimationArrayFadeMove[4,5]:=FadeMoveR45;
+  boardAnimationArrayFadeMove[5,1]:=FadeMoveR51;  boardAnimationArrayFadeMove[5,2]:=FadeMoveR52; boardAnimationArrayFadeMove[5,3]:=FadeMoveR53; boardAnimationArrayFadeMove[5,4]:=FadeMoveR54; boardAnimationArrayFadeMove[5,5]:=FadeMoveR55;
+  boardAnimationArrayFadeMove[6,1]:=FadeMoveR61;  boardAnimationArrayFadeMove[6,2]:=FadeMoveR62; boardAnimationArrayFadeMove[6,3]:=FadeMoveR63; boardAnimationArrayFadeMove[6,4]:=FadeMoveR64; boardAnimationArrayFadeMove[6,5]:=FadeMoveR65;
+
+  boardAnimationArrayFadePos[1,1]:=FadePosR11;  boardAnimationArrayFadePos[1,2]:=FadePosR12; boardAnimationArrayFadePos[1,3]:=FadePosR13; boardAnimationArrayFadePos[1,4]:=FadePosR14; boardAnimationArrayFadePos[1,5]:=FadePosR15;
+  boardAnimationArrayFadePos[2,1]:=FadePosR21;  boardAnimationArrayFadePos[2,2]:=FadePosR22; boardAnimationArrayFadePos[2,3]:=FadePosR23; boardAnimationArrayFadePos[2,4]:=FadePosR24; boardAnimationArrayFadePos[2,5]:=FadePosR25;
+  boardAnimationArrayFadePos[3,1]:=FadePosR31;  boardAnimationArrayFadePos[3,2]:=FadePosR32; boardAnimationArrayFadePos[3,3]:=FadePosR33; boardAnimationArrayFadePos[3,4]:=FadePosR34; boardAnimationArrayFadePos[3,5]:=FadePosR35;
+  boardAnimationArrayFadePos[4,1]:=FadePosR41;  boardAnimationArrayFadePos[4,2]:=FadePosR42; boardAnimationArrayFadePos[4,3]:=FadePosR43; boardAnimationArrayFadePos[4,4]:=FadePosR44; boardAnimationArrayFadePos[4,5]:=FadePosR45;
+  boardAnimationArrayFadePos[5,1]:=FadePosR51;  boardAnimationArrayFadePos[5,2]:=FadePosR52; boardAnimationArrayFadePos[5,3]:=FadePosR53; boardAnimationArrayFadePos[5,4]:=FadePosR54; boardAnimationArrayFadePos[5,5]:=FadePosR55;
+  boardAnimationArrayFadePos[6,1]:=FadePosR61;  boardAnimationArrayFadePos[6,2]:=FadePosR62; boardAnimationArrayFadePos[6,3]:=FadePosR63; boardAnimationArrayFadePos[6,4]:=FadePosR64; boardAnimationArrayFadePos[6,5]:=FadePosR65;
+
   ReadSettingsIniFile;
   statsReadAll;
                               // recovering previous session
@@ -2334,6 +2548,7 @@ begin
           {$IFDEF MSWINDOWS}
             BrainDissapearance.Enabled := true;
           {$ENDIF}
+          boardAnimationStart(rovv);
         end else if rovv=6 then begin
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];       // розовый
           InfoLabel.Text:=textFails[VocNumber]+vocab[numberOfTheword];
@@ -2345,10 +2560,13 @@ begin
           statsFileWriteLost;
           BoardFailColoring;
           BrainDissapearance.Enabled := true;
+          boardAnimationStart(rovv);
         end;
 
-        if (rovv<6) and not wordGuessedRight then
+        if (rovv<6) and not wordGuessedRight then begin
+          boardAnimationStart(rovv);
           inc(rovv);
+        end;
         col:=0;
       end
     end else begin

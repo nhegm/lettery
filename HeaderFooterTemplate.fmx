@@ -33,6 +33,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR13: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR13: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR13: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR13: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object info: TButton
     StyledSettings = [Family]
@@ -131,6 +151,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR55: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR55: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR55: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR55: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R65: TButton
     StyledSettings = []
@@ -151,6 +191,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR65: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR65: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR65: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR65: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R35: TButton
     StyledSettings = []
@@ -171,6 +231,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR35: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR35: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR35: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR35: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R45: TButton
     StyledSettings = []
@@ -191,6 +271,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR45: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR45: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR45: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR45: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R25: TButton
     StyledSettings = []
@@ -211,6 +311,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR25: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR25: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR25: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR25: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R15: TButton
     StyledSettings = []
@@ -231,6 +351,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR15: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR15: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR15: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR15: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R54: TButton
     StyledSettings = []
@@ -251,6 +391,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR54: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR54: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR54: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR54: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R64: TButton
     StyledSettings = []
@@ -271,6 +431,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object FadePosR64: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearMoveR64: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR64: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR64: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R34: TButton
     StyledSettings = []
@@ -291,6 +471,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR34: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR34: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR34: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR34: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R44: TButton
     StyledSettings = []
@@ -311,6 +511,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR44: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR44: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR44: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR44: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R24: TButton
     StyledSettings = []
@@ -331,6 +551,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR24: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR24: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR24: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR24: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R14: TButton
     StyledSettings = []
@@ -351,6 +591,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR14: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR14: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR14: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR14: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R53: TButton
     StyledSettings = []
@@ -371,6 +631,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR53: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR53: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR53: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR53: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R63: TButton
     StyledSettings = []
@@ -391,6 +671,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR63: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR63: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR63: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR63: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R33: TButton
     StyledSettings = []
@@ -411,6 +711,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR33: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR33: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR33: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR33: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R43: TButton
     StyledSettings = []
@@ -431,6 +751,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR43: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR43: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR43: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR43: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R23: TButton
     StyledSettings = []
@@ -451,6 +791,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR23: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR23: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR23: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR23: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R52: TButton
     StyledSettings = []
@@ -471,6 +831,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR52: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR52: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR52: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR52: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R62: TButton
     StyledSettings = []
@@ -491,6 +871,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR62: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR62: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR62: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR62: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R32: TButton
     StyledSettings = []
@@ -511,6 +911,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR32: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR32: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR32: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR32: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R42: TButton
     StyledSettings = []
@@ -531,6 +951,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR42: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR42: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR42: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR42: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R22: TButton
     StyledSettings = []
@@ -551,6 +991,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR22: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR22: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR22: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR22: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R12: TButton
     StyledSettings = []
@@ -571,6 +1031,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR12: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR12: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR12: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR12: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R51: TButton
     StyledSettings = []
@@ -591,6 +1071,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR51: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR51: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR51: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR51: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R61: TButton
     StyledSettings = []
@@ -611,6 +1111,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR61: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR61: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR61: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR61: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R31: TButton
     StyledSettings = []
@@ -631,6 +1151,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR31: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR31: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR31: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR31: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R41: TButton
     StyledSettings = []
@@ -651,6 +1191,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR41: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR41: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR41: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR41: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object R21: TButton
     StyledSettings = []
@@ -671,6 +1231,26 @@
     TextSettings.Font.Size = 50.000000000000000000
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object AppearMoveR21: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadeMoveR21: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR21: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR21: TFloatAnimation
+      Duration = 0.200000002980232200
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object ThemeButton: TButton
     StyledSettings = [Family, Style, FontColor]
@@ -714,6 +1294,30 @@
     TextSettings.FontColor = xFF00314A
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object FadeMoveR11: TFloatAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'Scale.X'
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object FadePosR11: TFloatAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'Position.X'
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearMoveR11: TFloatAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'Scale.X'
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
+    object AppearPosR11: TFloatAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'Position.X'
+      StartValue = 0.000000000000000000
+      StopValue = 0.000000000000000000
+    end
   end
   object й: TButton
     Enabled = False

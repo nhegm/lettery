@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<ActiveMobileDevice>
-		<NoProfile Android="18dac8fe" Android64="18dac8fe"/>
+		<NoProfile Android="" Android64=""/>
 	</ActiveMobileDevice>
 	<Transactions>
     <Transaction>1899.12.30 00:00:00.000.522,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.138,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.975,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.778,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.135,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.153,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.678,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.455,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\info.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\infoForm.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.882,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.705,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\info.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit2.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.402,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.392,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\statistics.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.455,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\info.pas=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\infoForm.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.558,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Lettery.dproj=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.501,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.dproj=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterApplication.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.635,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.541,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.pas=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.406,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\statistics.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.818,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\statistics.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.705,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit2.pas=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\info.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.705,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\info.pas=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.558,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.dproj=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Lettery.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.635,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\information.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.pas=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.455,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\infoForm.pas=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\info.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.392,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\statistics.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.501,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterApplication.dproj=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.984,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit2.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.341,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\languageForm.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.452,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\languageForm.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.541,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.922,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\themeForm.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.552,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\themeForm.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.336,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\themeForm.pas</Transaction>
@@ -33,11 +33,11 @@
     <Transaction>1899.12.30 00:00:00.000.267,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\meaningForm.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.953,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\meaningForm.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.827,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\meaningForm.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.882,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.pas=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.541,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.135,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.541,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.pas=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.455,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\infoForm.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\info.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.297,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\HeaderFooterTemplate.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\CincoCartas.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.414,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.705,C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit2.fmx=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\info.fmx</Transaction>
   </Transactions>
 	<BT_BuildType>Debug</BT_BuildType>
 </BorlandProject>
