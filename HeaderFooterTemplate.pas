@@ -211,6 +211,36 @@ type
     AppearPosR65: TFloatAnimation;
     FadeMoveR65: TFloatAnimation;
     FadePosR65: TFloatAnimation;
+    FontAnimationR11: TColorAnimation;
+    FontAnimationR12: TColorAnimation;
+    FontAnimationR13: TColorAnimation;
+    FontAnimationR14: TColorAnimation;
+    FontAnimationR15: TColorAnimation;
+    FontAnimationR21: TColorAnimation;
+    FontAnimationR22: TColorAnimation;
+    FontAnimationR65: TColorAnimation;
+    FontAnimationR64: TColorAnimation;
+    FontAnimationR63: TColorAnimation;
+    FontAnimationR62: TColorAnimation;
+    FontAnimationR61: TColorAnimation;
+    FontAnimationR55: TColorAnimation;
+    FontAnimationR54: TColorAnimation;
+    FontAnimationR53: TColorAnimation;
+    FontAnimationR52: TColorAnimation;
+    FontAnimationR51: TColorAnimation;
+    FontAnimationR45: TColorAnimation;
+    FontAnimationR44: TColorAnimation;
+    FontAnimationR43: TColorAnimation;
+    FontAnimationR42: TColorAnimation;
+    FontAnimationR41: TColorAnimation;
+    FontAnimationR35: TColorAnimation;
+    FontAnimationR34: TColorAnimation;
+    FontAnimationR33: TColorAnimation;
+    FontAnimationR32: TColorAnimation;
+    FontAnimationR31: TColorAnimation;
+    FontAnimationR25: TColorAnimation;
+    FontAnimationR24: TColorAnimation;
+    FontAnimationR23: TColorAnimation;
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure deleteBtnClick(Sender: TObject);
@@ -329,6 +359,7 @@ var StreakTemp1, StreakTemp2: integer;
     boardAnimationArrayAppearPos: array [1..6,1..5] of TFloatAnimation;
     boardAnimationArrayFadeMove: array [1..6,1..5] of TFloatAnimation;
     boardAnimationArrayFadePos: array [1..6,1..5] of TFloatAnimation;
+    fontAnimation: array [1..6,1..5] of TColorAnimation;
 
 implementation
 
@@ -339,15 +370,15 @@ uses statistics, meaningForm, themeForm, languageForm, infoForm;
 {$R *.NmXhdpiPh.fmx ANDROID}
 {$R *.LgXhdpiTb.fmx ANDROID}
 
-procedure boardAnimationStart(rowNumber : integer);
+procedure boardAnimationSet(rowNumber : integer);
 var
   delayFade: array [1..5] of real;
   delayAppear: array [1..5] of real;
   delayStep, durFade, durAppear: real;
 begin
   delayStep := 0.2;
-  durFade := 0.4;
-  durAppear := 0.5;
+  durFade := 0.6;
+  durAppear := 0.6;
   delayFade[1] := 0;
   delayAppear[1] := 0.4;
   for i := 2 to 5 do begin
@@ -358,7 +389,7 @@ begin
     boardAnimationArrayAppearMove[rowNumber,i].Delay := delayAppear[i];
     boardAnimationArrayAppearPos[rowNumber,i].Delay := delayAppear[i];
     boardAnimationArrayFadeMove[rowNumber,i].Delay := delayFade[i];
-    boardAnimationArrayFadePos[rowNumber,i].Delay := delayFade[i];
+    boardAnimationArrayFadePos[rowNumber,i].Delay := delayFade[i] + 0.01;
 
     boardAnimationArrayAppearMove[rowNumber,i].Duration := durAppear;
     boardAnimationArrayAppearPos[rowNumber,i].Duration := durAppear;
@@ -378,7 +409,7 @@ begin
     boardAnimationArrayAppearMove[rowNumber,i].StopValue := 1;
     boardAnimationArrayAppearPos[rowNumber,i].StopValue := board[rowNumber,i].Position.X;
     boardAnimationArrayFadeMove[rowNumber,i].StopValue := 0;
-    boardAnimationArrayFadePos[rowNumber,i].StopValue := board[rowNumber,i].Position.X + board[rowNumber,i].Width;
+    boardAnimationArrayFadePos[rowNumber,i].StopValue := board[rowNumber,i].Position.X;
 
     boardAnimationArrayAppearMove[rowNumber,i].AnimationType := TAnimationType.In;
     boardAnimationArrayAppearPos[rowNumber,i].AnimationType := TAnimationType.In;
@@ -391,12 +422,74 @@ begin
     boardAnimationArrayFadePos[rowNumber,i].Interpolation := TInterpolationType.Exponential;
   end;
 
+end;
+
+procedure boardAnimationFadeStart(rowNumber : integer);
+begin
   for i := 1 to 5 do begin
-    boardAnimationArrayAppearMove[rowNumber,i].Start;
-    boardAnimationArrayAppearPos[rowNumber,i].Start;
     boardAnimationArrayFadeMove[rowNumber,i].Start;
     boardAnimationArrayFadePos[rowNumber,i].Start;
   end;
+end;
+
+procedure boardAnimationAppearStart(rowNumber : integer);
+begin
+  for i := 1 to 5 do begin
+    boardAnimationArrayAppearMove[rowNumber,i].Start;
+    boardAnimationArrayAppearPos[rowNumber,i].Start;
+  end;
+end;
+
+procedure boardAnimationFontColorSet(rowNumber : integer);
+var
+  animDelay: array [1..5] of real;
+  animDur, delayStep: real;
+begin
+  delayStep := 0.2;
+  animDelay[1] := 0.4;
+  animDur := 0.2;
+  for i := 2 to 5 do
+    animDelay[i] := animDelay[i-1] + delayStep;
+
+  for i := 1 to 5 do begin
+    fontAnimation[rowNumber,i].Delay := animDelay[i];
+    fontAnimation[rowNumber,i].Duration := animDur;
+    fontAnimation[rowNumber,i].PropertyName := 'FontColor';
+    fontAnimation[rowNumber,i].Interpolation := TInterpolationType.Exponential;
+    fontAnimation[rowNumber,i].StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
+    if ask[rowNumber,i]=2 then fontAnimation[rowNumber,i].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];              //green
+    if ask[rowNumber,i]=1 then fontAnimation[rowNumber,i].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];              //yellow bright
+    if ask[rowNumber,i]=0 then fontAnimation[rowNumber,i].StopValue := boardNKeyTextColorsDef[ColorsSetNumber];
+  end;
+end;
+
+procedure boardAnimationTintColorSet(rowNumber : integer);
+var
+  animDelay: array [1..5] of real;
+  animDur, delayStep: real;
+begin
+  animDelay[1] := 0.4;
+  animDur := 0.2;
+  for i := 2 to 5 do
+    animDelay[i] := animDelay[i-1] + delayStep;
+
+  {$IFDEF ANDROID}
+  for I := 1 to 5 do begin
+    fontAnimation[rowNumber,i].Delay := animDelay[i];
+    fontAnimation[rowNumber,i].Duration := animDur;
+    fontAnimation[rowNumber,i].PropertyName := 'TintColor';
+    fontAnimation[rowNumber,i].Interpolation := TInterpolationType.Exponential;
+    fontAnimation[rowNumber,i].StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
+  end;
+  if wordGuessedWrong = true then
+    for I := 1 to 5 do
+      fontAnimation[rowNumber,i].StopValue := boardNKeyTextColorsRed[ColorsSetNumber];
+
+  if wordGuessedRight = true then
+    for I := 1 to 5 do
+      fontAnimation[rowNumber,i].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+  {$ENDIF}
+
 end;
 
 function GetMyFile(const AssetName : string) : string;
@@ -1984,14 +2077,14 @@ end;
 
 procedure BoardNkbrdColoring (number: integer);
 begin
-
   words[number]:=letters;
   rowLettersDelete;
   matches(vocab[numberOfTheword],words[number]);
-  for I := 1 to 5 do begin
-    if ask[number,i]=2 then board[number,i].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];              //green
-    if ask[number,i]=1 then board[number,i].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber];              //yellow bright
-  end;
+
+  boardAnimationFontColorSet(number);
+  for I := 1 to 5 do
+    fontAnimation[number,i].start;
+
   kbrdColoring;
 end;
 
@@ -2154,6 +2247,13 @@ begin
   board[4,1]:=R41;  board[4,2]:=R42; board[4,3]:=R43; board[4,4]:=R44; board[4,5]:=R45;
   board[5,1]:=R51;  board[5,2]:=R52; board[5,3]:=R53; board[5,4]:=R54; board[5,5]:=R55;
   board[6,1]:=R61;  board[6,2]:=R62; board[6,3]:=R63; board[6,4]:=R64; board[6,5]:=R65;
+
+  fontAnimation[1,1]:=fontAnimationR11;  fontAnimation[1,2]:=fontAnimationR12; fontAnimation[1,3]:=fontAnimationR13; fontAnimation[1,4]:=fontAnimationR14; fontAnimation[1,5]:=fontAnimationR15;
+  fontAnimation[2,1]:=fontAnimationR21;  fontAnimation[2,2]:=fontAnimationR22; fontAnimation[2,3]:=fontAnimationR23; fontAnimation[2,4]:=fontAnimationR24; fontAnimation[2,5]:=fontAnimationR25;
+  fontAnimation[3,1]:=fontAnimationR31;  fontAnimation[3,2]:=fontAnimationR32; fontAnimation[3,3]:=fontAnimationR33; fontAnimation[3,4]:=fontAnimationR34; fontAnimation[3,5]:=fontAnimationR35;
+  fontAnimation[4,1]:=fontAnimationR41;  fontAnimation[4,2]:=fontAnimationR42; fontAnimation[4,3]:=fontAnimationR43; fontAnimation[4,4]:=fontAnimationR44; fontAnimation[4,5]:=fontAnimationR45;
+  fontAnimation[5,1]:=fontAnimationR51;  fontAnimation[5,2]:=fontAnimationR52; fontAnimation[5,3]:=fontAnimationR53; fontAnimation[5,4]:=fontAnimationR54; fontAnimation[5,5]:=fontAnimationR55;
+  fontAnimation[6,1]:=fontAnimationR61;  fontAnimation[6,2]:=fontAnimationR62; fontAnimation[6,3]:=fontAnimationR63; fontAnimation[6,4]:=fontAnimationR64; fontAnimation[6,5]:=fontAnimationR65;
 
   boardAnimationArrayAppearMove[1,1]:=AppearMoveR11;  boardAnimationArrayAppearMove[1,2]:=AppearMoveR12; boardAnimationArrayAppearMove[1,3]:=AppearMoveR13; boardAnimationArrayAppearMove[1,4]:=AppearMoveR14; boardAnimationArrayAppearMove[1,5]:=AppearMoveR15;
   boardAnimationArrayAppearMove[2,1]:=AppearMoveR21;  boardAnimationArrayAppearMove[2,2]:=AppearMoveR22; boardAnimationArrayAppearMove[2,3]:=AppearMoveR23; boardAnimationArrayAppearMove[2,4]:=AppearMoveR24; boardAnimationArrayAppearMove[2,5]:=AppearMoveR25;
@@ -2531,8 +2631,12 @@ begin
     enter.Enabled := false;
     if wordExists then begin
       if words[rovv]='' then begin
+        boardAnimationSet(rovv);
+        boardAnimationFadeStart(rovv);
         BoardNkbrdColoring(rovv);
+        boardAnimationAppearStart(rovv);
         if words[rovv]=vocab[numberOfTheword] then begin
+          boardAnimationSet(rovv);
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
           InfoLabel.Text:=textCongrats[VocNumber];
           wordGuessedRight := true;
@@ -2541,15 +2645,20 @@ begin
           endRoundBtns;
           statsReadAll;
           statsFileWriteWon;
-          BoardSuccessColoring;
+          boardAnimationFadeStart(rovv);
+          boardAnimationTintColorSet(rovv);
+          for i := 1 to 5 do begin
+            fontAnimation[rovv,i].Start;
+          end;
+          boardAnimationAppearStart(rovv);
           {$IFDEF ANDROID}
             BrainDissapearance.Enabled := true;
           {$ENDIF}
           {$IFDEF MSWINDOWS}
             BrainDissapearance.Enabled := true;
           {$ENDIF}
-          boardAnimationStart(rovv);
         end else if rovv=6 then begin
+          boardAnimationSet(rovv);
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];       // розовый
           InfoLabel.Text:=textFails[VocNumber]+vocab[numberOfTheword];
           wordGuessedWrong := true;
@@ -2558,13 +2667,16 @@ begin
           endRoundBtns;
           statsReadAll;
           statsFileWriteLost;
-          BoardFailColoring;
+          boardAnimationFadeStart(rovv);
+          boardAnimationTintColorSet(rovv);
+          for i := 1 to 5 do begin
+            fontAnimation[rovv,i].Start;
+          end;
+          boardAnimationAppearStart(rovv);
           BrainDissapearance.Enabled := true;
-          boardAnimationStart(rovv);
         end;
 
         if (rovv<6) and not wordGuessedRight then begin
-          boardAnimationStart(rovv);
           inc(rovv);
         end;
         col:=0;

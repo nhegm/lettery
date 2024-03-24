@@ -53,6 +53,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR13: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object info: TButton
     StyledSettings = [Family]
@@ -171,6 +179,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR55: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R65: TButton
     StyledSettings = []
@@ -210,6 +226,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR65: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R35: TButton
@@ -251,6 +275,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR35: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R45: TButton
     StyledSettings = []
@@ -290,6 +322,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR45: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R25: TButton
@@ -331,6 +371,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR25: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R15: TButton
     StyledSettings = []
@@ -370,6 +418,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR15: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R54: TButton
@@ -411,6 +467,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR54: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R64: TButton
     StyledSettings = []
@@ -450,6 +514,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR64: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R34: TButton
@@ -491,6 +563,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR34: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R44: TButton
     StyledSettings = []
@@ -530,6 +610,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR44: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R24: TButton
@@ -571,6 +659,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR24: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R14: TButton
     StyledSettings = []
@@ -610,6 +706,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR14: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R53: TButton
@@ -651,6 +755,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR53: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R63: TButton
     StyledSettings = []
@@ -690,6 +802,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR63: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R33: TButton
@@ -731,6 +851,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR33: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R43: TButton
     StyledSettings = []
@@ -770,6 +898,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR43: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R23: TButton
@@ -811,6 +947,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR23: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R52: TButton
     StyledSettings = []
@@ -850,6 +994,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR52: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R62: TButton
@@ -891,6 +1043,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR62: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R32: TButton
     StyledSettings = []
@@ -930,6 +1090,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR32: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R42: TButton
@@ -971,6 +1139,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR42: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R22: TButton
     StyledSettings = []
@@ -1010,6 +1186,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR22: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R12: TButton
@@ -1051,6 +1235,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR12: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R51: TButton
     StyledSettings = []
@@ -1090,6 +1282,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR51: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R61: TButton
@@ -1131,6 +1331,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR61: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R31: TButton
     StyledSettings = []
@@ -1170,6 +1378,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR31: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object R41: TButton
@@ -1211,6 +1427,14 @@
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
     end
+    object FontAnimationR41: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object R21: TButton
     StyledSettings = []
@@ -1250,6 +1474,14 @@
       Duration = 0.200000002980232200
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR21: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object ThemeButton: TButton
@@ -1317,6 +1549,14 @@
       PropertyName = 'Position.X'
       StartValue = 0.000000000000000000
       StopValue = 0.000000000000000000
+    end
+    object FontAnimationR11: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
     end
   end
   object й: TButton
