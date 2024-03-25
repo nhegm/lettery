@@ -174,4 +174,10 @@ object informationForm: TinformationForm
     Text = 'btn1descr'
     TabOrder = 2
   end
+  object FillColorAnimation: TColorAnimation
+    Duration = 0.200000002980232200
+    PropertyName = 'Fill.Color'
+    StartValue = claWhite
+    StopValue = claWhite
+  end
 end

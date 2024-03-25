@@ -1576,6 +1576,14 @@
     ParentShowHint = False
     ShowHint = False
     OnClick = йClick
+    object kbrdAnimation10: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object ц: TButton
     Enabled = False
@@ -1592,6 +1600,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = цClick
+    object kbrdAnimation23: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object у: TButton
     Enabled = False
@@ -1608,6 +1624,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = уClick
+    object kbrdAnimation20: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object к: TButton
     Enabled = False
@@ -1624,6 +1648,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = кClick
+    object kbrdAnimation11: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object е: TButton
     Touch.InteractiveGestures = [LongTap]
@@ -1641,6 +1673,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = еClick
+    object kbrdAnimation6: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object н: TButton
     Enabled = False
@@ -1657,6 +1697,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = нClick
+    object kbrdAnimation14: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object г: TButton
     Enabled = False
@@ -1673,6 +1721,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = гClick
+    object kbrdAnimation4: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object ш: TButton
     Enabled = False
@@ -1689,6 +1745,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = шClick
+    object kbrdAnimation25: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object ф: TButton
     Enabled = False
@@ -1705,6 +1769,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = фClick
+    object kbrdAnimation21: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object ы: TButton
     Enabled = False
@@ -1721,6 +1793,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = ыClick
+    object kbrdAnimation28: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object в: TButton
     Enabled = False
@@ -1737,6 +1817,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = вClick
+    object kbrdAnimation3: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object а: TButton
     Enabled = False
@@ -1753,6 +1841,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = аClick
+    object kbrdAnimation1: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object п: TButton
     Enabled = False
@@ -1769,6 +1865,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = пClick
+    object kbrdAnimation16: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object р: TButton
     Enabled = False
@@ -1785,6 +1889,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = рClick
+    object kbrdAnimation17: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object о: TButton
     Enabled = False
@@ -1801,6 +1913,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = оClick
+    object kbrdAnimation15: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object л: TButton
     Enabled = False
@@ -1817,6 +1937,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = лClick
+    object kbrdAnimation12: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object я: TButton
     Enabled = False
@@ -1833,6 +1961,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = яClick
+    object kbrdAnimation32: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object ч: TButton
     Enabled = False
@@ -1849,6 +1985,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = чClick
+    object kbrdAnimation24: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object с: TButton
     Enabled = False
@@ -1865,6 +2009,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = сClick
+    object kbrdAnimation18: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object м: TButton
     Enabled = False
@@ -1881,6 +2033,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = мClick
+    object kbrdAnimation13: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object и: TButton
     Enabled = False
@@ -1897,6 +2057,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = иClick
+    object kbrdAnimation9: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object т: TButton
     Enabled = False
@@ -1913,6 +2081,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = тClick
+    object kbrdAnimation19: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object ь: TButton
     Enabled = False
@@ -1929,6 +2105,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = ьClick
+    object kbrdAnimation29: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object б: TButton
     Enabled = False
@@ -1945,6 +2129,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = бClick
+    object kbrdAnimation2: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object щ: TButton
     Enabled = False
@@ -1961,6 +2153,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = щClick
+    object kbrdAnimation26: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object з: TButton
     Enabled = False
@@ -1977,6 +2177,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = зClick
+    object kbrdAnimation8: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object х: TButton
     Enabled = False
@@ -1993,6 +2201,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = хClick
+    object kbrdAnimation22: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object ъ: TButton
     Enabled = False
@@ -2009,6 +2225,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = ъClick
+    object kbrdAnimation27: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object д: TButton
     Enabled = False
@@ -2025,6 +2249,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = дClick
+    object kbrdAnimation5: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object ж: TButton
     Enabled = False
@@ -2041,6 +2273,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = жClick
+    object kbrdAnimation7: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object э: TButton
     Enabled = False
@@ -2057,6 +2297,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = эClick
+    object kbrdAnimation30: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object enter: TButton
     Enabled = False
@@ -2089,6 +2337,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = юClick
+    object kbrdAnimation31: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object deleteBtn: TButton
     AutoTranslate = False
@@ -2122,6 +2378,14 @@
     TextSettings.Trimming = None
     TintColor = xFF669BBC
     OnClick = ёClick
+    object kbrdAnimation33: TColorAnimation
+      Delay = 0.400000005960464500
+      Duration = 0.200000002980232200
+      Interpolation = Exponential
+      PropertyName = 'FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object InfoLabel: TLabel
     StyledSettings = []

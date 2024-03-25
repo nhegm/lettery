@@ -241,6 +241,39 @@ type
     FontAnimationR25: TColorAnimation;
     FontAnimationR24: TColorAnimation;
     FontAnimationR23: TColorAnimation;
+    kbrdAnimation1: TColorAnimation;
+    kbrdAnimation2: TColorAnimation;
+    kbrdAnimation3: TColorAnimation;
+    kbrdAnimation4: TColorAnimation;
+    kbrdAnimation5: TColorAnimation;
+    kbrdAnimation6: TColorAnimation;
+    kbrdAnimation33: TColorAnimation;
+    kbrdAnimation7: TColorAnimation;
+    kbrdAnimation8: TColorAnimation;
+    kbrdAnimation9: TColorAnimation;
+    kbrdAnimation10: TColorAnimation;
+    kbrdAnimation11: TColorAnimation;
+    kbrdAnimation12: TColorAnimation;
+    kbrdAnimation13: TColorAnimation;
+    kbrdAnimation14: TColorAnimation;
+    kbrdAnimation15: TColorAnimation;
+    kbrdAnimation16: TColorAnimation;
+    kbrdAnimation17: TColorAnimation;
+    kbrdAnimation18: TColorAnimation;
+    kbrdAnimation19: TColorAnimation;
+    kbrdAnimation20: TColorAnimation;
+    kbrdAnimation21: TColorAnimation;
+    kbrdAnimation22: TColorAnimation;
+    kbrdAnimation23: TColorAnimation;
+    kbrdAnimation24: TColorAnimation;
+    kbrdAnimation25: TColorAnimation;
+    kbrdAnimation26: TColorAnimation;
+    kbrdAnimation27: TColorAnimation;
+    kbrdAnimation28: TColorAnimation;
+    kbrdAnimation29: TColorAnimation;
+    kbrdAnimation30: TColorAnimation;
+    kbrdAnimation31: TColorAnimation;
+    kbrdAnimation32: TColorAnimation;
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure deleteBtnClick(Sender: TObject);
@@ -360,6 +393,7 @@ var StreakTemp1, StreakTemp2: integer;
     boardAnimationArrayFadeMove: array [1..6,1..5] of TFloatAnimation;
     boardAnimationArrayFadePos: array [1..6,1..5] of TFloatAnimation;
     fontAnimation: array [1..6,1..5] of TColorAnimation;
+    kbrdAnimationArray: array [1..33] of TColorAnimation;
 
 implementation
 
@@ -470,6 +504,7 @@ var
 begin
   animDelay[1] := 0.4;
   animDur := 0.2;
+  delayStep := 0.2;
   for i := 2 to 5 do
     animDelay[i] := animDelay[i-1] + delayStep;
 
@@ -490,6 +525,381 @@ begin
       fontAnimation[rowNumber,i].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
   {$ENDIF}
 
+end;
+
+procedure kbrdAnimationFontColorStart;
+var
+  animDelay: array [1..5] of real;
+  delayStep: real;
+begin
+  delayStep := 0.2;
+  animDelay[1] := 0.4;
+  for i := 2 to 5 do
+    animDelay[i] := animDelay[i-1] + delayStep;
+
+  for I := 1 to 33 do begin
+    kbrdAnimationArray[i].Delay := animDelay[i];
+    kbrdAnimationArray[i].Duration := 0.4;
+    kbrdAnimationArray[i].PropertyName := 'FontColor';
+    kbrdAnimationArray[i].Interpolation := TInterpolationType.Exponential;
+  end;
+
+  if VocNumber = 1 then begin
+    for j := 1 to 5 do
+      for i := 1 to 32 do
+        if (ord(words[rovv][j])=1071+i) then begin                               // 223 было
+          if ask[rovv,j]=2 then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TextSettings.FontColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=1) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TextSettings.FontColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=0) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                             and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TextSettings.FontColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsRed[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+        end;
+    for j := 1 to 5 do
+      if (words[rovv][j] = #1105) then begin
+        if ask[rovv,j]=2 then begin
+          kbrdAnimationArray[33].StartValue := keys[i].TextSettings.FontColor;
+          kbrdAnimationArray[33].StopValue := $00000000;
+          kbrdAnimationArray[33].Delay := animDelay[j];
+          kbrdAnimationArray[33].start;
+          kbrdAnimationArray[33].StartValue := $00000000;;
+          kbrdAnimationArray[33].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+          kbrdAnimationArray[33].start;
+        end;
+        if (ask[rovv,j]=1) and (keys[33].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+          kbrdAnimationArray[33].StartValue := keys[33].TextSettings.FontColor;
+          kbrdAnimationArray[33].StopValue := $00000000;
+          kbrdAnimationArray[33].Delay := animDelay[j];
+          kbrdAnimationArray[33].start;
+          kbrdAnimationArray[33].StartValue := $00000000;;
+          kbrdAnimationArray[33].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+          kbrdAnimationArray[33].start;
+        end;
+        if (ask[rovv,j]=0) and (keys[33].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                           and (keys[33].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+          kbrdAnimationArray[33].StartValue := keys[33].TextSettings.FontColor;
+          kbrdAnimationArray[33].StopValue := $00000000;
+          kbrdAnimationArray[33].Delay := animDelay[j];
+          kbrdAnimationArray[33].start;
+          kbrdAnimationArray[33].StartValue := $00000000;;
+          kbrdAnimationArray[33].StopValue := boardNKeyTextColorsRed[ColorsSetNumber];
+          kbrdAnimationArray[33].start;
+        end;
+      end;
+  end;
+
+  if (VocNumber = 2) or (VocNumber = 3) then begin
+    for j := 1 to 5 do
+      for i := 1 to 33 do begin
+        if (ord(words[rovv][j])=96+i) then begin
+          if ask[rovv,j]=2 then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TextSettings.FontColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=1) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TextSettings.FontColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=0) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                             and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TextSettings.FontColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsRed[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+        end;
+      end;
+
+  end;
+
+  if VocNumber = 4 then begin
+
+    for j := 1 to 5 do
+      for i := 1 to 32 do
+        if (ord(words[rovv][j])=96+i) then begin                                // 223 было
+          if ask[rovv,j]=2 then begin
+              kbrdAnimationArray[i].StartValue := keys[i].TextSettings.FontColor;
+              kbrdAnimationArray[i].StopValue := $00000000;
+              kbrdAnimationArray[i].Delay := animDelay[j];
+              kbrdAnimationArray[i].start;
+              kbrdAnimationArray[i].StartValue := $00000000;;
+              kbrdAnimationArray[i].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+              kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=1) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TextSettings.FontColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=0) and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                                     and (keys[i].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TextSettings.FontColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsRed[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+        end;
+    for j := 1 to 5 do
+      if (words[rovv][j] = 'ñ') then begin
+        if ask[rovv,j]=2 then begin
+          kbrdAnimationArray[27].StartValue := keys[27].TextSettings.FontColor;
+          kbrdAnimationArray[27].StopValue := $00000000;
+          kbrdAnimationArray[27].Delay := animDelay[j];
+          kbrdAnimationArray[27].start;
+          kbrdAnimationArray[27].StartValue := $00000000;;
+          kbrdAnimationArray[27].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+          kbrdAnimationArray[27].start;
+        end;
+        if (ask[rovv,j]=1) and (keys[27].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+          kbrdAnimationArray[27].StartValue := keys[27].TextSettings.FontColor;
+          kbrdAnimationArray[27].StopValue := $00000000;
+          kbrdAnimationArray[27].Delay := animDelay[j];
+          kbrdAnimationArray[27].start;
+          kbrdAnimationArray[27].StartValue := $00000000;;
+          kbrdAnimationArray[27].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+          kbrdAnimationArray[27].start;
+        end;
+        if (ask[rovv,j]=0) and (keys[27].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                           and (keys[27].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+          kbrdAnimationArray[27].StartValue := keys[27].TextSettings.FontColor;
+          kbrdAnimationArray[27].StopValue := $00000000;
+          kbrdAnimationArray[27].Delay := animDelay[j];
+          kbrdAnimationArray[27].start;
+          kbrdAnimationArray[27].StartValue := $00000000;;
+          kbrdAnimationArray[27].StopValue := boardNKeyTextColorsRed[ColorsSetNumber];
+          kbrdAnimationArray[27].start;
+        end;
+      end;
+  end;
+end;
+
+procedure kbrdAnimationTintColorStart;
+var
+  animDelay: array [1..5] of real;
+  delayStep: real;
+begin
+  delayStep := 0.2;
+  animDelay[1] := 0.4;
+  for i := 2 to 5 do
+    animDelay[i] := animDelay[i-1] + delayStep;
+
+  for I := 1 to 33 do begin
+    kbrdAnimationArray[i].Delay := animDelay[i];
+    kbrdAnimationArray[i].Duration := 0.4;
+    kbrdAnimationArray[i].PropertyName := 'TintColor';
+    kbrdAnimationArray[i].Interpolation := TInterpolationType.Exponential;
+  end;
+
+  if VocNumber = 1 then begin
+    for j := 1 to 5 do
+      for i := 1 to 32 do
+        if (ord(words[rovv][j])=1071+i) then begin
+          if ask[rovv,j]=2 then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TintColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=1) and (keys[i].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TintColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=0) and (keys[i].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                             and (keys[i].TintColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TintColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsGrey[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+        end;
+    for j := 1 to 5 do
+      if (words[rovv][j] = #1105) then begin
+        if ask[rovv,j]=2 then begin
+          kbrdAnimationArray[33].StartValue := keys[i].TintColor;
+          kbrdAnimationArray[33].StopValue := $00000000;
+          kbrdAnimationArray[33].Delay := animDelay[j];
+          kbrdAnimationArray[33].start;
+          kbrdAnimationArray[33].StartValue := $00000000;;
+          kbrdAnimationArray[33].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+          kbrdAnimationArray[33].start;
+        end;
+        if (ask[rovv,j]=1) and (keys[33].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+          kbrdAnimationArray[33].StartValue := keys[33].TintColor;
+          kbrdAnimationArray[33].StopValue := $00000000;
+          kbrdAnimationArray[33].Delay := animDelay[j];
+          kbrdAnimationArray[33].start;
+          kbrdAnimationArray[33].StartValue := $00000000;;
+          kbrdAnimationArray[33].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+          kbrdAnimationArray[33].start;
+        end;
+        if (ask[rovv,j]=0) and (keys[33].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                           and (keys[33].TintColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+          kbrdAnimationArray[33].StartValue := keys[33].TintColor;
+          kbrdAnimationArray[33].StopValue := $00000000;
+          kbrdAnimationArray[33].Delay := animDelay[j];
+          kbrdAnimationArray[33].start;
+          kbrdAnimationArray[33].StartValue := $00000000;;
+          kbrdAnimationArray[33].StopValue := boardNKeyTextColorsGrey[ColorsSetNumber];
+          kbrdAnimationArray[33].start;
+        end;
+      end;
+  end;
+
+  if (VocNumber = 2) or (VocNumber = 3) then begin
+    for j := 1 to 5 do
+      for i := 1 to 26 do
+        if (ord(words[rovv][j])=96+i) then begin
+          if ask[rovv,j]=2 then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TintColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=1) and (keys[i].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TintColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=0) and (keys[i].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                             and (keys[i].TintColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TintColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsGrey[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+        end;
+
+  end;
+
+  if VocNumber = 4 then begin
+
+    for j := 1 to 5 do
+      for i := 1 to 26 do
+        if (ord(words[rovv][j])=96+i) then begin
+          if ask[rovv,j]=2 then begin
+              kbrdAnimationArray[i].StartValue := keys[i].TintColor;
+              kbrdAnimationArray[i].StopValue := $00000000;
+              kbrdAnimationArray[i].Delay := animDelay[j];
+              kbrdAnimationArray[i].start;
+              kbrdAnimationArray[i].StartValue := $00000000;;
+              kbrdAnimationArray[i].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+              kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=1) and (keys[i].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TintColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+          if (ask[rovv,j]=0) and (keys[i].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                                     and (keys[i].TintColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+            kbrdAnimationArray[i].StartValue := keys[i].TintColor;
+            kbrdAnimationArray[i].StopValue := $00000000;
+            kbrdAnimationArray[i].Delay := animDelay[j];
+            kbrdAnimationArray[i].start;
+            kbrdAnimationArray[i].StartValue := $00000000;;
+            kbrdAnimationArray[i].StopValue := boardNKeyTextColorsGrey[ColorsSetNumber];
+            kbrdAnimationArray[i].start;
+          end;
+        end;
+    for j := 1 to 5 do
+      if (words[rovv][j] = 'ñ') then begin
+        if ask[rovv,j]=2 then begin
+          kbrdAnimationArray[27].StartValue := keys[27].TintColor;
+          kbrdAnimationArray[27].StopValue := $00000000;
+          kbrdAnimationArray[27].Delay := animDelay[j];
+          kbrdAnimationArray[27].start;
+          kbrdAnimationArray[27].StartValue := $00000000;;
+          kbrdAnimationArray[27].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+          kbrdAnimationArray[27].start;
+        end;
+        if (ask[rovv,j]=1) and (keys[27].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) then begin
+          kbrdAnimationArray[27].StartValue := keys[27].TintColor;
+          kbrdAnimationArray[27].StopValue := $00000000;
+          kbrdAnimationArray[27].Delay := animDelay[j];
+          kbrdAnimationArray[27].start;
+          kbrdAnimationArray[27].StartValue := $00000000;;
+          kbrdAnimationArray[27].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+          kbrdAnimationArray[27].start;
+        end;
+        if (ask[rovv,j]=0) and (keys[27].TintColor <> boardNKeyTextColorsGreen[ColorsSetNumber])
+                           and (keys[27].TintColor <> boardNKeyTextColorsYellow[ColorsSetNumber]) then begin
+          kbrdAnimationArray[27].StartValue := keys[27].TintColor;
+          kbrdAnimationArray[27].StopValue := $00000000;
+          kbrdAnimationArray[27].Delay := animDelay[j];
+          kbrdAnimationArray[27].start;
+          kbrdAnimationArray[27].StartValue := $00000000;;
+          kbrdAnimationArray[27].StopValue := boardNKeyTextColorsGrey[ColorsSetNumber];
+          kbrdAnimationArray[27].start;
+        end;
+      end;
+  end;
 end;
 
 function GetMyFile(const AssetName : string) : string;
@@ -731,6 +1141,7 @@ begin
 
     kbrdKeys[3,1]:=keys[32];  kbrdKeys[3,2]:=keys[24];  kbrdKeys[3,3]:=keys[18];  kbrdKeys[3,4]:=keys[13];  kbrdKeys[3,5]:=keys[9];  kbrdKeys[3,6]:=keys[19];
     kbrdKeys[3,7]:=keys[29];  kbrdKeys[3,8]:=keys[2];   kbrdKeys[3,9]:=keys[31];  kbrdKeys[3,10]:=keys[33]; kbrdKeys[3,11]:=keys[39];
+
 
   end;
 
@@ -1538,15 +1949,35 @@ begin
 {$ENDIF}
 
 {$IFDEF MSWINDOWS}
-  AssignFile(input,GetMyFile(fileNameWord));
-  reset(input);
-  i:=0;
-  while not eof(input) do begin
-    inc(i);
-    readln(input,vocab[i]);
+//  AssignFile(input,GetMyFile(fileNameWord));
+//  reset(input);
+//  i:=0;
+//  while not eof(input) do begin
+//    inc(i);
+//    readln(input,vocab[i]);
+//  end;
+//  if numberOfTheword = 0 then
+//    numberOfTheword := random(i) + 1;
+
+if VocNumber = 1 then begin
+    AssignFile(input,GetMyFile(fileNameWord));
+    reset(input);
+    i:=0;
+    while not eof(input) do begin
+      inc(i);
+      readln(input,vocab[i]);
+    end;
+    if numberOfTheword = 0 then
+      numberOfTheword := random(i) + 1;
   end;
-  if numberOfTheword = 0 then
-    numberOfTheword := random(i) + 1;
+if VocNumber > 1 then begin
+    var vocabTemp := TFile.ReadAllLines(GetMyFile(fileNameWord), TEncoding.UTF8);
+    setLength(vocab, length(vocabTemp)+1);
+    for i := 0 to length(vocabTemp)-1 do
+      vocab[i+1] := vocabTemp[i];
+    if numberOfTheword = 0 then
+      numberOfTheword := random(length(vocab)) + 1;
+  end;
 {$ENDIF}
 
 {$IFDEF MACOS}
@@ -1984,7 +2415,7 @@ begin
               if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
                  (keys[ord(words[i][j]) - 1071].TextSettings.FontColor<> boardNKeyTextColorsGreen[ColorsSetNumber]) and
                  (keys[ord(words[i][j]) - 1071].TextSettings.FontColor<> boardNKeyTextColorsYellow[ColorsSetNumber])
-                then keys[33].TextSettings.FontColor:= boardNKeyTextColorsGrey[colorsSetNumber];
+                then keys[33].TextSettings.FontColor:= boardNKeyTextColorsRed[colorsSetNumber];
               end;
     if wordGuessedRight
       then BoardSuccessColoring;
@@ -2007,7 +2438,7 @@ begin
               if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
                  (keys[ord(words[i][j]) - 96].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) and
                  (keys[ord(words[i][j]) - 96].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
-                then keys[ord(words[i][j]) - 96].TextSettings.FontColor := boardNKeyTextColorsGrey[colorsSetNumber]
+                then keys[ord(words[i][j]) - 96].TextSettings.FontColor := boardNKeyTextColorsRed[colorsSetNumber]
             end;
     if wordGuessedRight
       then BoardSuccessColoring
@@ -2038,7 +2469,7 @@ begin
               if (board[i,j].TextSettings.FontColor = boardNKeyTextColorsDef[ColorsSetNumber]) and
                  (keys[27].TextSettings.FontColor <> boardNKeyTextColorsGreen[ColorsSetNumber]) and
                  (keys[27].TextSettings.FontColor <> boardNKeyTextColorsYellow[ColorsSetNumber])
-                then keys[27].TextSettings.FontColor := boardNKeyTextColorsGrey[colorsSetNumber];
+                then keys[27].TextSettings.FontColor := boardNKeyTextColorsRed[colorsSetNumber];
               end;
     if wordGuessedRight
       then BoardSuccessColoring
@@ -2085,7 +2516,13 @@ begin
   for I := 1 to 5 do
     fontAnimation[number,i].start;
 
-  kbrdColoring;
+  {$IFDEF MSWINDOWS OR MACOS}
+    kbrdAnimationFontColorStart;
+  {$ENDIF}
+  {$IFDEF ANDROID}
+    kbrdAnimationTintColorStart;
+  {$ENDIF}
+//  kbrdColoring;
 end;
 
 procedure boardColorsRefresh;
@@ -2282,6 +2719,14 @@ begin
   boardAnimationArrayFadePos[4,1]:=FadePosR41;  boardAnimationArrayFadePos[4,2]:=FadePosR42; boardAnimationArrayFadePos[4,3]:=FadePosR43; boardAnimationArrayFadePos[4,4]:=FadePosR44; boardAnimationArrayFadePos[4,5]:=FadePosR45;
   boardAnimationArrayFadePos[5,1]:=FadePosR51;  boardAnimationArrayFadePos[5,2]:=FadePosR52; boardAnimationArrayFadePos[5,3]:=FadePosR53; boardAnimationArrayFadePos[5,4]:=FadePosR54; boardAnimationArrayFadePos[5,5]:=FadePosR55;
   boardAnimationArrayFadePos[6,1]:=FadePosR61;  boardAnimationArrayFadePos[6,2]:=FadePosR62; boardAnimationArrayFadePos[6,3]:=FadePosR63; boardAnimationArrayFadePos[6,4]:=FadePosR64; boardAnimationArrayFadePos[6,5]:=FadePosR65;
+
+  kbrdAnimationArray[1]:=kbrdAnimation1;   kbrdAnimationArray[2]:=kbrdAnimation2;   kbrdAnimationArray[3]:=kbrdAnimation3;   kbrdAnimationArray[4]:=kbrdAnimation4;   kbrdAnimationArray[5]:=kbrdAnimation5;
+  kbrdAnimationArray[6]:=kbrdAnimation6;   kbrdAnimationArray[7]:=kbrdAnimation7;   kbrdAnimationArray[8]:=kbrdAnimation8;   kbrdAnimationArray[9]:=kbrdAnimation9;   kbrdAnimationArray[10]:=kbrdAnimation10;
+  kbrdAnimationArray[11]:=kbrdAnimation11;  kbrdAnimationArray[12]:=kbrdAnimation12;  kbrdAnimationArray[13]:=kbrdAnimation13;  kbrdAnimationArray[14]:=kbrdAnimation14;  kbrdAnimationArray[15]:=kbrdAnimation15;
+  kbrdAnimationArray[16]:=kbrdAnimation16;  kbrdAnimationArray[17]:=kbrdAnimation17;  kbrdAnimationArray[18]:=kbrdAnimation18;  kbrdAnimationArray[19]:=kbrdAnimation19;  kbrdAnimationArray[20]:=kbrdAnimation20;
+  kbrdAnimationArray[21]:=kbrdAnimation21;  kbrdAnimationArray[22]:=kbrdAnimation22;  kbrdAnimationArray[23]:=kbrdAnimation23;  kbrdAnimationArray[24]:=kbrdAnimation24;  kbrdAnimationArray[25]:=kbrdAnimation25;
+  kbrdAnimationArray[26]:=kbrdAnimation26;  kbrdAnimationArray[27]:=kbrdAnimation27;  kbrdAnimationArray[28]:=kbrdAnimation28;  kbrdAnimationArray[29]:=kbrdAnimation29;  kbrdAnimationArray[30]:=kbrdAnimation30;
+  kbrdAnimationArray[31]:=kbrdAnimation31;  kbrdAnimationArray[32]:=kbrdAnimation32;  kbrdAnimationArray[33]:=kbrdAnimation33;
 
   ReadSettingsIniFile;
   statsReadAll;
@@ -2713,7 +3158,7 @@ begin
   languageChanged := false;
 
           // Данный параметр нужен для тестирования. Задаёт определённое по счёту слово.
-//  numberOfTheword := Length(vocab) - 1;                               // акция - abbey - abaco - 2 слово
+//  numberOfTheword := 11;                               // акция - abbey - abaco - 2 слово
           //
 
   InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];

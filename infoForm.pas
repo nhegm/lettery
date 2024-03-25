@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Controls.Presentation;
+  FMX.Controls.Presentation, FMX.Ani;
 
 type
   TinformationForm = class(TForm)
@@ -19,6 +19,7 @@ type
     b3: TButton;
     b2: TButton;
     btn1descr: TLabel;
+    FillColorAnimation: TColorAnimation;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -95,10 +96,21 @@ var
 
 {$R *.fmx}
 
+procedure FormColorAnimation;
+begin
+  informationForm.FillColorAnimation.Duration := 1;
+  informationForm.FillColorAnimation.Delay := 0.2;
+  informationForm.FillColorAnimation.Interpolation := TInterpolationType.Cubic;
+  informationForm.FillColorAnimation.PropertyName := 'Fill.Color';
+  informationForm.FillColorAnimation.StartValue := $00000000;
+  informationForm.FillColorAnimation.StopValue := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
+end;
+
 procedure elementsShow;
 begin
   ////////////////////////////// Form settings //////////////////////////////
-  informationForm.Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
+//  informationForm.Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
+  informationForm.FillColorAnimation.StopValue := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   informationForm.width:= round (Screen.Width / 1.5);
   informationForm.Left := round(Screen.Width-informationForm.Width) div 2;
 
@@ -183,6 +195,8 @@ end;
 procedure TinformationForm.FormShow(Sender: TObject);
 begin
   elementsShow;
+  FormColorAnimation;
+  FillColorAnimation.Start;
 end;
 
 end.

@@ -9,16 +9,20 @@ uses
   FMX.Layouts, Math, System.Actions, FMX.ActnList, FMX.StdActns, FMX.Gestures,
   System.Sensors, System.Sensors.Components, FMX.Memo.Types, FMX.ScrollBox,
   FMX.Memo, IdIntercept, IdBaseComponent, IdLogBase, IdLogEvent,
-  FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Intf, FireDAC.Comp.Client, FMX.InertialMovement;
+  FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Intf, FireDAC.Comp.Client, FMX.InertialMovement,
+  FMX.Ani;
 
 type
   TmeaningForm1 = class(TForm)
     meaningText: TLabel;
     ScrollBar: TScrollBar;
     ScrollBox: TScrollBox;
+    FillColorAnimation: TColorAnimation;
+    FontColorAnimation: TColorAnimation;
 
-    procedure FormShow(Sender: TObject);
     procedure ScrollBarChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormHide(Sender: TObject);
 
   private
     { Private declarations }
@@ -41,12 +45,41 @@ const
 var
   meaningString : String;
 
+procedure TmeaningForm1.FormHide(Sender: TObject);
+begin
+  meaningForm1.FillColorAnimation.Duration := 0.05;
+  meaningForm1.FillColorAnimation.Delay := 0;
+  meaningForm1.FillColorAnimation.Interpolation := TInterpolationType.Sinusoidal;
+  meaningForm1.FillColorAnimation.PropertyName := 'Fill.Color';
+  meaningForm1.FillColorAnimation.StartValue := bckgrndColor[ColorsSetNumber];
+  meaningForm1.FillColorAnimation.StopValue := $00FFffFF;
+  meaningForm1.FillColorAnimation.start;
+  meaningForm1.FontColorAnimation.Duration := 0.5;
+  meaningForm1.FontColorAnimation.Delay := 0;
+  meaningForm1.FontColorAnimation.Interpolation := TInterpolationType.Sinusoidal;
+  meaningForm1.FontColorAnimation.PropertyName := 'FontColor';
+  meaningForm1.FontColorAnimation.StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
+  meaningForm1.FontColorAnimation.StopValue := $00FFffFF;
+  meaningForm1.FontColorAnimation.start;
+end;
+
 procedure TmeaningForm1.FormShow(Sender: TObject);
 
 begin
 
-  Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
-  meaningText.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
+  meaningForm1.FillColorAnimation.Duration := 0.05;
+  meaningForm1.FillColorAnimation.Delay := 0;
+  meaningForm1.FillColorAnimation.Interpolation := TInterpolationType.Sinusoidal;
+  meaningForm1.FillColorAnimation.PropertyName := 'Fill.Color';
+  meaningForm1.FillColorAnimation.StartValue := $00FFffFF;
+  meaningForm1.FillColorAnimation.StopValue := bckgrndColor[ColorsSetNumber];
+//  Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
+  meaningForm1.FontColorAnimation.Duration := 0.5;
+  meaningForm1.FontColorAnimation.Delay := 0;
+  meaningForm1.FontColorAnimation.Interpolation := TInterpolationType.Sinusoidal;
+  meaningForm1.FontColorAnimation.PropertyName := 'FontColor';
+  meaningForm1.FontColorAnimation.StartValue := $00FFffFF;
+  meaningForm1.FontColorAnimation.StopValue := boardNKeyTextColorsDef[ColorsSetNumber];
   meaningForm1.Top:=50;
   meaningForm1.Left:=70;
   meaningText.TextSettings.Font.Size := 18;
@@ -65,6 +98,8 @@ begin
         ScrollBox.AniCalculations.TouchTracking := [ttVertical];
         ScrollBox.AniCalculations.Animation := True;
     end;
+    meaningForm1.FillColorAnimation.start;
+    meaningForm1.FontColorAnimation.start;
   {$ENDIF}
 
   {$IFDEF MSWINDOWS}
@@ -82,6 +117,8 @@ begin
         ScrollBar.Value := 0;
         ScrollBar.Max := meaningText.Height - meaningForm1.height + 8;
       end;
+    meaningForm1.FillColorAnimation.start;
+    meaningForm1.FontColorAnimation.start;
   {$ENDIF}
 end;
 
