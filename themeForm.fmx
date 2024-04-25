@@ -7,12 +7,15 @@ object setForm: TsetForm
   ClientHeight = 532
   ClientWidth = 300
   Fill.Kind = Solid
+  StyleLookup = 'pushpanel'
   FormStyle = Popup
+  Visible = True
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Orientations = [Portrait]
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnClose = FormClose
   OnShow = FormShow
   DesignerMasterStyle = 3
   object Label1: TLabel
@@ -28,15 +31,21 @@ object setForm: TsetForm
     TextSettings.Trimming = None
     Text = 'Color Scheme'
     TabOrder = 0
+    object FontColorAnimation: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
-  object azul: TRoundRect
+  object azul1: TRoundRect
     Locked = True
     Position.X = 41.000000000000000000
     Position.Y = 97.000000000000000000
     Size.Width = 100.000000000000000000
     Size.Height = 34.000000000000000000
     Size.PlatformDefault = False
-    OnClick = azulClick
+    OnClick = azul1Click
     object Text1: TText
       Align = Center
       Locked = True
@@ -47,13 +56,13 @@ object setForm: TsetForm
       OnClick = Text1Click
     end
   end
-  object day: TRoundRect
+  object day2: TRoundRect
     Position.X = 41.000000000000000000
     Position.Y = 139.000000000000000000
     Size.Width = 100.000000000000000000
     Size.Height = 34.000000000000000000
     Size.PlatformDefault = False
-    OnClick = dayClick
+    OnClick = day2Click
     object Text2: TText
       Align = Center
       Locked = True
@@ -64,13 +73,13 @@ object setForm: TsetForm
       OnClick = Text2Click
     end
   end
-  object violet: TRoundRect
+  object violet3: TRoundRect
     Position.X = 41.000000000000000000
     Position.Y = 195.000000000000000000
     Size.Width = 100.000000000000000000
     Size.Height = 34.000000000000000000
     Size.PlatformDefault = False
-    OnClick = violetClick
+    OnClick = violet3Click
     object Text3: TText
       Align = Center
       Locked = True
@@ -81,31 +90,13 @@ object setForm: TsetForm
       OnClick = Text3Click
     end
   end
-  object returnButton: TButton
-    StyledSettings = [Family, Style, FontColor]
-    Margins.Left = 1.000000000000000000
-    Margins.Top = 1.000000000000000000
-    Margins.Right = 1.000000000000000000
-    Margins.Bottom = 1.000000000000000000
-    Position.X = 56.000000000000000000
-    Position.Y = 264.000000000000000000
-    Size.Width = 90.000000000000000000
-    Size.Height = 30.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 7
-    Text = #1074#1077#1088#1085#1091#1090#1100#1089#1103
-    TextSettings.Font.Size = 14.000000000000000000
-    TextSettings.Trimming = None
-    Visible = False
-    OnClick = returnButtonClick
-  end
-  object barbie: TRoundRect
+  object barbie4: TRoundRect
     Position.X = 41.000000000000000000
     Position.Y = 251.000000000000000000
     Size.Width = 100.000000000000000000
     Size.Height = 34.000000000000000000
     Size.PlatformDefault = False
-    OnClick = barbieClick
+    OnClick = barbie4Click
     object Text4: TText
       Align = Center
       Locked = True
@@ -116,13 +107,13 @@ object setForm: TsetForm
       OnClick = Text4Click
     end
   end
-  object console: TRoundRect
+  object console5: TRoundRect
     Position.X = 41.000000000000000000
     Position.Y = 293.000000000000000000
     Size.Width = 100.000000000000000000
     Size.Height = 34.000000000000000000
     Size.PlatformDefault = False
-    OnClick = consoleClick
+    OnClick = console5Click
     object Text5: TText
       Align = Center
       Locked = True
@@ -133,13 +124,13 @@ object setForm: TsetForm
       OnClick = Text5Click
     end
   end
-  object latinum: TRoundRect
+  object latinum6: TRoundRect
     Position.X = 41.000000000000000000
     Position.Y = 341.000000000000000000
     Size.Width = 100.000000000000000000
     Size.Height = 34.000000000000000000
     Size.PlatformDefault = False
-    OnClick = latinumClick
+    OnClick = latinum6Click
     object Text6: TText
       Align = Center
       Locked = True
@@ -150,13 +141,13 @@ object setForm: TsetForm
       OnClick = Text6Click
     end
   end
-  object greek: TRoundRect
+  object greek7: TRoundRect
     Position.X = 41.000000000000000000
     Position.Y = 383.000000000000000000
     Size.Width = 100.000000000000000000
     Size.Height = 34.000000000000000000
     Size.PlatformDefault = False
-    OnClick = greekClick
+    OnClick = greek7Click
     object Text7: TText
       Align = Center
       Locked = True
@@ -167,13 +158,13 @@ object setForm: TsetForm
       OnClick = Text7Click
     end
   end
-  object x_men: TRoundRect
+  object x_men8: TRoundRect
     Position.X = 41.000000000000000000
     Position.Y = 425.000000000000000000
     Size.Width = 100.000000000000000000
     Size.Height = 34.000000000000000000
     Size.PlatformDefault = False
-    OnClick = x_menClick
+    OnClick = x_men8Click
     object Text8: TText
       Align = Center
       Locked = True
@@ -183,5 +174,19 @@ object setForm: TsetForm
       Text = 'X'
       OnClick = Text8Click
     end
+  end
+  object FillColorAnimation: TColorAnimation
+    Duration = 0.200000002980232200
+    PropertyName = 'Fill.Color'
+    StartValue = claWhite
+    StopValue = claWhite
+  end
+  object returnButton: TButton
+    Position.X = 184.000000000000000000
+    Position.Y = 386.000000000000000000
+    TabOrder = 12
+    Text = 'returnButton'
+    TextSettings.Trimming = None
+    Visible = False
   end
 end

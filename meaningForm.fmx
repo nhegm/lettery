@@ -19,8 +19,8 @@ object meaningForm1: TmeaningForm1
   FormFactor.Width = 300
   FormFactor.Height = 300
   FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnClose = FormClose
   OnShow = FormShow
-  OnHide = FormHide
   DesignerMasterStyle = 0
   object ScrollBar: TScrollBar
     Align = Right

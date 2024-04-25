@@ -22,7 +22,7 @@ type
 
     procedure ScrollBarChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure FormHide(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
     { Private declarations }
@@ -45,40 +45,39 @@ const
 var
   meaningString : String;
 
-procedure TmeaningForm1.FormHide(Sender: TObject);
+procedure TmeaningForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  meaningForm1.FillColorAnimation.Duration := 0.05;
+  meaningForm1.FillColorAnimation.Duration := 0.5;
   meaningForm1.FillColorAnimation.Delay := 0;
-  meaningForm1.FillColorAnimation.Interpolation := TInterpolationType.Sinusoidal;
+  meaningForm1.FillColorAnimation.Interpolation := TInterpolationType.linear;
   meaningForm1.FillColorAnimation.PropertyName := 'Fill.Color';
   meaningForm1.FillColorAnimation.StartValue := bckgrndColor[ColorsSetNumber];
-  meaningForm1.FillColorAnimation.StopValue := $00FFffFF;
+  meaningForm1.FillColorAnimation.StopValue := $00000000;
   meaningForm1.FillColorAnimation.start;
+
   meaningForm1.FontColorAnimation.Duration := 0.5;
   meaningForm1.FontColorAnimation.Delay := 0;
-  meaningForm1.FontColorAnimation.Interpolation := TInterpolationType.Sinusoidal;
+  meaningForm1.FontColorAnimation.Interpolation := TInterpolationType.linear;
   meaningForm1.FontColorAnimation.PropertyName := 'FontColor';
   meaningForm1.FontColorAnimation.StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
-  meaningForm1.FontColorAnimation.StopValue := $00FFffFF;
+  meaningForm1.FontColorAnimation.StopValue := $00000000;
   meaningForm1.FontColorAnimation.start;
 end;
 
 procedure TmeaningForm1.FormShow(Sender: TObject);
 
 begin
-
-  meaningForm1.FillColorAnimation.Duration := 0.05;
+  meaningForm1.FillColorAnimation.Duration := 0.8;
   meaningForm1.FillColorAnimation.Delay := 0;
-  meaningForm1.FillColorAnimation.Interpolation := TInterpolationType.Sinusoidal;
+  meaningForm1.FillColorAnimation.Interpolation := TInterpolationType.linear;
   meaningForm1.FillColorAnimation.PropertyName := 'Fill.Color';
-  meaningForm1.FillColorAnimation.StartValue := $00FFffFF;
+  meaningForm1.FillColorAnimation.StartValue := bckgrndColor[ColorsSetNumber];
   meaningForm1.FillColorAnimation.StopValue := bckgrndColor[ColorsSetNumber];
-//  Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
-  meaningForm1.FontColorAnimation.Duration := 0.5;
+  meaningForm1.FontColorAnimation.Duration := 0.8;
   meaningForm1.FontColorAnimation.Delay := 0;
-  meaningForm1.FontColorAnimation.Interpolation := TInterpolationType.Sinusoidal;
+  meaningForm1.FontColorAnimation.Interpolation := TInterpolationType.linear;
   meaningForm1.FontColorAnimation.PropertyName := 'FontColor';
-  meaningForm1.FontColorAnimation.StartValue := $00FFffFF;
+  meaningForm1.FontColorAnimation.StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
   meaningForm1.FontColorAnimation.StopValue := boardNKeyTextColorsDef[ColorsSetNumber];
   meaningForm1.Top:=50;
   meaningForm1.Left:=70;

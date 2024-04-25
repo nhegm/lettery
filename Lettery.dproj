@@ -355,10 +355,6 @@
             <Form>MainForm</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="languageForm.pas">
-            <Form>language</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="meaningForm.pas">
             <Form>meaningForm1</Form>
             <FormType>fmx</FormType>
@@ -374,6 +370,9 @@
         <DCCReference Include="infoForm.pas">
             <Form>informationForm</Form>
             <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="langForm.pas">
+            <Form>languageForm</Form>
         </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

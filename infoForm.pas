@@ -20,8 +20,22 @@ type
     b2: TButton;
     btn1descr: TLabel;
     FillColorAnimation: TColorAnimation;
+    FontColorAnimation1: TColorAnimation;
+    FontColorAnimation2: TColorAnimation;
+    FontColorAnimation3: TColorAnimation;
+    FontColorAnimation4: TColorAnimation;
+    FontColorAnimation5: TColorAnimation;
+    FontColorAnimation6: TColorAnimation;
+    FontColorAnimation7: TColorAnimation;
+    btnTintAnimation1: TColorAnimation;
+    btnTextAnimation1: TColorAnimation;
+    btnTintAnimation2: TColorAnimation;
+    btnTextAnimation2: TColorAnimation;
+    btnTintAnimation3: TColorAnimation;
+    btnTextAnimation3: TColorAnimation;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -93,24 +107,25 @@ var
   buttons: array [1..3] of TButton;                  // array for 3 examples of boards
   btnDescriptions: array [1..3] of TLabel;           // array for 3 descriptions for these boards
   i, padX, padY: integer;
+  fontColorAnimation: array [1..7] of TColorAnimation;
+  btnTextAnimation: array [1..3] of TColorAnimation;
+  btnTintAnimation: array [1..3] of TColorAnimation;
 
 {$R *.fmx}
 
 procedure FormColorAnimation;
 begin
-  informationForm.FillColorAnimation.Duration := 1;
-  informationForm.FillColorAnimation.Delay := 0.2;
-  informationForm.FillColorAnimation.Interpolation := TInterpolationType.Cubic;
+  informationForm.FillColorAnimation.Duration := 0.8;
+  informationForm.FillColorAnimation.Delay := 0;
+  informationForm.FillColorAnimation.Interpolation := TInterpolationType.linear;
   informationForm.FillColorAnimation.PropertyName := 'Fill.Color';
-  informationForm.FillColorAnimation.StartValue := $00000000;
-  informationForm.FillColorAnimation.StopValue := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
+  informationForm.FillColorAnimation.StartValue := bckgrndColor[ColorsSetNumber];
+  informationForm.FillColorAnimation.StopValue := bckgrndColor[ColorsSetNumber];
 end;
 
 procedure elementsShow;
 begin
   ////////////////////////////// Form settings //////////////////////////////
-//  informationForm.Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
-  informationForm.FillColorAnimation.StopValue := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   informationForm.width:= round (Screen.Width / 1.5);
   informationForm.Left := round(Screen.Width-informationForm.Width) div 2;
 
@@ -119,14 +134,12 @@ begin
   ////////////////////////////// title settings //////////////////////////////
   informationForm.title.Text := arrayTitle[VocNumber];
   informationForm.title.Font.Size := 14;
-  informationForm.title.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   informationForm.title.Width := informationForm.Width - 40;
   informationForm.text1.Position.X := padX;
   informationForm.title.Position.Y := padY;
   ////////////////////////////// First phrase settings //////////////////////////////
   informationForm.text1.Text := arrayText1[VocNumber];
   informationForm.text1.Font.Size := 14;
-  informationForm.text1.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   informationForm.text1.Width := informationForm.Width - 40;
   informationForm.text1.Position.X := padX;
   informationForm.text1.Position.Y := informationForm.title.Position.Y + informationForm.title.Height + padY;
@@ -141,16 +154,12 @@ begin
   end;
   for i := 2 to 3 do
     buttons[i].Position.Y := buttons[i-1].Position.Y + buttons[i-1].Height + padY;
-  buttons[1].TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
-  buttons[2].TextSettings.FontColor := boardNKeyTextColorsYellow[ColorsSetNumber];
-  buttons[3].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
   buttons[1].Text := greenArray[VocNumber];
   buttons[2].Text := yellowArray[VocNumber];
   buttons[3].Text := defArray[VocNumber];
   ////////////////////////////// Buttons description settings //////////////////////////////
   for I := 1 to 3 do begin
     btnDescriptions[i].Font.Size := 14;
-    btnDescriptions[i].TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
     btnDescriptions[i].Width := informationForm.text1.Width - buttons[i].Width - padX;
     btnDescriptions[i].Position.X := buttons[i].Position.X + buttons[i].Width + padX;
   end;
@@ -164,20 +173,62 @@ begin
   ////////////////////////////// Vocab info text settings //////////////////////////////
   informationForm.vocabInfo.Text := arrayVocabInfo[VocNumber] + intToStr(vocabSize[VocNumber]);
   informationForm.vocabInfo.Font.Size := 14;
-  informationForm.vocabInfo.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   informationForm.vocabInfo.Width := informationForm.Width - 40;
   informationForm.vocabInfo.Position.X := padX;
   informationForm.vocabInfo.Position.Y := buttons[3].Position.Y + buttons[3].Height + padY;
   ////////////////////////////// Contact info text settings //////////////////////////////
   informationForm.contactInfo.Text := arrayContactInfo[VocNumber];
   informationForm.contactInfo.Font.Size := 14;
-  informationForm.contactInfo.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[ColorsSetNumber];
   informationForm.contactInfo.Width := informationForm.Width - 40;
   informationForm.contactInfo.Position.X := padX;
   informationForm.contactInfo.Position.Y := informationForm.vocabInfo.Position.Y + informationForm.vocabInfo.Height + padY;
 
   informationForm.height:= round (informationForm.contactInfo.Position.Y + informationForm.contactInfo.Height + padY);
   informationForm.Top := round(Screen.Height-informationForm.Height) div 2;
+end;
+
+procedure TinformationForm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  informationForm.FillColorAnimation.Duration := 0.5;
+  informationForm.FillColorAnimation.Delay := 0;
+  informationForm.FillColorAnimation.Interpolation := TInterpolationType.linear;
+  informationForm.FillColorAnimation.PropertyName := 'Fill.Color';
+  informationForm.FillColorAnimation.StartValue := bckgrndColor[ColorsSetNumber];
+  informationForm.FillColorAnimation.StopValue := $00000000;
+  informationForm.FillColorAnimation.start;
+
+  for i := 1 to 7 do begin
+    FontColorAnimation[i].Duration := 0.5;
+    FontColorAnimation[i].Delay := 0;
+    FontColorAnimation[i].Interpolation := TInterpolationType.linear;
+    FontColorAnimation[i].PropertyName := 'FontColor';
+    FontColorAnimation[i].StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
+    FontColorAnimation[i].StopValue := $00000000;
+    FontColorAnimation[i].start;
+  end;
+
+  for i := 1 to 3 do begin
+    btnTintAnimation[i].Duration := 0.5;
+    btnTintAnimation[i].Delay := 0;
+    btnTintAnimation[i].Interpolation := TInterpolationType.linear;
+    btnTintAnimation[i].PropertyName := 'TintColor';
+    btnTintAnimation[i].StartValue := boardNKeyColorsDef[ColorsSetNumber];
+    btnTintAnimation[i].StopValue := $00000000;
+    btnTintAnimation[i].start;
+  end;
+
+  btnTextAnimation[1].StartValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+  btnTextAnimation[2].StartValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+  btnTextAnimation[3].StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
+  for i := 1 to 3 do begin
+    btnTextAnimation[i].Duration := 0.5;
+    btnTextAnimation[i].Delay := 0;
+    btnTextAnimation[i].Interpolation := TInterpolationType.linear;
+    btnTextAnimation[i].PropertyName := 'FontColor';
+    btnTextAnimation[i].StopValue := $00000000;
+    btnTextAnimation[i].start;
+  end;
+
 end;
 
 procedure TinformationForm.FormCreate(Sender: TObject);
@@ -189,7 +240,24 @@ begin
   btnDescriptions[2] := btn2descr;
   btnDescriptions[3] := btn3descr;
 
+  btnTextAnimation[1] := btnTextAnimation1;
+  btnTextAnimation[2] := btnTextAnimation2;
+  btnTextAnimation[3] := btnTextAnimation3;
+  btnTintAnimation[1] := btnTintAnimation1;
+  btnTintAnimation[2] := btnTintAnimation2;
+  btnTintAnimation[3] := btnTintAnimation3;
+
+  fontColorAnimation[1] := fontColorAnimation1;
+  fontColorAnimation[2] := fontColorAnimation2;
+  fontColorAnimation[3] := fontColorAnimation3;
+  fontColorAnimation[4] := fontColorAnimation4;
+  fontColorAnimation[5] := fontColorAnimation5;
+  fontColorAnimation[6] := fontColorAnimation6;
+  fontColorAnimation[7] := fontColorAnimation7;
+
   elementsShow;
+  FormColorAnimation;
+  FillColorAnimation.Start;
 end;
 
 procedure TinformationForm.FormShow(Sender: TObject);
@@ -197,6 +265,40 @@ begin
   elementsShow;
   FormColorAnimation;
   FillColorAnimation.Start;
+
+  for i := 1 to 7 do begin
+    FontColorAnimation[i].Duration := 0.8;
+    FontColorAnimation[i].Delay := 0;
+    FontColorAnimation[i].Interpolation := TInterpolationType.linear;
+    FontColorAnimation[i].PropertyName := 'FontColor';
+    FontColorAnimation[i].StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
+    FontColorAnimation[i].StopValue := boardNKeyTextColorsDef[ColorsSetNumber];
+    FontColorAnimation[i].start;
+  end;
+
+  for i := 1 to 3 do begin
+    btnTintAnimation[i].Duration := 0.8;
+    btnTintAnimation[i].Delay := 0;
+    btnTintAnimation[i].Interpolation := TInterpolationType.linear;
+    btnTintAnimation[i].PropertyName := 'TintColor';
+    btnTintAnimation[i].StartValue := boardNKeyColorsDef[ColorsSetNumber];
+    btnTintAnimation[i].StopValue := boardNKeyColorsDef[ColorsSetNumber];
+    btnTintAnimation[i].start;
+  end;
+
+  btnTextAnimation[1].StartValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+  btnTextAnimation[2].StartValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+  btnTextAnimation[3].StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
+  btnTextAnimation[1].StopValue := boardNKeyTextColorsGreen[ColorsSetNumber];
+  btnTextAnimation[2].StopValue := boardNKeyTextColorsYellow[ColorsSetNumber];
+  btnTextAnimation[3].StopValue := boardNKeyTextColorsDef[ColorsSetNumber];
+  for i := 1 to 3 do begin
+    btnTextAnimation[i].Duration := 0.8;
+    btnTextAnimation[i].Delay := 0;
+    btnTextAnimation[i].Interpolation := TInterpolationType.linear;
+    btnTextAnimation[i].PropertyName := 'FontColor';
+    btnTextAnimation[i].start;
+  end;
 end;
 
 end.

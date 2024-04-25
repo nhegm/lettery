@@ -6,6 +6,7 @@ object informationForm: TinformationForm
   Caption = 'info'
   ClientHeight = 328
   ClientWidth = 372
+  Fill.Color = claNull
   Fill.Kind = Solid
   Position = Designed
   StyleLookup = 'pushpanel'
@@ -14,6 +15,7 @@ object informationForm: TinformationForm
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnClose = FormClose
   OnShow = FormShow
   DesignerMasterStyle = 0
   object b1: TButton
@@ -35,6 +37,18 @@ object informationForm: TinformationForm
     TextSettings.VertAlign = Trailing
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object btnTintAnimation1: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
+    object btnTextAnimation1: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object title: TLabel
     AutoSize = True
@@ -49,6 +63,12 @@ object informationForm: TinformationForm
     TextSettings.Trimming = None
     Text = 'title'
     TabOrder = 8
+    object FontColorAnimation6: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object contactInfo: TLabel
     AutoSize = True
@@ -63,6 +83,12 @@ object informationForm: TinformationForm
     TextSettings.Trimming = None
     Text = 'contactInfo'
     TabOrder = 5
+    object FontColorAnimation4: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object vocabInfo: TLabel
     AutoSize = True
@@ -77,6 +103,12 @@ object informationForm: TinformationForm
     TextSettings.Trimming = None
     Text = 'vocabInfo'
     TabOrder = 7
+    object FontColorAnimation7: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object btn3descr: TLabel
     AutoSize = True
@@ -91,6 +123,12 @@ object informationForm: TinformationForm
     TextSettings.Trimming = None
     Text = 'btn3descr'
     TabOrder = 0
+    object FontColorAnimation3: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object btn2descr: TLabel
     AutoSize = True
@@ -105,6 +143,12 @@ object informationForm: TinformationForm
     TextSettings.Trimming = None
     Text = 'btn2descr'
     TabOrder = 1
+    object FontColorAnimation2: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object text1: TLabel
     AutoSize = True
@@ -119,6 +163,12 @@ object informationForm: TinformationForm
     TextSettings.Trimming = None
     Text = 'text1'
     TabOrder = 6
+    object FontColorAnimation5: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object b3: TButton
     StyledSettings = [Family]
@@ -139,6 +189,18 @@ object informationForm: TinformationForm
     TextSettings.VertAlign = Trailing
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object btnTintAnimation3: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
+    object btnTextAnimation3: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object b2: TButton
     StyledSettings = [Family]
@@ -159,6 +221,18 @@ object informationForm: TinformationForm
     TextSettings.VertAlign = Trailing
     TextSettings.Trimming = None
     TouchTargetExpansion.Bottom = 20.000000000000000000
+    object btnTintAnimation2: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
+    object btnTextAnimation2: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object btn1descr: TLabel
     AutoSize = True
@@ -173,6 +247,12 @@ object informationForm: TinformationForm
     TextSettings.Trimming = None
     Text = 'btn1descr'
     TabOrder = 2
+    object FontColorAnimation1: TColorAnimation
+      Duration = 0.200000002980232200
+      PropertyName = 'TextSettings.FontColor'
+      StartValue = claWhite
+      StopValue = claWhite
+    end
   end
   object FillColorAnimation: TColorAnimation
     Duration = 0.200000002980232200

@@ -1,8 +1,6 @@
 inherited setForm_LgXhdpiTb: TsetForm_LgXhdpiTb
   ClientHeight = 828
   ClientWidth = 480
-  StyleLookup = 'pushpanel'
-  Visible = True
   DesignerMasterStyle = 0
   inherited Label1: TLabel
     Size.Width = 480.000000000000000000
