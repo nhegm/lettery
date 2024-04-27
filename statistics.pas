@@ -15,6 +15,8 @@ type
     headLabel: TLabel;
     Switcher: TSwitch;
     lastStreakLabel: TLabel;
+    averageLabel: TLabel;
+    fastAttemptLabel: TLabel;
     procedure FormShow(Sender: TObject);
     procedure SwitcherSwitch(Sender: TObject);
 
@@ -36,12 +38,16 @@ const
   commonHeaderRus = 'Общая статистика'; commonHeaderEng = 'Common statistics'; commonHeaderLat = 'Statistica tota'; commonHeaderEsp = 'Todas las estadísticas';
   GamesRus = 'Игр сыграно: '; GamesEng = 'Games played: ';  GamesLat = 'Ludos lusit: '; GamesEsp = 'Juegos jugados: ';
   WinsRus = 'Побед: '; WinsEng = 'Wins: '; WinsLat = 'Victoriae: '; WinsEsp = 'Victorias: ';
+  averageRus = 'В среднем попыток: '; averageEng = 'Aver. attempts: '; averageLat = 'Что-то будет'; averageEsp = 'Intento promedio: ';
+  fastAttemptRus = 'Быстрейшая попытка: '; fastAttemptEng = 'The fastest attempt: '; fastAttemptLat = 'Что-то будет'; fastAttemptEsp = 'El intento más rápido: ';
   StreakRus = 'Длиннейшая серия: '; StreakEng = 'Longiest streak: '; StreakLat = 'Series longissima: '; StreakEsp = 'Racha más larga: ';
   LastStreakRus = 'Текущая серия: '; LastStreakEng = 'Current Streak: '; LastStreakLat = 'Series praesens: '; LastStreakEsp = 'Racha actual: ';
 
   commonHeaders: array [1..4] of String = (commonHeaderRus, commonHeaderEng, commonHeaderLat, commonHeaderEsp);
   GamesStat: array [1..4] of String = (GamesRus, GamesEng, GamesLat, GamesEsp);
   WinsStat: array [1..4] of String = (WinsRus, WinsEng, WinsLat, WinsEsp);
+  averageStat: array [1..4] of String = (averageRus, averageEng, averageLat, averageEsp);
+  fastAttemptStat: array [1..4] of String = (fastAttemptRus, fastAttemptEng, fastAttemptLat, fastAttemptEsp);
   StreakStat: array [1..4] of String = (StreakRus, StreakEng, StreakLat, StreakEsp);
   LastStreakStat: array [1..4] of String = (LastStreakRus, LastStreakEng, LastStreakLat, LastStreakEsp);
 
@@ -55,8 +61,8 @@ const
 procedure elementsSettings;
 begin
 {$IFDEF ANDROID}
-  statsForm.height:= 200;
-  statsForm.width:= 220;
+  statsForm.height:= 260;
+  statsForm.width:= 260;
 {$ENDIF}
   statsForm.Top:=50;
   statsForm.Left:=100;
@@ -68,8 +74,12 @@ begin
   statsForm.gamesLabel.Position.Y := statsForm.headLabel.Position.Y + 30;
   statsForm.winsLabel.Position.X := (statsForm.Width - statsForm.winsLabel.Width) / 2;
   statsForm.winsLabel.Position.Y := statsForm.gamesLabel.Position.Y + 30;
+  statsForm.averageLabel.Position.X := (statsForm.Width - statsForm.averageLabel.Width) / 2;
+  statsForm.averageLabel.Position.Y := statsForm.winsLabel.Position.Y + 30;
+  statsForm.fastAttemptLabel.Position.X := (statsForm.Width - statsForm.fastAttemptLabel.Width) / 2;
+  statsForm.fastAttemptLabel.Position.Y := statsForm.averageLabel.Position.Y + 30;
   statsForm.streakLabel.Position.X := (statsForm.Width - statsForm.streakLabel.Width) / 2;
-  statsForm.streakLabel.Position.Y := statsForm.winsLabel.Position.Y + 30;
+  statsForm.streakLabel.Position.Y := statsForm.fastAttemptLabel.Position.Y + 30;
   statsForm.lastStreakLabel.Position.X := (statsForm.Width - statsForm.lastStreakLabel.Width) / 2;
   statsForm.lastStreakLabel.Position.Y := statsForm.streakLabel.Position.Y + 30;
   statsForm.Switcher.Enabled := true;
@@ -80,6 +90,8 @@ begin
 {$ENDIF}
   statsForm.gamesLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   statsForm.winsLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
+  statsForm.averageLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
+  statsForm.fastAttemptLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   statsForm.streakLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   statsForm.lastStreakLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   statsForm.headLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
@@ -90,6 +102,8 @@ begin
   statsForm.headLabel.Text := commonHeaders[HeaderFooterTemplate.VocNumber];
   statsForm.gamesLabel.Text := GamesStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.games);
   statsForm.winsLabel.Text := WinsStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.wins);
+  statsForm.averageLabel.Text := averageStat[HeaderFooterTemplate.VocNumber] + FloatToStr(HeaderFooterTemplate.average);
+  statsForm.fastAttemptLabel.Text := fastAttemptStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.fastAttempt);
   statsForm.streakLabel.Text := StreakStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.winStreak);
   statsForm.lastStreakLabel.Text := LastStreakStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.lastStreak);
 end;
@@ -99,6 +113,8 @@ begin
   statsForm.headLabel.Text := langHeaders[HeaderFooterTemplate.VocNumber];
   statsForm.gamesLabel.Text := GamesStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.gamesL);
   statsForm.winsLabel.Text := WinsStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.winsL);
+  statsForm.averageLabel.Text := averageStat[HeaderFooterTemplate.VocNumber] + FloatToStr(HeaderFooterTemplate.averageL);
+  statsForm.fastAttemptLabel.Text := fastAttemptStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.fastAttemptL);
   statsForm.streakLabel.Text:=StreakStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.winStreakL);
   statsForm.lastStreakLabel.Text:=LastStreakStat[HeaderFooterTemplate.VocNumber] + inttostr(HeaderFooterTemplate.lastStreakL);
 end;

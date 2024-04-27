@@ -9,7 +9,6 @@ object setForm: TsetForm
   Fill.Kind = Solid
   StyleLookup = 'pushpanel'
   FormStyle = Popup
-  Visible = True
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Orientations = [Portrait]

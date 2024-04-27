@@ -74,8 +74,8 @@ begin
   languageForm.Left := round(Screen.Width-languageForm.Width) div 2;
   languageForm.Top := 50;
   {$ELSEIF Defined(MSWINDOWS)}
-  Height := 180;
-  width := 200;
+  languageForm.Height := 180;
+  languageForm.width := 200;
   {$ENDIF}
 
   padY := 8;

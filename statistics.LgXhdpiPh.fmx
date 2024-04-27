@@ -1,5 +1,6 @@
 inherited statsForm_LgXhdpiPh: TstatsForm_LgXhdpiPh
   ClientHeight = 199
+  ClientWidth = 200
   Constraints.MaxHeight = 200.000000000000000000
   Constraints.MaxWidth = 200.000000000000000000
   Constraints.MinHeight = 200.000000000000000000

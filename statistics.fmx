@@ -4,8 +4,8 @@ object statsForm: TstatsForm
   BorderIcons = []
   BorderStyle = Single
   Caption = 'stats'
-  ClientHeight = 248
-  ClientWidth = 200
+  ClientHeight = 292
+  ClientWidth = 276
   Fill.Color = xFF003049
   Fill.Kind = Solid
   Position = Designed
@@ -27,7 +27,7 @@ object statsForm: TstatsForm
     TextSettings.HorzAlign = Center
     TextSettings.Trimming = None
     Text = 'winsLabel'
-    TabOrder = 2
+    TabOrder = 4
   end
   object gamesLabel: TLabel
     StyledSettings = [Family, Size, Style]
@@ -40,15 +40,15 @@ object statsForm: TstatsForm
     TextSettings.HorzAlign = Center
     TextSettings.Trimming = None
     Text = 'gamesLabel'
-    TabOrder = 3
+    TabOrder = 5
   end
   object streakLabel: TLabel
     AutoSize = True
     StyledSettings = [Family, Size, Style]
     Position.X = 8.000000000000000000
-    Position.Y = 90.000000000000000000
+    Position.Y = 144.000000000000000000
     Size.Width = 210.399993896484400000
-    Size.Height = 22.400001525878910000
+    Size.Height = 22.399993896484380000
     Size.PlatformDefault = False
     TextSettings.FontColor = xFFFDF0D5
     TextSettings.HorzAlign = Center
@@ -66,17 +66,17 @@ object statsForm: TstatsForm
     TextSettings.HorzAlign = Center
     TextSettings.Trimming = None
     Text = 'headLabel'
-    TabOrder = 5
+    TabOrder = 7
   end
   object Switcher: TSwitch
     IsChecked = False
-    Position.X = 78.000000000000000000
-    Position.Y = 152.000000000000000000
+    Position.X = 86.000000000000000000
+    Position.Y = 204.000000000000000000
     Size.Width = 44.000000000000000000
     Size.Height = 26.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'switchstyle'
-    TabOrder = 6
+    TabOrder = 8
     TabStop = False
     ParentShowHint = False
     ShowHint = False
@@ -86,7 +86,7 @@ object statsForm: TstatsForm
     AutoSize = True
     StyledSettings = [Family, Size, Style]
     Position.X = 8.000000000000000000
-    Position.Y = 120.000000000000000000
+    Position.Y = 174.000000000000000000
     Size.Width = 210.399993896484400000
     Size.Height = 22.399993896484380000
     Size.PlatformDefault = False
@@ -95,5 +95,32 @@ object statsForm: TstatsForm
     TextSettings.Trimming = None
     Text = 'lastStreakLabel'
     TabOrder = 0
+  end
+  object averageLabel: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 8.000000000000000000
+    Position.Y = 88.000000000000000000
+    Size.Width = 210.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = xFFFDF0D5
+    TextSettings.HorzAlign = Center
+    TextSettings.Trimming = None
+    Text = 'averageLabel'
+    TabOrder = 3
+  end
+  object fastAttemptLabel: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 8.000000000000000000
+    Position.Y = 116.000000000000000000
+    Size.Width = 210.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = xFFFDF0D5
+    TextSettings.HorzAlign = Center
+    TextSettings.WordWrap = False
+    TextSettings.Trimming = None
+    Text = 'fastAttemptLabel'
+    TabOrder = 2
   end
 end

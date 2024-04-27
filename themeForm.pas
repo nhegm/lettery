@@ -115,18 +115,8 @@ procedure elementsShow;
 begin
 
   themeChanged := false;
-  {$IF Defined(ANDROID)}
-    setForm.width := 275;
-    setForm.height := 220;
-    setForm.Top := 50;
-    setForm.Left := round(Screen.Width-setForm.Width) div 2;
-  {$ELSEIF Defined(MSWINDOWS)}
-    setForm.StyleLookup := DefaultFormStyleLookup;
-    width := 300;
-    height := 530;
-  {$ENDIF}
 
-  setForm.Label1.Position.X := (setForm.Width - setForm.Label1.Width)/2;
+
   setForm.Label1.Position.Y := 8;
   setForm.Label1.Height := 24;
   padY := 8;
@@ -238,8 +228,19 @@ procedure TsetForm.FormShow(Sender: TObject);
 begin
   themeChanged := false;
 
-  animationStart;
+  {$IF Defined(ANDROID)}
+    setForm.width := 275;
+    setForm.height := 220;
+    setForm.Top := 50;
+    setForm.Left := round(Screen.Width-setForm.Width) div 2;
+  {$ELSEIF Defined(MSWINDOWS)}
+    setForm.StyleLookup := DefaultFormStyleLookup;
+    width := 300;
+    height := 530;
+  {$ENDIF}
 
+  animationStart;
+  setForm.Label1.Position.X := (setForm.Width - setForm.Label1.Width)/2;
   setForm.Label1.Text := textHeader[VocNumber];
   if languageChanged then buttonText[ColorsSetNumber].Text := textHitButton[VocNumber];
 

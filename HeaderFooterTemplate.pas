@@ -343,13 +343,15 @@ const                                                                   // 1    
 
 var
   MainForm: TMainForm;
-  wins, games, winStreak, lastGameWon, currentWinStreak, lastStreak, ColorsSetNumber: integer;         // statistics transfering to statistics form
-  winsL, gamesL, winStreakL, currentWinStreakL, lastGameWonL, lastStreakL, lastLangGame: integer;
+  wins, games, winStreak, lastGameWon, currentWinStreak, lastStreak, fastAttempt, allAttempts, ColorsSetNumber: integer;         // statistics transfering to statistics form
+  winsL, gamesL, winStreakL, currentWinStreakL, lastGameWonL, lastStreakL, fastAttemptL, allAttemptsL, lastLangGame: integer;
+  average, averageL : real;
   meaningOfTheWord, otvet: String;                      // meaning transfering to meaningForm
   VocNumber: byte;
   startButtonCondition, languageChanged, themeChanged: boolean;
 const
   statFileNames: array [0..4] of string = ('stats.ngm', 'statsRus.ngm', 'statsEng.ngm', 'statsLat.ngm', 'statsEsp.ngm');
+  aveStatFileNames: array [0..4] of string = ('aveStat.ngm', 'aveStatRus.ngm', 'aveStatEng.ngm', 'aveStatLat.ngm', 'aveStatEsp.ngm');
   textCongratsRus='Ура! Ура! Молоденчик!'; textCongratsEng='Great job!'; textCongratsLat=''; textCongratsEsp='¡Que trabajo tan excelente!'; textCongratsFra='';
   textFailRus='Вы не угадали слово '; textFailEng='The word was '; textFailLat=''; textFailEsp='La palabra correcta - '; textFailFra='';
   textAnotherTryRus='Попробуйте другое слово'; textAnotherTryEng='Try another word'; textAnotherTryLat=''; textAnotherTryEsp='Pruebe otra palabra, por favor'; textAnotherTryFra='';
@@ -365,7 +367,7 @@ const
   textPrevious: array [1..5] of String = (textPreviousRus, textPreviousEng, textPreviousLat, textPreviousEsp, textPreviousFra);
 
 var StreakTemp1, StreakTemp2: integer;
-    input, stat, statL: text;                              // input - read from vocabulary, stat - read from statistics file
+    input, stat, statL, aveStat, aveStatL : text;                              // input - read from vocabulary, stat - read from statistics file
     i, j, k, l, numberOfTheword, keyNumber, size: integer;  // разные счетчики wins - победы, games - все игры
     vocab, meanings: array of String;         // массив всего словаря и массив значений слов
     words: array [1..6] of string;              // массив со всеми ответами
@@ -993,15 +995,21 @@ begin
   games := 0;
   wins := 0;
   winStreak := 0;
+  average := 0;
+  fastAttempt := 0;
+  allAttempts := 0;
   lastGameWon := 0;
   lastStreak := 0;
 end;
 
-procedure statsVarNullL;
+procedure statsLVarNull;
 begin
   gamesL := 0;
   winsL := 0;
   winStreakL := 0;
+  averageL := 0;
+  fastAttemptL := 0;
+  allAttemptsL := 0;
   lastGameWonL := 0;
   lastStreakL := 0;
 end;
@@ -1014,6 +1022,9 @@ begin
     reset(stat);
     readln(stat , games);                               // считываем кол-во игр
     readln(stat , wins);                                // считываем кол-во всех побед
+    readln(stat , allAttempts);                         // считываем кол-во всех попыток
+    readln(stat , average);                             // считываем среднюю попытку
+    readln(stat , fastAttempt);                         // считываем самое быстрое отгадывание
     readln(stat , winStreak);                           // считываем кол-во побед подряд
     readln(stat , lastGameWon);                         // считываем проверку на предыдущую победу
     readln(stat , lastStreak);                          // считываем послюднюю серию побед
@@ -1030,6 +1041,9 @@ begin
     reset(statL);
     readln(statL , gamesL);                               // считываем кол-во игр
     readln(statL , winsL);                                // считываем кол-во всех побед
+    readln(statL , allAttemptsL);                         // считываем кол-во всех попыток
+    readln(statL , averageL);                             // считываем среднюю попытку
+    readln(statL , fastAttemptL);                         // считываем самое быстрое отгадывание
     readln(statL , winStreakL);                           // считываем кол-во побед подряд
     readln(statL , lastGameWonL);                         // считываем проверку на предыдущую победу
     readln(statL , lastStreakL);                          // считываем послюднюю серию побед
@@ -1041,12 +1055,35 @@ end;
 procedure statsFileWriteWon;
 begin
 
+  if fastAttempt = 0 then fastAttempt := rovv;
+  if fastAttemptL = 0 then fastAttemptL := rovv;
+
   AssignFile(stat,GetMyFile(statFileNames[0]));        // общая статистика
   rewrite(stat);
   inc(games);
-  writeln(stat , games);
+  writeln(stat , games);                                            // все игры
   inc(wins);
-  writeln(stat , wins);
+  writeln(stat , wins);                                             // победы
+  if fileExists(GetMyFile(aveStatFileNames[0]))
+    then begin
+      AssignFile(aveStat , GetMyFile(aveStatFileNames[0]));
+      append(aveStat);
+      writeln(aveStat);
+      write(aveStat , rovv,' - ',vocab[numberOfTheword]);
+    end
+    else begin
+      AssignFile(aveStat , GetMyFile(aveStatFileNames[0]));
+      rewrite(aveStat);
+      write(aveStat , rovv,' - ',vocab[numberOfTheword]);
+    end;
+  close(aveStat);
+  allAttempts := allAttempts + rovv;
+  writeln(stat , allAttempts);                                      // все попытки
+  average := allAttempts/wins;
+  writeln(stat , average:4:2);                                      // среднее
+  if rovv < fastAttempt
+   then writeln(stat , rovv)
+   else writeln(stat , fastAttempt);                        // самая быстрая попытка
   if lastGameWon = 0
     then lastStreak := 1
     else inc(lastStreak);
@@ -1058,12 +1095,33 @@ begin
   writeln(stat , lastStreak);
   close(stat);
 
+
   AssignFile(statL,GetMyFile(statFileNames[VocNumber]));  // статистика в языке
   rewrite(statL);
   inc(gamesL);
   writeln(statL , gamesL);
   inc(winsL);
   writeln(statL , winsL);
+  if fileExists(GetMyFile(aveStatFileNames[VocNumber]))
+    then begin
+      AssignFile(aveStatL , GetMyFile(aveStatFileNames[VocNumber]));
+      append(aveStatL);
+      writeln(aveStatL);
+      write(aveStatL , rovv,' - ',vocab[numberOfTheword]);
+    end
+    else begin
+      AssignFile(aveStatL , GetMyFile(aveStatFileNames[VocNumber]));
+      rewrite(aveStatL);
+      write(aveStatL , rovv,' - ',vocab[numberOfTheword]);
+    end;
+  close(aveStatL);
+  allAttemptsL := allAttemptsL + rovv;
+  writeln(statL , allAttemptsL);
+  averageL := allAttemptsL/winsL;
+  writeln(statL , averageL:4:2);
+  if rovv < fastAttemptL
+    then writeln(statL , rovv)
+    else writeln(statL , fastAttemptL);
   if lastGameWonL = 0
     then lastStreakL := 1
     else inc(lastStreakL);
@@ -1085,6 +1143,25 @@ begin
   inc(games);
   writeln(stat, games);
   writeln(stat, wins);
+  if fileExists(GetMyFile(aveStatFileNames[0]))
+    then begin
+      AssignFile(aveStat , GetMyFile(aveStatFileNames[0]));
+      append(aveStat);
+      writeln(aveStat);
+      write(aveStat , 0,' - ',vocab[numberOfTheword]);
+    end
+    else begin
+      AssignFile(aveStat , GetMyFile(aveStatFileNames[0]));
+      rewrite(aveStat);
+      write(aveStat , 0,' - ',vocab[numberOfTheword]);
+    end;
+  close(aveStat);
+  writeln(stat , allAttempts);                                      // все попытки
+  average := allAttempts/wins;
+  if allAttempts = 0
+    then writeln(stat , 0)
+    else writeln(stat , average:4:2);                                      // среднее
+  writeln(stat , 0);
   writeln(stat, winStreak);
   lastGameWon := 0;
   writeln(stat, lastGameWon);
@@ -1092,11 +1169,31 @@ begin
   writeln(stat ,lastStreak);
   close(stat);
 
+
   AssignFile(statL,GetMyFile(statFileNames[VocNumber]));
   rewrite(statL);
   inc(gamesL);
   writeln(statL, gamesL);
   writeln(statL, winsL);
+  if fileExists(GetMyFile(aveStatFileNames[VocNumber]))
+    then begin
+      AssignFile(aveStatL , GetMyFile(aveStatFileNames[VocNumber]));
+      append(aveStatL);
+      writeln(aveStatL);
+      write(aveStatL , 0,' - ',vocab[numberOfTheword]);
+    end
+    else begin
+      AssignFile(aveStatL , GetMyFile(aveStatFileNames[VocNumber]));
+      rewrite(aveStatL);
+      write(aveStatL , 0,' - ',vocab[numberOfTheword]);
+    end;
+  close(aveStatL);
+  writeln(statL , allAttemptsL);                                      // все попытки
+  averageL := allAttemptsL/winsL;
+  if allAttemptsL = 0
+    then writeln(statL , 0)
+    else writeln(statL , averageL:4:2);                                      // среднее
+  writeln(statL, 0);
   writeln(statL, winStreakL);
   lastGameWonL := 0;
   writeln(statL, lastGameWonL);
@@ -1117,7 +1214,7 @@ end;
 procedure statsReadAll;
 begin
   statsVarNull;
-  statsVarNullL;
+  statsLVarNull;
   statsFileRead;
   statsFileReadL;
 end;
@@ -2736,6 +2833,9 @@ begin
   ReadSettingsIniFile;
   statsReadAll;
                               // recovering previous session
+//  if fastAttempt = 0 then fastAttempt := 7;
+//  if fastAttemptL = 0 then fastAttemptL := 7;
+
   if wordNotGuessed then begin
     BoardDefColor;
     kbrdDefColor;
@@ -3088,6 +3188,7 @@ begin
         if words[rovv]=vocab[numberOfTheword] then begin
           boardAnimationSet(rovv);
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
+          //InfoLabel.Text:= intToStr(fastAttempt) +' '+intToStr(rovv);
           InfoLabel.Text:=textCongrats[VocNumber];
           wordGuessedRight := true;
           wordNotGuessed := false;
@@ -3163,14 +3264,14 @@ begin
   languageChanged := false;
 
           // Данный параметр нужен для тестирования. Задаёт определённое по счёту слово.
-//  numberOfTheword := 11;                               // акция - abbey - abaco - 2 слово
+//  numberOfTheword := 2;                               // акция - abbey - abaco - 2 слово
           //
 
   InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
   InfoLabel.Text := textStarts[VocNumber];
 
           // Данный параметр нужен для тестирования. Выводит нужное сообщение в инфо строку.
-//  InfoLabel.Text := vocab[Length(vocab) - 1];
+//  InfoLabel.Text := intToStr(fastAttempt);
           //
 
   meaningOfTheWord:=meanings[numberOfTheword];
