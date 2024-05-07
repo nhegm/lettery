@@ -2401,27 +2401,6 @@
     TextSettings.Trimming = None
     TabOrder = 68
   end
-  object FlashLightMeaning: TRectangle
-    Corners = []
-    EnableDragHighlight = False
-    Fill.Color = claNull
-    HitTest = False
-    Position.X = 177.000000000000000000
-    Position.Y = 8.000000000000000000
-    Sides = []
-    Size.Width = 41.000000000000000000
-    Size.Height = 41.000000000000000000
-    Size.PlatformDefault = False
-    Visible = False
-    object RectAnimation1: TColorAnimation
-      AutoReverse = True
-      Duration = 0.600000023841857900
-      Loop = True
-      PropertyName = 'Fill.Color'
-      StartValue = claNull
-      StopValue = xFFFFFFB7
-    end
-  end
   object meaning: TButton
     StyledSettings = []
     Position.X = 177.000000000000000000
@@ -2446,5 +2425,30 @@
       StartValue = 0.000000000000000000
       StopValue = 1.000000000000000000
     end
+  end
+  object MediaPlayer: TMediaPlayer
+    Left = 384
+    Top = 232
+  end
+  object TimerSound: TTimer
+    OnTimer = TimerSoundTimer
+    Left = 392
+    Top = 312
+  end
+  object SoundBtn: TButton
+    Position.X = 392.000000000000000000
+    Position.Y = 40.000000000000000000
+    Size.Width = 32.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 81
+    Text = #55357#56586' '
+    TextSettings.Trimming = None
+    OnClick = SoundBtnClick
+  end
+  object kbrdSwitch: TTimer
+    OnTimer = kbrdSwitchTimer
+    Left = 400
+    Top = 168
   end
 end

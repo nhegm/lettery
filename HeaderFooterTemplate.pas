@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Controls.Presentation, FMX.Ani, iniFiles, FMX.Objects, System.IOUtils
+  FMX.Controls.Presentation, FMX.Ani, iniFiles, FMX.Objects, System.IOUtils,
+  FMX.Media
   {$IF Defined(ANDROID)}
   ,Androidapi.Helpers
 {$ENDIF};
@@ -84,8 +85,6 @@ type
     deleteBtn: TButton;
     ё: TButton;
     InfoLabel: TLabel;
-    FlashLightMeaning: TRectangle;
-    RectAnimation1: TColorAnimation;
     ColorAnimation1: TColorAnimation;
     BrainDissapearance: TFloatAnimation;
     InfoAnimation: TFloatAnimation;
@@ -274,6 +273,10 @@ type
     kbrdAnimation30: TColorAnimation;
     kbrdAnimation31: TColorAnimation;
     kbrdAnimation32: TColorAnimation;
+    MediaPlayer: TMediaPlayer;
+    TimerSound: TTimer;
+    SoundBtn: TButton;
+    kbrdSwitch: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure deleteBtnClick(Sender: TObject);
@@ -319,6 +322,9 @@ type
     procedure infoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormSaveState(Sender: TObject);
+    procedure TimerSoundTimer(Sender: TObject);
+    procedure SoundBtnClick(Sender: TObject);
+    procedure kbrdSwitchTimer(Sender: TObject);
   private                                                                                               // 00ffdb      FF00FF33
     { Private declarations }
   public
@@ -405,6 +411,14 @@ uses statistics, meaningForm, themeForm, langForm, infoForm;
 {$R *.iPhone4in.fmx IOS}
 {$R *.NmXhdpiPh.fmx ANDROID}
 {$R *.LgXhdpiTb.fmx ANDROID}
+
+  {$IFDEF ANDROID}
+
+  {$ENDIF}
+
+  {$IFDEF MSWINDOWS}
+
+  {$ENDIF}
 
 procedure boardAnimationSet(rowNumber : integer);
 var
@@ -1161,7 +1175,9 @@ begin
   if allAttempts = 0
     then writeln(stat , 0)
     else writeln(stat , average:4:2);                                      // среднее
-  writeln(stat , 0);
+  if fastAttempt = 0
+   then writeln(stat , 0)
+   else writeln(stat , fastAttempt);
   writeln(stat, winStreak);
   lastGameWon := 0;
   writeln(stat, lastGameWon);
@@ -1193,7 +1209,9 @@ begin
   if allAttemptsL = 0
     then writeln(statL , 0)
     else writeln(statL , averageL:4:2);                                      // среднее
-  writeln(statL, 0);
+  if fastAttemptL = 0
+   then writeln(statL , 0)
+   else writeln(statL , fastAttemptL);
   writeln(statL, winStreakL);
   lastGameWonL := 0;
   writeln(statL, lastGameWonL);
@@ -1293,6 +1311,7 @@ begin
         for I := 34 to 38 do
           keys[i].Position.Y:=padY;
         keys[41].Position.Y:=padY;
+        keys[42].Position.Y:=padY;
 
         padY := 8;
 
@@ -1335,6 +1354,7 @@ begin
           for I := 34 to 38 do
             keys[i].Position.Y:=padY;
           keys[41].Position.Y:=padY;
+          keys[42].Position.Y:=padY;
 
           padY := 8;
 
@@ -1366,6 +1386,7 @@ begin
       for I := 34 to 38 do
         keys[i].Position.Y:=padY;
       keys[41].Position.Y:=padY;
+      keys[42].Position.Y:=padY;
 
       for i := 1 to 6 do
         for j := 1 to 5 do begin
@@ -1436,6 +1457,7 @@ begin
   keys[36].TextSettings.Font.Size := 22;
   keys[37].TextSettings.Font.Size := 20;
   keys[41].TextSettings.Font.Size := 20;
+  keys[42].TextSettings.Font.Size := 20;
   if VocNumber = 1
     then keys[41].Text := '🇷🇺';
   if VocNumber = 2
@@ -1450,7 +1472,7 @@ begin
   keys[36].TextSettings.Font.Size := 22;
   keys[37].TextSettings.Font.Size := 22;
   keys[41].TextSettings.Font.Size := 22;
-
+  keys[42].TextSettings.Font.Size := 20;
   if VocNumber = 1
     then keys[41].Text := '🇷🇺';
   if VocNumber = 2
@@ -1466,6 +1488,7 @@ begin
   for I := 34 to 37 do
       keys[i].Width := keys[i].Height;
   keys[41].Width := keys[41].Height;
+  keys[42].Width := keys[42].Height;
 
   keys[38].Width := board[1,1].Width;
   keys[38].Position.X:=padX;
@@ -1474,6 +1497,7 @@ begin
   keys[41].Position.X := keys[36].Position.X + keys[36].Width + padX;
   keys[34].Position.X := keys[41].Position.X + keys[41].Width + padX;
   keys[37].Position.X := screen.Width - keys[37].Width - padX;
+  keys[42].Position.X := keys[37].Position.X - keys[42].Width - padX;
 {$ENDIF}
 
 {$IFDEF MSWINDOWS}
@@ -1482,6 +1506,7 @@ begin
   for I := 34 to 37 do
       keys[i].Width := keys[38].Width;
   keys[41].Width := keys[38].Width;
+  keys[42].Width := keys[42].Height;
 
   padX := 4;
 
@@ -1495,9 +1520,11 @@ begin
   keys[38].Position.X := 4;
   keys[37].Position.X := 4;
   keys[41].Position.X := 4;
+  keys[42].Position.X := 4;
   keys[38].Position.Y := board[2,1].Position.Y;
   keys[37].Position.Y := keys[38].Position.Y + keys[38].Height + 4;
   keys[41].Position.Y := keys[37].Position.Y + keys[38].Height + 4;
+  keys[42].Position.Y := keys[41].Position.Y + keys[38].Height + 4;
 
 {$ENDIF}
 end;
@@ -1538,6 +1565,7 @@ begin
   for I := 34 to 38 do
     keys[i].Height := 32;
   keys[41].Height := 32;
+  keys[42].Height := 32;
 
   if VocNumber = 1 then begin
 
@@ -2220,6 +2248,18 @@ begin
     keys[i].Enabled:=true;
 end;
 
+procedure kbrdHitTestOff;
+begin
+  for I := 1 to 33 do
+    keys[i].HitTest:=false;
+end;
+
+procedure kbrdHitTestOn;
+begin
+  for I := 1 to 33 do
+    keys[i].HitTest:=true;
+end;
+
 procedure kbrdColoring;
 begin
 {$IFDEF ANDROID}
@@ -2394,6 +2434,7 @@ begin
     for I := 34 to 37 do
       keys[i].TintColor := $00ffffff;
     keys[41].TintColor := $00ffffff;
+    keys[42].TintColor := $00ffffff;
 
   {$ELSEIF Defined(MSWINDOWS)}
     for I := 1 to 33 do begin
@@ -2624,7 +2665,6 @@ begin
   {$IFDEF ANDROID}
     kbrdAnimationTintColorStart;
   {$ENDIF}
-//  kbrdColoring;
 end;
 
 procedure boardColorsRefresh;
@@ -2701,19 +2741,6 @@ begin
 
 end;
 
-procedure TMainForm.deleteBtnClick(Sender: TObject);
-begin
-
-  if col>0 then begin
-    board[rovv,col].Text:='';
-    InfoLabel.Text:='';
-    letters[col]:=#0;
-    dec(col);
-    enter.Enabled := false;
-  end;
-
-end;
-
 procedure ThemeRefresh;
 begin
   MainForm.Fill.Color := bckgrndColor[ColorsSetNumber];
@@ -2771,14 +2798,13 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-
   keys[1]:=а;   keys[2]:=б;   keys[3]:=в;   keys[4]:=г;   keys[5]:=д;   keys[6]:=е;   keys[7]:=ж;   keys[8]:=з;
   keys[9]:=и;   keys[10]:=й;  keys[11]:=к;  keys[12]:=л;  keys[13]:=м;  keys[14]:=н;  keys[15]:=о;  keys[16]:=п;
   keys[17]:=р;  keys[18]:=с;  keys[19]:=т;  keys[20]:=у;  keys[21]:=ф;  keys[22]:=х;  keys[23]:=ц;  keys[24]:=ч;
   keys[25]:=ш;  keys[26]:=щ;  keys[27]:=ъ;  keys[28]:=ы;  keys[29]:=ь;  keys[30]:=э;  keys[31]:=ю;  keys[32]:=я;
   keys[33]:=ё;  keys[39]:=deleteBtn;        keys[40]:=Enter;
   keys[34]:=ThemeButton;      keys[35]:=stats;            keys[36]:=meaning;          keys[37]:=info;
-  keys[38]:=start;            keys[41]:=Lang;
+  keys[38]:=start;            keys[41]:=Lang;             keys[42]:=SoundBtn;
 
   board[1,1]:=R11;  board[1,2]:=R12; board[1,3]:=R13; board[1,4]:=R14; board[1,5]:=R15;
   board[2,1]:=R21;  board[2,2]:=R22; board[2,3]:=R23; board[2,4]:=R24; board[2,5]:=R25;
@@ -2833,9 +2859,6 @@ begin
   ReadSettingsIniFile;
   statsReadAll;
                               // recovering previous session
-//  if fastAttempt = 0 then fastAttempt := 7;
-//  if fastAttemptL = 0 then fastAttemptL := 7;
-
   if wordNotGuessed then begin
     BoardDefColor;
     kbrdDefColor;
@@ -2910,266 +2933,356 @@ begin
     then LanguageKbrdRefresh;
 end;
 
+procedure KbrdSoundPlay;
+begin
+  if MainForm.MediaPlayer.State = TMediaState.Playing
+    then MainForm.MediaPlayer.Stop;
+  MainForm.MediaPlayer.FileName := GetMyFile('standard_click.mp3');
+  MainForm.TimerSound.OnTimer := MainForm.TimerSoundTimer;
+  MainForm.TimerSound.Interval := MainForm.MediaPlayer.Duration;
+  MainForm.MediaPlayer.Play;
+  MainForm.TimerSound.Enabled := true;
+end;
+
+procedure EnterSoundPlay;
+begin
+  if MainForm.MediaPlayer.State = TMediaState.Playing then MainForm.MediaPlayer.Stop;
+    MainForm.MediaPlayer.FileName := GetMyFile('enter.mp3');
+    MainForm.TimerSound.OnTimer := MainForm.TimerSoundTimer;
+    MainForm.TimerSound.Interval := MainForm.MediaPlayer.Duration;
+    MainForm.MediaPlayer.Play;
+    MainForm.TimerSound.Enabled := true;
+end;
+
+procedure FailSoundPlay;
+begin
+  if MainForm.MediaPlayer.State = TMediaState.Playing then MainForm.MediaPlayer.Stop;
+    MainForm.MediaPlayer.FileName := GetMyFile('fail.mp3');
+    MainForm.TimerSound.OnTimer := MainForm.TimerSoundTimer;
+    MainForm.TimerSound.Interval := MainForm.MediaPlayer.Duration;
+    MainForm.MediaPlayer.Play;
+    MainForm.TimerSound.Enabled := true;
+end;
+
+procedure SuccessSoundPlay;
+begin
+  if MainForm.MediaPlayer.State = TMediaState.Playing
+    then MainForm.MediaPlayer.Stop;
+  MainForm.MediaPlayer.FileName := GetMyFile('success.mp3');
+  MainForm.TimerSound.OnTimer := MainForm.TimerSoundTimer;
+  MainForm.TimerSound.Interval := MainForm.MediaPlayer.Duration;
+  MainForm.MediaPlayer.Play;
+  MainForm.TimerSound.Enabled := true;
+end;
+
+procedure ErrorSoundPlay;
+begin
+  if MainForm.MediaPlayer.State = TMediaState.Playing
+    then MainForm.MediaPlayer.Stop;
+  MainForm.MediaPlayer.FileName := GetMyFile('error.mp3');
+  MainForm.TimerSound.OnTimer := MainForm.TimerSoundTimer;
+  MainForm.TimerSound.Interval := MainForm.MediaPlayer.Duration;
+  MainForm.MediaPlayer.Play;
+  MainForm.TimerSound.Enabled := true;
+end;
+
+procedure StartSoundPlay;
+begin
+  if MainForm.MediaPlayer.State = TMediaState.Playing then MainForm.MediaPlayer.Stop;
+    MainForm.MediaPlayer.FileName := GetMyFile('start.mp3');
+    MainForm.TimerSound.OnTimer := MainForm.TimerSoundTimer;
+    MainForm.TimerSound.Interval := MainForm.MediaPlayer.Duration;
+    MainForm.MediaPlayer.Play;
+    MainForm.TimerSound.Enabled := true;
+end;
+
+procedure TMainForm.TimerSoundTimer(Sender: TObject);
+begin
+  MainForm.TimerSound.Enabled := False;
+  MediaPlayer.Stop;
+end;
+
+procedure TMainForm.kbrdSwitchTimer(Sender: TObject);
+begin
+  MainForm.kbrdSwitch.Enabled := False;
+  kbrdHitTestOn;
+  if deleteBtn.HitTest = false
+    then deleteBtn.HitTest := true;
+  if enter.HitTest = false
+    then enter.HitTest := true;
+end;
+
+procedure KbrdPushAction;
+begin
+  if MainForm.SoundBtn.Text = '🔊 '
+    then begin
+      KbrdSoundPlay;
+      kbrdHitTestOff;
+      MainForm.kbrdSwitch.OnTimer := MainForm.kbrdSwitchTimer;
+      MainForm.kbrdSwitch.Interval := 100;
+      MainForm.kbrdSwitch.Enabled := true;
+    end;
+  kbrdClick;
+  MainForm.deleteBtn.Enabled:=true;
+end;
+
 procedure TMainForm.йClick(Sender: TObject);
 begin
-
   kbrdBtnPress[10]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
-
+  KbrdPushAction;
 end;
 
 procedure TMainForm.цClick(Sender: TObject);
 begin
   kbrdBtnPress[23]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.уClick(Sender: TObject);
 begin
   kbrdBtnPress[20]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.кClick(Sender: TObject);
 begin
   kbrdBtnPress[11]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.нClick(Sender: TObject);
 begin
   kbrdBtnPress[14]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.гClick(Sender: TObject);
 begin
   kbrdBtnPress[4]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.шClick(Sender: TObject);
 begin
   kbrdBtnPress[25]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.щClick(Sender: TObject);
 begin
   kbrdBtnPress[26]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.зClick(Sender: TObject);
 begin
- kbrdBtnPress[8]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  kbrdBtnPress[8]:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.фClick(Sender: TObject);
 begin
   kbrdBtnPress[21]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.ыClick(Sender: TObject);
 begin
   kbrdBtnPress[28]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.вClick(Sender: TObject);
 begin
   kbrdBtnPress[3]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.аClick(Sender: TObject);
 begin
   kbrdBtnPress[1]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.пClick(Sender: TObject);
 begin
   kbrdBtnPress[16]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.рClick(Sender: TObject);
 begin
   kbrdBtnPress[17]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.оClick(Sender: TObject);
 begin
   kbrdBtnPress[15]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.лClick(Sender: TObject);
 begin
   kbrdBtnPress[12]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.дClick(Sender: TObject);
 begin
-kbrdBtnPress[5]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  kbrdBtnPress[5]:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.еClick(Sender: TObject);
 begin
   kbrdBtnPress[6]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.яClick(Sender: TObject);
 begin
   kbrdBtnPress[32]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.чClick(Sender: TObject);
 begin
   kbrdBtnPress[24]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.сClick(Sender: TObject);
 begin
   kbrdBtnPress[18]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.мClick(Sender: TObject);
 begin
   kbrdBtnPress[13]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.иClick(Sender: TObject);
 begin
   kbrdBtnPress[9]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.тClick(Sender: TObject);
 begin
   kbrdBtnPress[19]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.ьClick(Sender: TObject);
 begin
   kbrdBtnPress[29]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.бClick(Sender: TObject);
 begin
   kbrdBtnPress[2]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.юClick(Sender: TObject);
 begin
   kbrdBtnPress[31]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.жClick(Sender: TObject);
 begin
   kbrdBtnPress[7]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.ёClick(Sender: TObject);
 begin
   kbrdBtnPress[33]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.хClick(Sender: TObject);
 begin
   kbrdBtnPress[22]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.эClick(Sender: TObject);
 begin
   kbrdBtnPress[30]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.ъClick(Sender: TObject);
 begin
   kbrdBtnPress[27]:=true;
-  kbrdClick;
-  deleteBtn.Enabled:=true;
+  KbrdPushAction;
 end;
 
 procedure TMainForm.meaningClick(Sender: TObject);
 begin
   BrainDissapearance.Enabled := false;
   meaningForm1.Show;
+  if SoundBtn.Text = '🔈'
+    then KbrdSoundPlay;
 end;
 
 procedure TMainForm.statsClick(Sender: TObject);
 begin
   statsReadAll;
   statsForm.Show;
+  if SoundBtn.Text = '🔈'
+      then KbrdSoundPlay;
 end;
 
 procedure TMainForm.langClick(Sender: TObject);
 begin
   LangAnimation.Enabled := false;
   languageForm.Show;
+  if SoundBtn.Text = '🔈'
+      then KbrdSoundPlay;
 end;
 
 procedure TMainForm.infoClick(Sender: TObject);
 begin
   InfoAnimation.Enabled := false;
   informationForm.Show;
+  if SoundBtn.Text = '🔈'
+      then KbrdSoundPlay;
 end;
 
 procedure TMainForm.themeButtonClick(Sender: TObject);
 begin
   setForm.Show;
+  if SoundBtn.Text = '🔈'
+      then KbrdSoundPlay;
+end;
+
+procedure TMainForm.deleteBtnClick(Sender: TObject);
+begin
+
+  if col>0 then begin
+    board[rovv,col].Text:='';
+    InfoLabel.Text:='';
+    letters[col]:=#0;
+    dec(col);
+    enter.Enabled := false;
+    if SoundBtn.Text = '🔊 '
+      then begin
+        KbrdSoundPlay;
+        deleteBtn.HitTest := false;
+        MainForm.kbrdSwitch.OnTimer := MainForm.kbrdSwitchTimer;
+        MainForm.kbrdSwitch.Interval := 100;
+        MainForm.kbrdSwitch.Enabled := true;
+      end;
+
+  end;
+
 end;
 
 procedure TMainForm.enterClick(Sender: TObject);
@@ -3208,6 +3321,8 @@ begin
           {$IFDEF MSWINDOWS}
             BrainDissapearance.Enabled := true;
           {$ENDIF}
+          if SoundBtn.Text = '🔊 '
+            then SuccessSoundPlay;
         end else if rovv=6 then begin
           boardAnimationSet(rovv);
           InfoLabel.TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];       // розовый
@@ -3225,10 +3340,14 @@ begin
           end;
           boardAnimationAppearStart(rovv);
           BrainDissapearance.Enabled := true;
+          if SoundBtn.Text = '🔊 '
+            then FailSoundPlay;
         end;
 
         if (rovv<6) and not wordGuessedRight then begin
           inc(rovv);
+          if SoundBtn.Text = '🔊 '
+            then EnterSoundPlay;
         end;
         col:=0;
       end
@@ -3236,6 +3355,14 @@ begin
       InfoLabel.TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];           // розовый
       InfoLabel.Text:=textTries[VocNumber];
       enter.Enabled := true;
+      if SoundBtn.Text = '🔊 '
+        then begin
+          ErrorSoundPlay;
+          enter.HitTest := false;
+          MainForm.kbrdSwitch.OnTimer := MainForm.kbrdSwitchTimer;
+          MainForm.kbrdSwitch.Interval := 100;
+          MainForm.kbrdSwitch.Enabled := true;
+        end;
     end;
   end;
  end;
@@ -3286,6 +3413,16 @@ begin
   rowLettersDelete;
   for I := 1 to 6 do
     words[i]:='';
+
+  if SoundBtn.Text = '🔊 '
+    then StartSoundPlay;
+end;
+
+procedure TMainForm.SoundBtnClick(Sender: TObject);
+begin
+  if SoundBtn.Text = '🔈'
+    then SoundBtn.Text := '🔊 '
+    else SoundBtn.Text := '🔈';
 end;
 
 end.

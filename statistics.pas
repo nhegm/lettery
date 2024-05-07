@@ -39,7 +39,7 @@ const
   GamesRus = 'Игр сыграно: '; GamesEng = 'Games played: ';  GamesLat = 'Ludos lusit: '; GamesEsp = 'Juegos jugados: ';
   WinsRus = 'Побед: '; WinsEng = 'Wins: '; WinsLat = 'Victoriae: '; WinsEsp = 'Victorias: ';
   averageRus = 'В среднем попыток: '; averageEng = 'Aver. attempts: '; averageLat = 'Что-то будет'; averageEsp = 'Intento promedio: ';
-  fastAttemptRus = 'Быстрейшая попытка: '; fastAttemptEng = 'The fastest attempt: '; fastAttemptLat = 'Что-то будет'; fastAttemptEsp = 'El intento más rápido: ';
+  fastAttemptRus = 'Быстрейшая попытка: '; fastAttemptEng = 'Fastest attempt: '; fastAttemptLat = 'Что-то будет'; fastAttemptEsp = 'Intento más rápido: ';
   StreakRus = 'Длиннейшая серия: '; StreakEng = 'Longiest streak: '; StreakLat = 'Series longissima: '; StreakEsp = 'Racha más larga: ';
   LastStreakRus = 'Текущая серия: '; LastStreakEng = 'Current Streak: '; LastStreakLat = 'Series praesens: '; LastStreakEsp = 'Racha actual: ';
 
