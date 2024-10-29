@@ -32,7 +32,7 @@ var
 
 implementation
 
-uses HeaderFooterTemplate;
+uses HeaderFooterTemplate, GuessWhat;
 
 const
   commonHeaderRus = 'Общая статистика'; commonHeaderEng = 'Common statistics'; commonHeaderLat = 'Statistica tota'; commonHeaderEsp = 'Todas las estadísticas';
@@ -64,8 +64,8 @@ begin
   statsForm.height:= 260;
   statsForm.width:= 260;
 {$ENDIF}
-  statsForm.Top:=50;
-  statsForm.Left:=100;
+  statsForm.Top := 50;
+  statsForm.Left := round(screen.Width - statsForm.Width) div 2;
   statsForm.Fill.Color := HeaderFooterTemplate.bckgrndColor[ColorsSetNumber];
   statsForm.headLabel.TextSettings.Font.Size := 14;
   statsForm.headLabel.Position.X := (statsForm.Width - statsForm.headLabel.Width) / 2;
@@ -86,7 +86,7 @@ begin
   statsForm.Switcher.Position.X := (statsForm.Width - statsForm.Switcher.Width) / 2;
   statsForm.Switcher.Position.Y := statsForm.lastStreakLabel.Position.Y + 30;
 {$IFDEF MSWINDOWS}
-  statsForm.height:= round (statsForm.Switcher.Position.Y + 50);
+  statsForm.height:= round (statsForm.Switcher.Position.Y + 70);
 {$ENDIF}
   statsForm.gamesLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   statsForm.winsLabel.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];

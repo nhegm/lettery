@@ -31,6 +31,8 @@ type
     FillColorAnimation: TColorAnimation;
     FontColorAnimation: TColorAnimation;
     returnButton: TButton;
+    dark9: TRoundRect;
+    Text9: TText;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure azul1Click(Sender: TObject);
@@ -51,6 +53,8 @@ type
     procedure x_men8Click(Sender: TObject);
     procedure Text8Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Text9Click(Sender: TObject);
+    procedure dark9Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -65,32 +69,32 @@ type
 // 4) Rename the both
 // 5) Add new click events for both
 // 6) Add to form.Height +30
-// 7) Add themeButton[i] and buttonText[i]
+// 7) Add themeButton[i] and buttonText[i] in FormCreate procedure
 
 var
   setForm: TsetForm;
 
 implementation
 
-uses HeaderFooterTemplate;
+uses HeaderFooterTemplate, GuessWhat;
 {$R *.fmx}
 {$R *.LgXhdpiTb.fmx ANDROID}
 
 var
   i,j: integer;
   s: string;
-  padY: single;
+  padYy, padXx: single;
   themeButton: array [1..HeaderFooterTemplate.colorsMax] of TRoundRect;
   buttonText: array [1..HeaderFooterTemplate.colorsMax] of TText;
 
 const
   textHeaderRus='Цветовая схема'; textHeaderEng='Color Scheme'; textHeaderLat=''; textHeaderEsp='Esquema de colores'; textHeaderFra='';
   textHitRus='активна'; textHitEng='applied'; textHitLat=''; textHitEsp='usando'; textHitFra='';
-  textDef1='azul'; textDef2='day'; textDef3='violet'; textDef4='Barbie'; textDef5='console'; textDef6='latinum'; textDef7='greek'; textDef8='X';
+  textDef1='azul'; textDef2='day'; textDef3='violet'; textDef4='Barbie'; textDef5='console'; textDef6='latinum'; textDef7='greek'; textDef8='X'; textDef9='dark';
 
   textHeader: array [1..5] of String = (textHeaderRus, textHeaderEng, textHeaderLat, textHeaderEsp, textHeaderFra);
   textHitButton: array [1..5] of String = (textHitRus, textHitEng, textHitLat, textHitEsp, textHitFra);
-  textDefButton: array [1..8] of String = (textDef1, textDef2, textDef3, textDef4, textDef5, textDef6, textDef7, textDef8);
+  textDefButton: array [1..HeaderFooterTemplate.colorsMax] of String = (textDef1 , textDef2 , textDef3 , textDef4 , textDef5 , textDef6 , textDef7 , textDef8 , textDef9);
 
 procedure animationStart;
 begin
@@ -119,22 +123,24 @@ begin
 
   setForm.Label1.Position.Y := 8;
   setForm.Label1.Height := 24;
-  padY := 8;
-  padX := 25;
+  padYy := 8;
+  padXx := 25;
 
-  themeButton[1].Position.Y := setForm.Label1.Position.Y + setForm.Label1.Height + padY;
+  themeButton[1].Position.Y := setForm.Label1.Position.Y + setForm.Label1.Height + padYy;
   for I := 2 to HeaderFooterTemplate.colorsMax div 2 do
-    themeButton[i].Position.Y := themeButton[i-1].Position.Y + themeButton[i-1].Height + padY;
+    themeButton[i].Position.Y := themeButton[i-1].Position.Y + themeButton[i-1].Height + padYy;
 
-  themeButton[5].Position.Y := setForm.Label1.Position.Y + setForm.Label1.Height + padY;
+  themeButton[5].Position.Y := setForm.Label1.Position.Y + setForm.Label1.Height + padYy;
   for I := 6 to HeaderFooterTemplate.colorsMax do
-    themeButton[i].Position.Y := themeButton[i-1].Position.Y + themeButton[i-1].Height + padY;
+    themeButton[i].Position.Y := themeButton[i-1].Position.Y + themeButton[i-1].Height + padYy;
 
   for I := 1 to HeaderFooterTemplate.colorsMax div 2 do
-    themeButton[i].Position.X := padX;
+    themeButton[i].Position.X := padXx;
 
   for I := 5 to HeaderFooterTemplate.colorsMax do
-    themeButton[i].Position.X := themeButton[1].Position.X + themeButton[1].Width + padX;
+    themeButton[i].Position.X := themeButton[1].Position.X + themeButton[1].Width + padXx;
+
+  themeButton[9].Position.X := padXx;
 
 //  setForm.returnButton.Position.Y := themeButton[colorsMax].Position.Y + themeButton[colorsMax].Height + padY;
 //  setForm.returnButton.Position.X := (setForm.Width - setForm.returnButton.Width)/2;
@@ -179,6 +185,7 @@ begin
   themeButton[6] := latinum6;
   themeButton[7] := greek7;
   themeButton[8] := x_men8;
+  themeButton[9] := dark9;
   buttonText[1] := Text1;
   buttonText[2] := Text2;
   buttonText[3] := Text3;
@@ -187,6 +194,7 @@ begin
   buttonText[6] := Text6;
   buttonText[7] := Text7;
   buttonText[8] := Text8;
+  buttonText[9] := Text9;
 
   elementsShow;
   animationStart;
@@ -230,7 +238,7 @@ begin
 
   {$IF Defined(ANDROID)}
     setForm.width := 275;
-    setForm.height := 220;
+    setForm.height := 250;
     setForm.Top := 50;
     setForm.Left := round(Screen.Width-setForm.Width) div 2;
   {$ELSEIF Defined(MSWINDOWS)}
@@ -246,25 +254,7 @@ begin
 
   setForm.Active := true;
   MainForm.Active := false;
-
-end;
-
-procedure TsetForm.greek7Click(Sender: TObject);
-begin
-  HeaderFooterTemplate.ColorsSetNumber := 7;
-  btnClickSet;
-end;
-
-procedure TsetForm.x_men8Click(Sender: TObject);
-begin
-  HeaderFooterTemplate.ColorsSetNumber := 8;
-  btnClickSet;
-end;
-
-procedure TsetForm.latinum6Click(Sender: TObject);
-begin
-  HeaderFooterTemplate.ColorsSetNumber := 6;
-  btnClickSet;
+  GuessWhatForm.Active := false;
 end;
 
 procedure TsetForm.azul1Click(Sender: TObject);
@@ -294,6 +284,30 @@ end;
 procedure TsetForm.console5Click(Sender: TObject);
 begin
   HeaderFooterTemplate.ColorsSetNumber := 5;
+  btnClickSet;
+end;
+
+procedure TsetForm.latinum6Click(Sender: TObject);
+begin
+  HeaderFooterTemplate.ColorsSetNumber := 6;
+  btnClickSet;
+end;
+
+procedure TsetForm.greek7Click(Sender: TObject);
+begin
+  HeaderFooterTemplate.ColorsSetNumber := 7;
+  btnClickSet;
+end;
+
+procedure TsetForm.x_men8Click(Sender: TObject);
+begin
+  HeaderFooterTemplate.ColorsSetNumber := 8;
+  btnClickSet;
+end;
+
+procedure TsetForm.dark9Click(Sender: TObject);
+begin
+  HeaderFooterTemplate.ColorsSetNumber := 9;
   btnClickSet;
 end;
 
@@ -342,6 +356,12 @@ end;
 procedure TsetForm.Text8Click(Sender: TObject);
 begin
   HeaderFooterTemplate.ColorsSetNumber := 8;
+  btnClickSet;
+end;
+
+procedure TsetForm.Text9Click(Sender: TObject);
+begin
+  HeaderFooterTemplate.ColorsSetNumber := 9;
   btnClickSet;
 end;
 

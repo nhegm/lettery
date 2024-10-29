@@ -1,0 +1,193 @@
+object GuessWhatForm: TGuessWhatForm
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  Caption = 'Form2'
+  ClientHeight = 480
+  ClientWidth = 640
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Touch.GestureManager = GestureManager1
+  OnGesture = FormGesture
+  DesignerMasterStyle = 0
+  object ScrollBox: TScrollBox
+    Position.X = 56.000000000000000000
+    Position.Y = 88.000000000000000000
+    Size.Width = 224.000000000000000000
+    Size.Height = 185.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Viewport.Width = 224.000000000000000000
+    Viewport.Height = 185.000000000000000000
+    object QuestionField: TText
+      Align = Center
+      AutoSize = True
+      Size.Width = 185.000000000000000000
+      Size.Height = 185.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+  object ThemeButton: TButton
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 105.000000000000000000
+    Position.Y = 23.000000000000000000
+    Size.Width = 32.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = #55356#57256
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.Trimming = None
+    OnClick = ThemeButtonClick
+    object ColorAnimation1: TColorAnimation
+      AutoReverse = True
+      Duration = 0.500000000000000000
+      Interpolation = Circular
+      Loop = True
+      PropertyName = 'TintColor'
+      StartValue = claNull
+      StopValue = xFFFFFFB7
+    end
+  end
+  object statsG: TButton
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 237.000000000000000000
+    Position.Y = 23.000000000000000000
+    Size.Width = 32.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 80
+    Text = #55357#56520
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.Trimming = None
+  end
+  object startGuess: TButton
+    StyledSettings = [Family, Size]
+    Position.X = 48.000000000000000000
+    Position.Y = 23.000000000000000000
+    Size.Width = 49.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 44
+    Text = 'start'
+    TextSettings.Trimming = None
+    OnClick = startGuessClick
+    object StartAnimation: TFloatAnimation
+      AutoReverse = True
+      Duration = 0.600000023841857900
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
+  end
+  object Lang: TButton
+    StyledSettings = []
+    Position.X = 197.000000000000000000
+    Position.Y = 23.000000000000000000
+    Size.Width = 32.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.FontColor = xFFFDF0D5
+    TextSettings.Trimming = None
+    OnClick = LangClick
+    object LangAnimation: TFloatAnimation
+      AnimationType = InOut
+      Duration = 1.500000000000000000
+      Interpolation = Circular
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
+  end
+  object SoundBtn: TButton
+    Position.X = 277.000000000000000000
+    Position.Y = 23.000000000000000000
+    Size.Width = 32.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 82
+    Text = #55357#56586' '
+    TextSettings.Trimming = None
+  end
+  object info: TButton
+    StyledSettings = [Family]
+    Position.X = 329.000000000000000000
+    Position.Y = 23.000000000000000000
+    Size.Width = 32.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = #10069
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.FontColor = claNull
+    TextSettings.Trimming = None
+    OnClick = infoClick
+    object InfoAnimation: TFloatAnimation
+      AnimationType = InOut
+      Duration = 1.500000000000000000
+      Interpolation = Circular
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
+  end
+  object Button1: TButton
+    StyledSettings = [Family]
+    Position.X = 75.000000000000000000
+    Position.Y = 304.000000000000000000
+    TabOrder = 83
+    Text = 'Button1'
+    TextSettings.Trimming = None
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    StyledSettings = [Family]
+    Position.X = 180.000000000000000000
+    Position.Y = 304.000000000000000000
+    TabOrder = 84
+    Text = 'Button2'
+    TextSettings.Trimming = None
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    StyledSettings = [Family]
+    Position.X = 75.000000000000000000
+    Position.Y = 334.000000000000000000
+    TabOrder = 85
+    Text = 'Button3'
+    TextSettings.Trimming = None
+    OnClick = Button3Click
+  end
+  object Button4: TButton
+    StyledSettings = [Family]
+    Position.X = 180.000000000000000000
+    Position.Y = 334.000000000000000000
+    TabOrder = 86
+    Text = 'Button4'
+    TextSettings.Trimming = None
+    OnClick = Button4Click
+  end
+  object GestureManager1: TGestureManager
+    Sensitivity = 80.000000000000000000
+    Left = 344
+    Top = 232
+    GestureData = <
+      item
+        Control = Owner
+        Collection = <
+          item
+            GestureID = sgiRight
+          end>
+      end>
+  end
+end

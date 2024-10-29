@@ -101,4 +101,17 @@ inherited MainForm_iPhone4in: TMainForm_iPhone4in
   inherited meaning: TButton
     TextSettings.Font.StyleExt = {00070000000000000004000000}
   end
+  inherited rating: TButton
+    TintColor = claTomato
+  end
+  inherited GestureManager1: TGestureManager
+    GestureData = <
+      item
+        Control = Owner
+        Collection = <
+          item
+            GestureID = sgiRight
+          end>
+      end>
+  end
 end

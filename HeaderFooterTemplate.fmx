@@ -5,7 +5,7 @@
   BorderStyle = Single
   Caption = 'Lettery'
   ClientHeight = 604
-  ClientWidth = 484
+  ClientWidth = 464
   Fill.Kind = Solid
   FormFactor.Width = 0
   FormFactor.Height = 0
@@ -13,6 +13,8 @@
   OnActivate = FormActivate
   OnCreate = FormCreate
   OnClose = FormClose
+  Touch.GestureManager = GestureManager1
+  OnGesture = FormGesture
   DesignerMasterStyle = 3
   object R13: TButton
     StyledSettings = []
@@ -114,7 +116,7 @@
     Size.Width = 32.000000000000000000
     Size.Height = 32.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 78
+    TabOrder = 79
     Text = #55357#56520
     TextSettings.Font.Size = 16.000000000000000000
     TextSettings.Trimming = None
@@ -2388,16 +2390,17 @@
     end
   end
   object InfoLabel: TLabel
+    AutoTranslate = False
     StyledSettings = []
     Position.X = 83.000000000000000000
     Position.Y = 449.000000000000000000
-    Size.Width = 249.000000000000000000
-    Size.Height = 23.000000000000000000
+    Size.Width = 0.000000000000000000
+    Size.Height = 80.000000000000000000
     Size.PlatformDefault = False
     TextSettings.Font.Size = 20.000000000000000000
     TextSettings.FontColor = claDarkblue
     TextSettings.HorzAlign = Center
-    TextSettings.VertAlign = Trailing
+    TextSettings.VertAlign = Leading
     TextSettings.Trimming = None
     TabOrder = 68
   end
@@ -2441,7 +2444,7 @@
     Size.Width = 32.000000000000000000
     Size.Height = 32.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 81
+    TabOrder = 82
     Text = #55357#56586' '
     TextSettings.Trimming = None
     OnClick = SoundBtnClick
@@ -2450,5 +2453,31 @@
     OnTimer = kbrdSwitchTimer
     Left = 400
     Top = 168
+  end
+  object rating: TButton
+    StyledSettings = [Family, Style]
+    Position.X = 349.000000000000000000
+    Position.Y = 15.000000000000000000
+    Size.Width = 32.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 78
+    Text = #55356#57286
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.Trimming = None
+    OnClick = ratingClick
+  end
+  object GestureManager1: TGestureManager
+    Sensitivity = 80.000000000000000000
+    Left = 392
+    Top = 408
+    GestureData = <
+      item
+        Control = Owner
+        Collection = <
+          item
+            GestureID = sgiRight
+          end>
+      end>
   end
 end

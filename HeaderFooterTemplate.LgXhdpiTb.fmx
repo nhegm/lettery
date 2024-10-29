@@ -125,4 +125,14 @@
   inherited meaning: TButton
     TextSettings.Font.StyleExt = {00070000000000000004000000}
   end
+  inherited GestureManager1: TGestureManager
+    GestureData = <
+      item
+        Control = Owner
+        Collection = <
+          item
+            GestureID = sgiRight
+          end>
+      end>
+  end
 end

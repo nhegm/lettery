@@ -6,10 +6,10 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Ani, iniFiles, FMX.Objects, System.IOUtils,
-  FMX.Media
+  FMX.Media, FMX.Gestures
   {$IF Defined(ANDROID)}
   ,Androidapi.Helpers
-{$ENDIF};
+  {$ENDIF};
 
 type
   TMainForm = class(TForm)
@@ -277,6 +277,8 @@ type
     TimerSound: TTimer;
     SoundBtn: TButton;
     kbrdSwitch: TTimer;
+    rating: TButton;
+    GestureManager1: TGestureManager;
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure deleteBtnClick(Sender: TObject);
@@ -285,7 +287,7 @@ type
     procedure LangClick(Sender: TObject);
     procedure meaningClick(Sender: TObject);
     procedure startClick(Sender: TObject);
-    procedure statsClick(Sender: TObject);
+    procedure ratingClick(Sender: TObject);
     procedure ThemeButtonClick(Sender: TObject);
     procedure аClick(Sender: TObject);
     procedure бClick(Sender: TObject);
@@ -325,21 +327,24 @@ type
     procedure TimerSoundTimer(Sender: TObject);
     procedure SoundBtnClick(Sender: TObject);
     procedure kbrdSwitchTimer(Sender: TObject);
+    procedure statsClick(Sender: TObject);
+    procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
+      var Handled: Boolean);
   private                                                                                               // 00ffdb      FF00FF33
     { Private declarations }
   public
     { Public declarations }
   end;
 const                                                                   // 1         // 2        // 3         //4          //5        //6        //7       //8
-  colorsMax = 8;                                                        // azul     // day     // violet   // Barbie   // Console // latinum // greek   // x-men
-    bckgrndColor: array              [1..colorsMax] of TAlphaColor = ( $FF003049 , $FFfdfdfd , $FF725ac1 , $FFFDECF4 , $FF000080, $FFFDF0D5, $FFffffff, $ffFFE85C );
-    boardNKeyColorsDef: array        [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FFd2d2d2 , $FFf7ece1 , $FFff67b1 , $FFDB00FF, $FFAB172B, $FF1C85F6, $ff00b4d8 );
-    boardNKeyTextColorsDef: array    [1..colorsMax] of TAlphaColor = ( $FFFDF0D5 , $FF000000 , $FFfdfffc , $FFff037d , $FFF0F0F0, $FF000000, $FF865746, $ff000000 );
-    boardNKeyTextColorsYellow: array [1..colorsMax] of TAlphaColor = ( $FFffea00 , $FFffc000 , $FFffff3f , $FFf0f405 , $FFffdb00, $FF00C8FA, $FFffee32, $ffFAF761 );
-    boardNKeyTextColorsGreen: array  [1..colorsMax] of TAlphaColor = ( $FF5bf36d , $FF40916c , $FF80ed99 , $FF73C4FE , $FF00ffdb, $FF7B2CBF, $FF02c39a, $ff48A06F );
-    boardNKeyTextColorsGrey: array   [1..colorsMax] of TAlphaColor = ( $FF6c757d , $FF495057 , $FFd6a9db , $FFcbcbcb , $FF000000, $FF6C757D, $FFd6d6d6, $ff9FB1C0 );
-    boardNKeyTextColorsRed: array    [1..colorsMax] of TAlphaColor = ( $FFFFB3C6 , $FFba181b , $FFff5d73 , $FFa9a2a6 , $FFF0F0F0, $FFDC1934, $FFDFBA89, $ffE8403E );
-    barsColors:             array    [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FF495057 , $FF725ac1 , $FFff037d , $FF000080, $FFAB172B, $FF1C85F6, $ff7FCD99 );
+  colorsMax = 9;                                                        // azul     // day     // violet   // Barbie   // Console // latinum // greek   // x-men
+    bckgrndColor: array              [1..colorsMax] of TAlphaColor = ( $FF003049 , $FFfdfdfd , $FF725ac1 , $FFFDECF4 , $FF000080 , $FFFDF0D5 , $FFffffff , $ffFFE85C , $ff100B08);
+    boardNKeyColorsDef: array        [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FFd2d2d2 , $FFf7ece1 , $FFff67b1 , $FFDB00FF , $FFAB172B , $FF1C85F6 , $ff00b4d8 , $ff31393C);
+    boardNKeyTextColorsDef: array    [1..colorsMax] of TAlphaColor = ( $FFFDF0D5 , $FF000000 , $FFfdfffc , $FFff037d , $FFF0F0F0 , $FF000000 , $FF865746 , $ff000000 , $ffF9F9F9);
+    boardNKeyTextColorsYellow: array [1..colorsMax] of TAlphaColor = ( $FFffea00 , $FFffc000 , $FFffff3f , $FFf0f405 , $FFffdb00 , $FF00C8FA , $FFffee32 , $ffFAF761 , $ffCA9532);  // 9CDEF1
+    boardNKeyTextColorsGreen: array  [1..colorsMax] of TAlphaColor = ( $FF5bf36d , $FF40916c , $FF80ed99 , $FF73C4FE , $FF00ffdb , $FF7B2CBF , $FF02c39a , $ff48A06F , $ff0C5014);
+    boardNKeyTextColorsGrey: array   [1..colorsMax] of TAlphaColor = ( $FF6c757d , $FF495057 , $FFd6a9db , $FFcbcbcb , $FF000000 , $FF6C757D , $FFd6d6d6 , $ff9FB1C0 , $ff929292);
+    boardNKeyTextColorsRed: array    [1..colorsMax] of TAlphaColor = ( $FFFFB3C6 , $FFba181b , $FFff5d73 , $FFa9a2a6 , $FFF0F0F0 , $FFDC1934 , $FFDFBA89 , $ffE8403E , $ff900950);
+    barsColors:             array    [1..colorsMax] of TAlphaColor = ( $FF669BBC , $FF495057 , $FF725ac1 , $FFff037d , $FF000080 , $FFAB172B , $FF1C85F6 , $ff7FCD99 , $ff31393C);
   sizeRUS = 4844;      // vocNumber - 1
   sizeENG = 3193;      //           - 2
   sizeLAT = 3;         //           - 3
@@ -351,10 +356,12 @@ var
   MainForm: TMainForm;
   wins, games, winStreak, lastGameWon, currentWinStreak, lastStreak, fastAttempt, allAttempts, ColorsSetNumber: integer;         // statistics transfering to statistics form
   winsL, gamesL, winStreakL, currentWinStreakL, lastGameWonL, lastStreakL, fastAttemptL, allAttemptsL, lastLangGame: integer;
+  ratingValue, ratingValueL: integer;
   average, averageL : real;
   meaningOfTheWord, otvet: String;                      // meaning transfering to meaningForm
   VocNumber: byte;
   startButtonCondition, languageChanged, themeChanged: boolean;
+  str: String;
 const
   statFileNames: array [0..4] of string = ('stats.ngm', 'statsRus.ngm', 'statsEng.ngm', 'statsLat.ngm', 'statsEsp.ngm');
   aveStatFileNames: array [0..4] of string = ('aveStat.ngm', 'aveStatRus.ngm', 'aveStatEng.ngm', 'aveStatLat.ngm', 'aveStatEsp.ngm');
@@ -373,14 +380,14 @@ const
   textPrevious: array [1..5] of String = (textPreviousRus, textPreviousEng, textPreviousLat, textPreviousEsp, textPreviousFra);
 
 var StreakTemp1, StreakTemp2: integer;
-    input, stat, statL, aveStat, aveStatL : text;                              // input - read from vocabulary, stat - read from statistics file
+    input, stat, statL, aveStat, aveStatL : text;           // input - read from vocabulary, stat - read from statistics file
     i, j, k, l, numberOfTheword, keyNumber, size: integer;  // разные счетчики wins - победы, games - все игры
-    vocab, meanings: array of String;         // массив всего словаря и массив значений слов
-    words: array [1..6] of string;              // массив со всеми ответами
+    vocab, meanings: array of String;                       // массив всего словаря и массив значений слов
+    words: array [1..6] of string;                          // массив со всеми ответами
     wordExists, wordGuessedRight, wordGuessedWrong, wordNotGuessed: boolean;
     ask: array [1..6,1..5] of integer;
     ques: array [1..6,1..5] of integer;
-    keys: array [1..42] of TButton;
+    keys: array [1..43] of TButton;
     keyValue: array [1..33] of char;                 // массив кнопок клавиатуры
     board: array [1..6,1..5] of TButton;             // массив табло с буквами 5х6
     letters: array [1..5] of char;
@@ -392,6 +399,7 @@ var StreakTemp1, StreakTemp2: integer;
     kbrdWidth, kbrdHeight: integer;
     boardHeight, boardWidth, boardDivVar: integer;
     ini: TIniFile;
+    SoundOn : integer;
     theWordTemp, theWord, boardWordsTemp, askRead, charTemp: string;
     boardWords : array [1..6] of String;
     askTemp: array [1..6] of String;
@@ -405,7 +413,7 @@ var StreakTemp1, StreakTemp2: integer;
 
 implementation
 
-uses statistics, meaningForm, themeForm, langForm, infoForm;
+uses statistics, meaningForm, themeForm, langForm, infoForm, ratings, gameMode;
 
 {$R *.fmx}
 {$R *.iPhone4in.fmx IOS}
@@ -952,6 +960,7 @@ begin
   try
     ini.WriteInteger('settings','ColorsSetNumber',ColorsSetNumber);
     ini.WriteInteger('settings','VocNumber',VocNumber);
+    ini.WriteInteger('settings','SoundOn',SoundOn);
     if wordNotGuessed = true then begin
       ini.WriteInteger('session','numberOfTheword',numberOfTheword);
       ini.WriteString('session','theWord',theWord);
@@ -984,6 +993,7 @@ begin
   try
     ColorsSetNumber := ini.ReadInteger('settings','ColorsSetNumber',ColorsSetNumber);
     VocNumber := ini.ReadInteger('settings','VocNumber',VocNumber);
+    SoundOn := ini.ReadInteger('settings','SoundOn',SoundOn);
     wordNotGuessed := ini.ReadBool('session','wordNotGuessed',wordNotGuessed);
     if wordNotGuessed then begin
       numberOfTheword := ini.ReadInteger('session','numberOfTheword',numberOfTheword);
@@ -1310,8 +1320,8 @@ begin
 
         for I := 34 to 38 do
           keys[i].Position.Y:=padY;
-        keys[41].Position.Y:=padY;
-        keys[42].Position.Y:=padY;
+        for I := 41 to 43 do
+          keys[i].Position.Y:=padY;
 
         padY := 8;
 
@@ -1353,8 +1363,8 @@ begin
           padX := round((screen.Width - (board[1,1].Height * 5 + padX * 4)) / 2);
           for I := 34 to 38 do
             keys[i].Position.Y:=padY;
-          keys[41].Position.Y:=padY;
-          keys[42].Position.Y:=padY;
+          for I := 41 to 43 do
+          keys[i].Position.Y:=padY;
 
           padY := 8;
 
@@ -1385,8 +1395,8 @@ begin
 
       for I := 34 to 38 do
         keys[i].Position.Y:=padY;
-      keys[41].Position.Y:=padY;
-      keys[42].Position.Y:=padY;
+      for I := 41 to 43 do
+          keys[i].Position.Y:=padY;
 
       for i := 1 to 6 do
         for j := 1 to 5 do begin
@@ -1458,6 +1468,8 @@ begin
   keys[37].TextSettings.Font.Size := 20;
   keys[41].TextSettings.Font.Size := 20;
   keys[42].TextSettings.Font.Size := 20;
+  keys[43].TextSettings.Font.Size := 20;
+
   if VocNumber = 1
     then keys[41].Text := '🇷🇺';
   if VocNumber = 2
@@ -1487,17 +1499,19 @@ begin
 {$IFDEF ANDROID}
   for I := 34 to 37 do
       keys[i].Width := keys[i].Height;
-  keys[41].Width := keys[41].Height;
-  keys[42].Width := keys[42].Height;
+  for I := 41 to 43 do
+      keys[i].Width := keys[i].Height;
 
   keys[38].Width := board[1,1].Width;
   keys[38].Position.X:=padX;
   keys[35].Position.X := keys[38].Position.X + keys[38].Width + padX;
-  keys[36].Position.X := keys[35].Position.X + keys[35].Width + padX;
+  keys[43].Position.X := keys[35].Position.X + keys[35].Width + padX;
+  keys[36].Position.X := keys[43].Position.X + keys[43].Width + padX;
   keys[41].Position.X := keys[36].Position.X + keys[36].Width + padX;
   keys[34].Position.X := keys[41].Position.X + keys[41].Width + padX;
   keys[37].Position.X := screen.Width - keys[37].Width - padX;
   keys[42].Position.X := keys[37].Position.X - keys[42].Width - padX;
+
 {$ENDIF}
 
 {$IFDEF MSWINDOWS}
@@ -1513,9 +1527,11 @@ begin
   for i := 34 to 36 do
     keys[i].Position.X := MainForm.ClientWidth - keys[i].Width - 4;
   keys[41].Position.X := MainForm.ClientWidth - keys[41].Width - 4;
+  keys[43].Position.X := MainForm.ClientWidth - keys[43].Width - 4;
   keys[34].Position.Y := board[2,1].Position.Y;
   for i := 35 to 36 do
-  keys[i].Position.Y := keys[i-1].Position.Y + keys[34].Height + 4;
+    keys[i].Position.Y := keys[i-1].Position.Y + keys[34].Height + 4;
+  keys[43].Position.Y := keys[36].Position.Y + keys[43].Height + 4;
 
   keys[38].Position.X := 4;
   keys[37].Position.X := 4;
@@ -1536,7 +1552,8 @@ begin
 
   padY := 8;
   MainForm.infoLabel.Width := screen.Width;
-  MainForm.infoLabel.Height := 20;
+  MainForm.infoLabel.TextSettings.Font.Size := 20;
+  MainForm.infoLabel.Height := MainForm.infoLabel.TextSettings.Font.Size * 2 + 4;
   MainForm.infoLabel.Position.Y := kbrdKeys[1,1].Position.Y - MainForm.infoLabel.Height - padY;
   MainForm.infoLabel.Position.X := 0;
 
@@ -1564,8 +1581,9 @@ begin
 
   for I := 34 to 38 do
     keys[i].Height := 32;
-  keys[41].Height := 32;
-  keys[42].Height := 32;
+  for I := 41 to 43 do
+    keys[i].Height := 32;
+
 
   if VocNumber = 1 then begin
 
@@ -1962,23 +1980,6 @@ begin
       end;
   end;
 {$ENDIF}
-end;
-
-procedure topButtonsFlashing;
-begin
-
-{$IFDEF ANDROID}
-
-{$ENDIF}
-{$IFDEF MSWINDOWS}
-{$ENDIF}
-{$IFDEF MSWINDOWS}
-  MainForm.FlashLightMeaning.Height := keys[36].Height + 4;
-  MainForm.FlashLightMeaning.Width := keys[36].Width + 4;
-  MainForm.FlashLightMeaning.Position.X := keys[36].Position.X - 2;
-  MainForm.FlashLightMeaning.Position.Y := keys[36].Position.Y - 2;
-{$ENDIF}
-
 end;
 
 procedure meaningsFill;
@@ -2433,8 +2434,8 @@ begin
     end;
     for I := 34 to 37 do
       keys[i].TintColor := $00ffffff;
-    keys[41].TintColor := $00ffffff;
-    keys[42].TintColor := $00ffffff;
+    for I := 41 to 43 do
+      keys[i].TintColor := $00ffffff;
 
   {$ELSEIF Defined(MSWINDOWS)}
     for I := 1 to 33 do begin
@@ -2768,7 +2769,6 @@ begin
   boardSizeCalc;
   topButtonsProperties;
   topButtonsPositions;
-  topButtonsFlashing;
 {$ENDIF}
 {$IFDEF ANDROID}
   MainForm.BrainDissapearance.Enabled := false;
@@ -2804,7 +2804,7 @@ begin
   keys[25]:=ш;  keys[26]:=щ;  keys[27]:=ъ;  keys[28]:=ы;  keys[29]:=ь;  keys[30]:=э;  keys[31]:=ю;  keys[32]:=я;
   keys[33]:=ё;  keys[39]:=deleteBtn;        keys[40]:=Enter;
   keys[34]:=ThemeButton;      keys[35]:=stats;            keys[36]:=meaning;          keys[37]:=info;
-  keys[38]:=start;            keys[41]:=Lang;             keys[42]:=SoundBtn;
+  keys[38]:=start;            keys[41]:=Lang;             keys[42]:=SoundBtn;         keys[43]:=rating;
 
   board[1,1]:=R11;  board[1,2]:=R12; board[1,3]:=R13; board[1,4]:=R14; board[1,5]:=R15;
   board[2,1]:=R21;  board[2,2]:=R22; board[2,3]:=R23; board[2,4]:=R24; board[2,5]:=R25;
@@ -2883,6 +2883,10 @@ begin
     meaningOfTheWord:=meanings[numberOfTheword];
     InfoLabel.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
     InfoLabel.Text := textPrevious[VocNumber];
+    if SoundOn = 1
+      then SoundBtn.Text := '🔊 '
+      else SoundBtn.Text := '🔈';
+
   end;
                               ///////////////////////////////
   if not wordNotGuessed then begin
@@ -2905,7 +2909,6 @@ begin
     boardSizeCalc;
     topButtonsProperties;
     topButtonsPositions;
-    topButtonsFlashing;
   {$ENDIF}
 
   {$IF Defined(ANDROID)}
@@ -3019,7 +3022,7 @@ begin
       KbrdSoundPlay;
       kbrdHitTestOff;
       MainForm.kbrdSwitch.OnTimer := MainForm.kbrdSwitchTimer;
-      MainForm.kbrdSwitch.Interval := 100;
+      MainForm.kbrdSwitch.Interval := 75;
       MainForm.kbrdSwitch.Enabled := true;
     end;
   kbrdClick;
@@ -3228,15 +3231,33 @@ procedure TMainForm.meaningClick(Sender: TObject);
 begin
   BrainDissapearance.Enabled := false;
   meaningForm1.Show;
-  if SoundBtn.Text = '🔈'
+  if SoundBtn.Text = '🔊 '
     then KbrdSoundPlay;
+end;
+
+procedure TMainForm.ratingClick(Sender: TObject);
+begin
+  statsReadAll;
+  ratingValue := round(wins + winStreak/games*100 + 400-fastAttempt*100 + 600-average*100);
+  ratingValueL := round(winsL + winStreakL/gamesL*100 + 400-fastAttemptL*100 + 600-averageL*100);
+  if games < 100
+    then ratingValue := round (ratingValue * 0.1);
+  if gamesL < 100
+    then ratingValueL := round (ratingValueL * 0.1);
+  rateForm.Show;
+  if ratingValue < 0
+    then ratingValue := 0;
+  if ratingValue < 0
+    then ratingValue := 0;
+  if SoundBtn.Text = '🔊 '
+      then KbrdSoundPlay;
 end;
 
 procedure TMainForm.statsClick(Sender: TObject);
 begin
   statsReadAll;
   statsForm.Show;
-  if SoundBtn.Text = '🔈'
+  if SoundBtn.Text = '🔊 '
       then KbrdSoundPlay;
 end;
 
@@ -3244,7 +3265,7 @@ procedure TMainForm.langClick(Sender: TObject);
 begin
   LangAnimation.Enabled := false;
   languageForm.Show;
-  if SoundBtn.Text = '🔈'
+  if SoundBtn.Text = '🔊 '
       then KbrdSoundPlay;
 end;
 
@@ -3252,14 +3273,14 @@ procedure TMainForm.infoClick(Sender: TObject);
 begin
   InfoAnimation.Enabled := false;
   informationForm.Show;
-  if SoundBtn.Text = '🔈'
+  if SoundBtn.Text = '🔊 '
       then KbrdSoundPlay;
 end;
 
 procedure TMainForm.themeButtonClick(Sender: TObject);
 begin
   setForm.Show;
-  if SoundBtn.Text = '🔈'
+  if SoundBtn.Text = '🔊 '
       then KbrdSoundPlay;
 end;
 
@@ -3277,7 +3298,7 @@ begin
         KbrdSoundPlay;
         deleteBtn.HitTest := false;
         MainForm.kbrdSwitch.OnTimer := MainForm.kbrdSwitchTimer;
-        MainForm.kbrdSwitch.Interval := 100;
+        MainForm.kbrdSwitch.Interval := 75;
         MainForm.kbrdSwitch.Enabled := true;
       end;
 
@@ -3421,8 +3442,21 @@ end;
 procedure TMainForm.SoundBtnClick(Sender: TObject);
 begin
   if SoundBtn.Text = '🔈'
-    then SoundBtn.Text := '🔊 '
-    else SoundBtn.Text := '🔈';
+    then begin
+      SoundBtn.Text := '🔊 ';
+      SoundOn := 1;
+    end
+    else begin
+      SoundBtn.Text := '🔈';
+      SoundOn := 0;
+    end
+end;
+
+procedure TMainForm.FormGesture(Sender: TObject;
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+begin
+  if EventInfo.GestureID = sgiRight
+    then GameModeForm.show;
 end;
 
 end.

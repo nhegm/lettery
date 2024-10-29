@@ -5,7 +5,7 @@
     </ProjectExtensions>
     <PropertyGroup>
         <DeviceId Condition="'$(Platform)'=='Android'"/>
-        <DeviceId Condition="'$(Platform)'=='Android64'">18dac8fe</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android64'">RFCX31SDSQF</DeviceId>
         <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
         <DeviceId Condition="'$(Platform)'=='iOSSimARM64'"/>
     </PropertyGroup>
@@ -148,15 +148,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Release'">
-            <RemoteDir>Lettery\library\lib\mips\</RemoteDir>
-            <RemoteName>libLettery.so</RemoteName>
-            <DeployClass>AndroidLibnativeMipsFile</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="temp\lettery-icons\icon72.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
@@ -176,15 +167,6 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\lib\android\debug\armeabi-v7a\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>libLettery.so</RemoteName>
-            <DeployClass>AndroidLibnativeArmeabiv7aFile</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="$(BDS)\lib\android\debug\armeabi-v7a\libnative-activity.so" Condition="'$(Config)'=='Release'">
             <RemoteDir>Lettery\library\lib\armeabi-v7a\</RemoteDir>
             <RemoteName>libLettery.so</RemoteName>
             <DeployClass>AndroidLibnativeArmeabiv7aFile</DeployClass>
@@ -294,15 +276,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android64\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>AndroidManifest.xml</RemoteName>
-            <DeployClass>ProjectAndroidManifest</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="temp\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
@@ -349,15 +322,6 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\library\lib\armeabi\</RemoteDir>
-            <RemoteName>libLettery.so</RemoteName>
-            <DeployClass>AndroidLibnativeArmeabiFile</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Release'">
             <RemoteDir>Lettery\library\lib\armeabi\</RemoteDir>
             <RemoteName>libLettery.so</RemoteName>
             <DeployClass>AndroidLibnativeArmeabiFile</DeployClass>
@@ -546,6 +510,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="temp\dicts\GuessWhat\RusQuesTemp.txt" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>RusQuesTemp.txt</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="temp\lettery-icons\icon48.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\res\drawable-mdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
@@ -618,6 +591,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="temp\dicts\GuessWhat\RusAnswTemp.txt" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>RusAnswTemp.txt</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="temp\lettery-icons\icon192.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\res\drawable-xxxhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
@@ -631,15 +613,6 @@
             <RemoteDir>Lettery\res\drawable-xxxhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon192</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
-        <DeployFile Include="Android64\Release\AndroidManifest.xml" Condition="'$(Config)'=='Release'">
-            <RemoteDir>Lettery\</RemoteDir>
-            <RemoteName>AndroidManifest.xml</RemoteName>
-            <DeployClass>ProjectAndroidManifest</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -1201,6 +1174,51 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="temp\sounds\enter.mp3" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\</RemoteDir>
+            <RemoteName>enter.mp3</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\sounds\fail.mp3" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\</RemoteDir>
+            <RemoteName>fail.mp3</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\sounds\start.mp3" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\</RemoteDir>
+            <RemoteName>start.mp3</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\sounds\standard_click.mp3" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\</RemoteDir>
+            <RemoteName>standard_click.mp3</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="temp\sounds\error.mp3" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\</RemoteDir>
+            <RemoteName>error.mp3</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="temp\lettery-icons\icon144.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Lettery\Assets\</RemoteDir>
             <RemoteName>Logo150x150.png</RemoteName>
@@ -1219,6 +1237,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
             <Required>True</Required>
+        </DeployFile>
+        <DeployFile Include="temp\sounds\success.mp3" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\</RemoteDir>
+            <RemoteName>success.mp3</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='iOSDevice64'">

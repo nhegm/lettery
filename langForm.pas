@@ -30,7 +30,7 @@ var
 
 implementation
 
-uses HeaderFooterTemplate;
+uses HeaderFooterTemplate, GuessWhat;
 
 var
   vocChangeClick: array [1..5] of boolean;
@@ -71,7 +71,7 @@ begin
   {$IF Defined(ANDROID)}
   languageForm.width := 138;
   languageForm.height := 138;
-  languageForm.Left := round(Screen.Width-languageForm.Width) div 2;
+  languageForm.Left := round(Screen.Width -languageForm.Width) div 2;
   languageForm.Top := 50;
   {$ELSEIF Defined(MSWINDOWS)}
   languageForm.Height := 180;
@@ -109,10 +109,12 @@ end;
 procedure TlanguageForm.langButton4Click(Sender: TObject);
 begin
   VocNumber := 4;
+  VocNumberG := 4;
   langButton4.Enabled := false;
   langButton2.Enabled := true;
   langButton1.Enabled := true;
   languageChanged := true;
+  languageChangedG := true;
 end;
 
 procedure TlanguageForm.FormShow(Sender: TObject);
@@ -125,21 +127,23 @@ end;
 procedure TlanguageForm.langButton1Click(Sender: TObject);
 begin
   VocNumber := 1;
+  VocNumberG := 1;
   langButton1.Enabled := false;
   langButton2.Enabled := true;
   langButton4.Enabled := true;
   languageChanged := true;
-
+  languageChangedG := true;
 end;
 
 procedure TlanguageForm.langButton2Click(Sender: TObject);
 begin
   VocNumber := 2;
+  VocNumberG := 2;
   langButton2.Enabled := false;
   langButton1.Enabled := true;
   langButton4.Enabled := true;
   languageChanged := true;
-
+  languageChangedG := true;
 end;
 
 end.

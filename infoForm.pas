@@ -47,7 +47,7 @@ var
 
 implementation
 
-uses HeaderFooterTemplate;
+uses HeaderFooterTemplate, GuessWhat;
 
 const
   titleRus = 'Справка';

@@ -188,4 +188,21 @@ object setForm: TsetForm
     TextSettings.Trimming = None
     Visible = False
   end
+  object dark9: TRoundRect
+    Position.X = 41.000000000000000000
+    Position.Y = 467.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 34.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = dark9Click
+    object Text9: TText
+      Align = Center
+      Locked = True
+      Size.Width = 57.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'dark'
+      OnClick = Text9Click
+    end
+  end
 end

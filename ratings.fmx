@@ -1,0 +1,56 @@
+object rateForm: TrateForm
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = Single
+  Caption = 'rateForm'
+  ClientHeight = 400
+  ClientWidth = 400
+  Fill.Kind = Solid
+  Position = MainFormCenter
+  StyleLookup = 'pushpanel'
+  FormStyle = Popup
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object ratingHeader: TLabel
+    AutoSize = True
+    StyledSettings = []
+    Position.X = 112.000000000000000000
+    Position.Y = 48.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 21.599998474121090000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.HorzAlign = Center
+    TextSettings.Trimming = None
+    Text = 'ratingHeader'
+    TabOrder = 1
+  end
+  object ratingValue: TLabel
+    StyledSettings = []
+    Position.X = 112.000000000000000000
+    Position.Y = 73.000000000000000000
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.HorzAlign = Center
+    TextSettings.Trimming = None
+    Text = 'Label1'
+    TabOrder = 0
+  end
+  object Switcher: TSwitch
+    IsChecked = False
+    Position.X = 150.000000000000000000
+    Position.Y = 108.000000000000000000
+    Size.Width = 44.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'switchstyle'
+    TabOrder = 6
+    TabStop = False
+    ParentShowHint = False
+    ShowHint = False
+    OnSwitch = SwitcherSwitch
+  end
+end

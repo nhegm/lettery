@@ -42,8 +42,6 @@ uses HeaderFooterTemplate;
 
 const
   posY = 100;
-var
-  meaningString : String;
 
 procedure TmeaningForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -79,11 +77,8 @@ begin
   meaningForm1.FontColorAnimation.PropertyName := 'FontColor';
   meaningForm1.FontColorAnimation.StartValue := boardNKeyTextColorsDef[ColorsSetNumber];
   meaningForm1.FontColorAnimation.StopValue := boardNKeyTextColorsDef[ColorsSetNumber];
-  meaningForm1.Top:=50;
-  meaningForm1.Left:=70;
   meaningText.TextSettings.Font.Size := 18;
-  meaningString := HeaderFooterTemplate.meaningOfTheWord;
-  meaningText.Text := AnsiToUTF8 (meaningString);
+  meaningText.Text := AnsiToUTF8 (HeaderFooterTemplate.meaningOfTheWord);
 
   {$IFDEF ANDROID}
     ScrollBox.Height := meaningText.Height;
@@ -119,6 +114,9 @@ begin
     meaningForm1.FillColorAnimation.start;
     meaningForm1.FontColorAnimation.start;
   {$ENDIF}
+
+  meaningForm1.Top:=50;
+  meaningForm1.Left:=round(screen.Width - meaningForm1.Width) div 2;
 end;
 
 procedure TmeaningForm1.ScrollBarChange(Sender: TObject);
