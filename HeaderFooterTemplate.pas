@@ -1471,11 +1471,11 @@ begin
   keys[43].TextSettings.Font.Size := 20;
 
   if VocNumber = 1
-    then keys[41].Text := '🇷🇺';
+    then keys[41].Text := '🇷🇺''';
   if VocNumber = 2
-    then keys[41].Text := '🇬🇧';
+    then keys[41].Text := '🇬🇧''';
   if VocNumber = 4
-    then keys[41].Text := '🇪🇸';
+    then keys[41].Text := '🇪🇸''';
 {$ENDIF}
 
 {$IFDEF MSWINDOWS}

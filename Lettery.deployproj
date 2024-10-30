@@ -726,15 +726,6 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="temp\dicts\Rus5Word.ngm" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Lettery\assets\internal\</RemoteDir>
-            <RemoteName>Rus5Word.ngm</RemoteName>
-            <DeployClass>File</DeployClass>
-            <Operation>0</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-        </DeployFile>
         <DeployFile Include="temp\dicts\Rus5Word.ngm" Condition="'$(Config)'=='Release'">
             <RemoteDir>Lettery\assets\internal\</RemoteDir>
             <RemoteName>Rus5Word.ngm</RemoteName>
@@ -758,6 +749,15 @@
             <RemoteName>styles.xml</RemoteName>
             <DeployClass>AndroidSplashStylesV21</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Rus5Word.ngm" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Lettery\assets\internal\</RemoteDir>
+            <RemoteName>Rus5Word.ngm</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>

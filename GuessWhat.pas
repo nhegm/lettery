@@ -18,7 +18,7 @@ type
     ColorAnimation1: TColorAnimation;
     statsG: TButton;
     startGuess: TButton;
-    StartAnimation: TFloatAnimation;
+    StartGuessAnimation: TFloatAnimation;
     Lang: TButton;
     LangAnimation: TFloatAnimation;
     SoundBtn: TButton;
@@ -27,6 +27,10 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button4Animation: TFloatAnimation;
+    Button3Animation: TFloatAnimation;
+    Button2Animation: TFloatAnimation;
+    Button1Animation: TFloatAnimation;
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
     procedure FormShow(Sender: TObject);
@@ -53,13 +57,14 @@ var
   answers , questions : array of String;             // 2 массива для хранения значений и слов
   ansRndm : array [1..4] of Integer;                // массив порядка ответов
   btnPushArray : array [1..4] of boolean;
+  btnsRightAnswerAnimationArray : array [1..4] of TFloatAnimation;
   keysG: array [1..6] of TButton;
   iG, jG, wordNumber, sizeG: integer;
   sign, val, valTemp, randNumber: integer;                   // вспом. числа для перемешивания вариантов ответов
   fileQues , fileAnsw : string;
   inputG : text;
   VocNumberG: byte;
-  languageChangedG : boolean;
+  languageChangedG , youWereWrong : boolean;
 
 const
   sizeRUSG = 1775;   //           - 1
@@ -71,10 +76,33 @@ const
   TextFieldHeight = 100;
   PadG = 8;
 
+  textCongratsRusG = 'Ура! Ура! Молоденчик!'; textCongratsEngG = 'Great job!'; textCongratsLatG = ''; textCongratsEspG = '¡Que trabajo tan excelente!'; textCongratsFraG = '';
+
+  textCongratsG: array [1..5] of String = (textCongratsRusG, textCongratsEngG, textCongratsLatG, textCongratsEspG, textCongratsFraG);
+
 implementation
 
 uses statistics, themeForm, langForm, infoForm, HeaderFooterTemplate, gameMode;
 {$R *.fmx}
+
+procedure animationRightAnswer;
+begin
+  for iG := 1 to 4 do begin
+    if ansRndm[iG] = wordNumber then begin
+      ansButtArray[iG].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
+      ansButtArray[iG].TintColor := boardNKeyTextColorsGreen[ColorsSetNumber];
+      btnsRightAnswerAnimationArray[iG].Enabled := true;
+    end;
+  end;
+end;
+
+procedure btnsAnimationStop;
+begin
+  for iG := 1 to 4 do begin
+    ansButtArray[iG].TintColor := boardNKeyColorsDef[ColorsSetNumber];
+    btnsRightAnswerAnimationArray[iG].Enabled := false;
+  end;
+end;
 
 procedure topButtonsPropertiesG;
 begin
@@ -91,6 +119,13 @@ begin
     for iG := 2 to 6 do begin
       keysG[iG].TintColor := $00ffffff;
     end;
+
+    if VocNumberG = 1
+      then keysG[3].Text := '🇷🇺';
+    if VocNumberG = 2
+      then keysG[3].Text := '🇬🇧';
+    if VocNumberG = 4
+      then keysG[3].Text := '🇪🇸';
 
   {$ENDIF}
 
@@ -134,7 +169,7 @@ begin
   end;
 
   GuessWhatForm.ScrollBox.Height := (ansButtArray[1].Position.Y - (keysG[2].Position.Y + keysG[2].Height) - padG * 2) / 3 * 2;
-  GuessWhatForm.ScrollBox.Width := GuessWhatForm.Width - PadG * 4;
+  GuessWhatForm.ScrollBox.Width := screen.Width - PadG * 4;
   GuessWhatForm.QuestionField.Width := GuessWhatForm.ScrollBox.Width;
   GuessWhatForm.ScrollBox.Position.X := PadG * 2;
   GuessWhatForm.ScrollBox.Position.Y := ansButtArray[1].Position.Y - padG - GuessWhatForm.ScrollBox.Height;
@@ -284,19 +319,26 @@ begin
       inc(iG);
       readln(inputG,questions[iG]);
     end;
-    if wordNumber = 0 then
-      wordNumber := random(iG) + 1;
   end;                                              // нужно будет отредактировать
   if VocNumberG > 1 then begin
     var quesTemp := TFile.ReadAllLines(GetMyFileG(fileQues), TEncoding.UTF8);
     setLength(answers, length(quesTemp)+1);
     for iG := 0 to length(quesTemp)-1 do
-      answers[iG+1] := quesTemp[iG];
-    if wordNumber = 0 then
-      wordNumber := random(length(questions)) + 1;
+      questions[iG+1] := quesTemp[iG];
   end;
 {$ENDIF}
 
+
+end;
+
+procedure questionChoose;
+begin
+
+  if wordNumber = 0
+    then wordNumber := random(length(questions)) + 1;
+  if VocNumberG = 1
+    then GuessWhatForm.QuestionField.Text := AnsiToUTF8 (questions[wordNumber])
+    else GuessWhatForm.QuestionField.Text := questions[wordNumber];
 
 end;
 
@@ -306,22 +348,19 @@ begin
   for iG := 1 to 4 do begin
     if btnPushArray[iG] = true then
       if ansRndm[iG] = wordNumber then begin
-        GuessWhatForm.QuestionField.TextSettings.FontColor := boardNKeyTextColorsGreen[ColorsSetNumber];
-        GuessWhatForm.QuestionField.Text := AnsiToUTF8 ('крутой');
-
         ansButtArray[iG].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
         ansButtArray[iG].TintColor := boardNKeyTextColorsGreen[ColorsSetNumber];
+        youWereWrong := false;
       end else begin
-        GuessWhatForm.QuestionField.TextSettings.FontColor := boardNKeyTextColorsRed[ColorsSetNumber];
-        GuessWhatForm.QuestionField.Text := AnsiToUTF8 ('лошара');
-
         ansButtArray[iG].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
         ansButtArray[iG].TintColor := boardNKeyTextColorsRed[ColorsSetNumber];
-
-        ShowMessage('Не угадал, это было: ' + answers[wordNumber])
+        youWereWrong := true;
       end;
     ansButtArray[iG].HitTest := false;
   end;
+
+  if youWereWrong
+    then animationRightAnswer;
 
   GuessWhatForm.startGuess.Enabled := true;
 
@@ -366,6 +405,10 @@ begin
   ansButtArray[2] := Button2;
   ansButtArray[3] := Button3;
   ansButtArray[4] := Button4;
+  btnsRightAnswerAnimationArray[1] := Button1Animation;
+  btnsRightAnswerAnimationArray[2] := Button2Animation;
+  btnsRightAnswerAnimationArray[3] := Button3Animation;
+  btnsRightAnswerAnimationArray[4] := Button4Animation;
   for IG := 1 to 4 do
     ansButtArray[iG].HitTest := false;
   keysG[1] := startGuess;
@@ -375,8 +418,9 @@ begin
   keysG[5] := SoundBtn;
   keysG[6] := info;
 
-  wordNumber := 0;
   VocNumberG := 1;
+  vocabularyCheck;
+  questionsFill;
 
   for IG := 1 to 4 do
     ansButtArray[iG].Text := '';
@@ -384,6 +428,8 @@ begin
   topButtonsPropertiesG;
   topButtonsPositionsG;
   elementsSettingsG;
+
+  StartGuessAnimation.Enabled := true;
 
 end;
 
@@ -399,6 +445,7 @@ begin
 
   ThemeRefreshG;
   vocabularyCheck;
+  topButtonsPropertiesG;
   elementsSettingsG;
 
 end;
@@ -428,12 +475,10 @@ procedure TGuessWhatForm.startGuessClick(Sender: TObject);
 begin
 
   wordNumber := 0;
-
   vocabularyCheck;
   questionsFill;
+  questionChoose;
   ButtonsWordsFill;
-
-  QuestionField.Text := AnsiToUTF8 (questions[wordNumber]);
 
   elementsSettingsG;
   ThemeRefreshG;
@@ -447,6 +492,8 @@ begin
     btnPushArray[iG] := false;
   end;
 
+  btnsAnimationStop;
+  StartGuessAnimation.Enabled := false;
 
 end;
 

@@ -77,7 +77,7 @@ object GuessWhatForm: TGuessWhatForm
     Text = 'start'
     TextSettings.Trimming = None
     OnClick = startGuessClick
-    object StartAnimation: TFloatAnimation
+    object StartGuessAnimation: TFloatAnimation
       AutoReverse = True
       Duration = 0.600000023841857900
       Loop = True
@@ -149,6 +149,14 @@ object GuessWhatForm: TGuessWhatForm
     Text = 'Button1'
     TextSettings.Trimming = None
     OnClick = Button1Click
+    object Button1Animation: TFloatAnimation
+      AutoReverse = True
+      Duration = 0.600000023841857900
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
   end
   object Button2: TButton
     StyledSettings = [Family]
@@ -158,6 +166,14 @@ object GuessWhatForm: TGuessWhatForm
     Text = 'Button2'
     TextSettings.Trimming = None
     OnClick = Button2Click
+    object Button2Animation: TFloatAnimation
+      AutoReverse = True
+      Duration = 0.600000023841857900
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
   end
   object Button3: TButton
     StyledSettings = [Family]
@@ -167,6 +183,14 @@ object GuessWhatForm: TGuessWhatForm
     Text = 'Button3'
     TextSettings.Trimming = None
     OnClick = Button3Click
+    object Button3Animation: TFloatAnimation
+      AutoReverse = True
+      Duration = 0.600000023841857900
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
   end
   object Button4: TButton
     StyledSettings = [Family]
@@ -176,6 +200,14 @@ object GuessWhatForm: TGuessWhatForm
     Text = 'Button4'
     TextSettings.Trimming = None
     OnClick = Button4Click
+    object Button4Animation: TFloatAnimation
+      AutoReverse = True
+      Duration = 0.600000023841857900
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
   end
   object GestureManager1: TGestureManager
     Sensitivity = 80.000000000000000000
