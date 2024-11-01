@@ -8,7 +8,7 @@ uses
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Gestures;
 
 type
-  TForm1 = class(TForm)
+  TGameModeForm = class(TForm)
     FiveLetters: TButton;
     GuessWhat: TButton;
     GestureManager1: TGestureManager;
@@ -24,7 +24,7 @@ type
   end;
 
 var
-  gameModeForm: TForm1;
+  gameModeForm: TGameModeForm;
   i: integer;
 
 const
@@ -62,25 +62,25 @@ begin
   gameModeForm.FiveLetters.Text := textFiveLettersButton[VocNumber];
 end;
 
-procedure TForm1.FiveLettersClick(Sender: TObject);
+procedure TGameModeForm.FiveLettersClick(Sender: TObject);
 begin
   elementsSettings;
   MainForm.Show;
 end;
 
-procedure TForm1.FormGesture(Sender: TObject;
+procedure TGameModeForm.FormGesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
   if EventInfo.GestureID = sgiLeft
     then gameModeForm.Close;
 end;
 
-procedure TForm1.FormShow(Sender: TObject);
+procedure TGameModeForm.FormShow(Sender: TObject);
 begin
   elementsSettings;
 end;
 
-procedure TForm1.GuessWhatClick(Sender: TObject);
+procedure TGameModeForm.GuessWhatClick(Sender: TObject);
 begin
   elementsSettings;
   GuessWhatForm.Show;

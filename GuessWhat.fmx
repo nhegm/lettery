@@ -65,9 +65,10 @@ object GuessWhatForm: TGuessWhatForm
     Text = #55357#56520
     TextSettings.Font.Size = 16.000000000000000000
     TextSettings.Trimming = None
+    OnClick = statsGClick
   end
   object startGuess: TButton
-    StyledSettings = [Family, Size]
+    StyledSettings = []
     Position.X = 48.000000000000000000
     Position.Y = 23.000000000000000000
     Size.Width = 49.000000000000000000
@@ -179,7 +180,7 @@ object GuessWhatForm: TGuessWhatForm
     StyledSettings = [Family]
     Position.X = 75.000000000000000000
     Position.Y = 334.000000000000000000
-    TabOrder = 85
+    TabOrder = 87
     Text = 'Button3'
     TextSettings.Trimming = None
     OnClick = Button3Click
@@ -196,7 +197,7 @@ object GuessWhatForm: TGuessWhatForm
     StyledSettings = [Family]
     Position.X = 180.000000000000000000
     Position.Y = 334.000000000000000000
-    TabOrder = 86
+    TabOrder = 88
     Text = 'Button4'
     TextSettings.Trimming = None
     OnClick = Button4Click
@@ -208,6 +209,88 @@ object GuessWhatForm: TGuessWhatForm
       StartValue = 0.000000000000000000
       StopValue = 1.000000000000000000
     end
+  end
+  object Button5: TButton
+    StyledSettings = [Family]
+    Position.X = 75.000000000000000000
+    Position.Y = 364.000000000000000000
+    TabOrder = 85
+    Text = 'Button5'
+    TextSettings.Trimming = None
+    OnClick = Button5Click
+    object Button5Animation: TFloatAnimation
+      AutoReverse = True
+      Duration = 0.600000023841857900
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
+  end
+  object Button6: TButton
+    StyledSettings = [Family]
+    Position.X = 180.000000000000000000
+    Position.Y = 364.000000000000000000
+    TabOrder = 86
+    Text = 'Button6'
+    TextSettings.Trimming = None
+    OnClick = Button6Click
+    object Button6Animation: TFloatAnimation
+      AutoReverse = True
+      Duration = 0.600000023841857900
+      Loop = True
+      PropertyName = 'Opacity'
+      StartValue = 0.000000000000000000
+      StopValue = 1.000000000000000000
+    end
+  end
+  object headLabelG: TLabel
+    AutoSize = True
+    StyledSettings = []
+    Position.X = 296.000000000000000000
+    Position.Y = 405.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'headLabelG'
+    TabOrder = 93
+  end
+  object winsLabelG: TLabel
+    AutoSize = True
+    StyledSettings = []
+    Position.X = 296.000000000000000000
+    Position.Y = 430.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Label1'
+    TabOrder = 92
+  end
+  object percentageLabelG: TLabel
+    AutoSize = True
+    StyledSettings = []
+    Position.X = 296.000000000000000000
+    Position.Y = 447.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'Label1'
+    TabOrder = 90
+  end
+  object gamesLabelG: TLabel
+    AutoSize = True
+    StyledSettings = []
+    Position.X = 140.000000000000000000
+    Position.Y = 430.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Trimming = None
+    Text = 'gamesLabelG'
+    TabOrder = 91
   end
   object GestureManager1: TGestureManager
     Sensitivity = 80.000000000000000000

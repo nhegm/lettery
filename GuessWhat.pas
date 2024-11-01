@@ -31,6 +31,14 @@ type
     Button3Animation: TFloatAnimation;
     Button2Animation: TFloatAnimation;
     Button1Animation: TFloatAnimation;
+    Button5: TButton;
+    Button5Animation: TFloatAnimation;
+    Button6: TButton;
+    Button6Animation: TFloatAnimation;
+    headLabelG: TLabel;
+    winsLabelG: TLabel;
+    percentageLabelG: TLabel;
+    gamesLabelG: TLabel;
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
     procedure FormShow(Sender: TObject);
@@ -44,8 +52,11 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure statsGClick(Sender: TObject);
   private
-    { Private declarations }
+
   public
     { Public declarations }
   end;
@@ -53,18 +64,23 @@ type
 var
   GuessWhatForm: TGuessWhatForm;
   questionstring : String;
-  ansButtArray: array [1..4] of TButton;              // массив кнопок с ответами
+  ansButtArray: array [1..6] of TButton;              // массив кнопок с ответами
   answers , questions : array of String;             // 2 массива для хранения значений и слов
-  ansRndm : array [1..4] of Integer;                // массив порядка ответов
-  btnPushArray : array [1..4] of boolean;
-  btnsRightAnswerAnimationArray : array [1..4] of TFloatAnimation;
+  ansRndm : array [1..6] of Integer;                // массив порядка ответов
+  btnPushArray : array [1..6] of boolean;
+  btnsRightAnswerAnimationArray : array [1..6] of TFloatAnimation;
   keysG: array [1..6] of TButton;
   iG, jG, wordNumber, sizeG: integer;
-  sign, val, valTemp, randNumber: integer;                   // вспом. числа для перемешивания вариантов ответов
+  valTemp, randNumber: integer;                   // вспом. числа для перемешивания вариантов ответов
   fileQues , fileAnsw : string;
-  inputG : text;
-  VocNumberG: byte;
+  inputG , statG , statGL : text;
   languageChangedG , youWereWrong : boolean;
+  statsLabelsArray : array [1..4] of TLabel;
+  statsHitCounter : integer;
+  // transfer to statisticsGW form
+  VocNumberG: byte;
+  gamesGW , winsGW , percentageGW : integer;        // overall stat
+  gamesGWL , winsGWL , percentageGWL : integer;     // language stat
 
 const
   sizeRUSG = 1775;   //           - 1
@@ -75,19 +91,152 @@ const
   answersSize: array [1..5] of integer = (sizeRUSG, sizeENGG, sizeLATG, sizeESPG, sizeFRAG);
   TextFieldHeight = 100;
   PadG = 8;
+  answersQuantity = 6;   // по сути Количество кнопок с ответами (кол-во ответов)
 
-  textCongratsRusG = 'Ура! Ура! Молоденчик!'; textCongratsEngG = 'Great job!'; textCongratsLatG = ''; textCongratsEspG = '¡Que trabajo tan excelente!'; textCongratsFraG = '';
+  textStartButtonRus = 'дальше'; textStartButtonEng = 'next'; textStartButtonLat = ''; textStartButtonEsp = 'próx'; textStartButtonFra = '';
+  textStartButtonArray: array [1..5] of String = (textStartButtonRus, textStartButtonEng, textStartButtonLat, textStartButtonEsp, textStartButtonFra);
 
-  textCongratsG: array [1..5] of String = (textCongratsRusG, textCongratsEngG, textCongratsLatG, textCongratsEspG, textCongratsFraG);
+  statFileNamesG: array [0..4] of string = ('statsG.ngm', 'statsRusG.ngm', 'statsEngG.ngm', 'statsLatG.ngm', 'statsEspG.ngm');
+
+  commonHeaderRusG = 'Общая статистика'; commonHeaderEngG = 'Common statistics'; commonHeaderLatG = 'Statistica tota'; commonHeaderEspG = 'Todas las estadísticas';
+  GamesRusG = 'Игр сыграно: '; GamesEngG = 'Games played: ';  GamesLatG = 'Ludos lusit: '; GamesEspG = 'Juegos jugados: ';
+  WinsRusG = 'Побед: '; WinsEngG = 'Wins: '; WinsLatG = 'Victoriae: '; WinsEspG = 'Victorias: ';
+  percentageRusG = '% побед'; percentageEngG = 'Aver. attempts: '; percentageLatG = 'Что-то будет'; percentageEspG = 'Intento promedio: ';
+
+  commonHeadersG: array [1..4] of String = (commonHeaderRusG, commonHeaderEngG, commonHeaderLatG, commonHeaderEspG);
+  GamesStatG: array [1..4] of String = (GamesRusG, GamesEngG, GamesLatG, GamesEspG);
+  WinsStatG: array [1..4] of String = (WinsRusG, WinsEngG, WinsLatG, WinsEspG);
+  percentageStatG: array [1..4] of String = (percentageRusG, percentageEngG, percentageLatG, percentageEspG);
+
+  langHeaderRusG = 'Русс стат'; langHeaderEngG = 'English stat'; langHeaderLatG = 'Statistica latina'; langHeaderEspG = 'Estadística en español';
+  langHeadersG: array [1..4] of String = (langHeaderRusG, langHeaderEngG, langHeaderLatG, langHeaderEspG);
 
 implementation
 
-uses statistics, themeForm, langForm, infoForm, HeaderFooterTemplate, gameMode;
+uses themeForm, langForm, infoForm, HeaderFooterTemplate, gameMode;
 {$R *.fmx}
+
+function GetMyFileG(const AssetNameG : string) : string;
+begin
+{$IFDEF ANDROID}
+  Result := TPath.Combine(TPath.GetDocumentsPath, AssetNameG);
+{$ENDIF}
+
+{$IFDEF MSWINDOWS}
+  Result := TPath.Combine(TPath.GetAppPath + PathDelim, AssetNameG);
+{$ENDIF}
+
+{$IFDEF IOS}
+  Result := TPath.Combine(TPath.GetAppPath, AssetNameG);
+{$ENDIF}
+
+{$IFDEF MACOS}
+  Result := TPath.Combine(TPath.GetAppPath, AssetNameG);
+{$ENDIF}
+end;
+
+procedure statsVarNullG;
+begin
+  gamesGW := 0;
+  winsGW := 0;
+  percentageGW := 0;
+end;
+
+procedure statsLVarNullG;
+begin
+  gamesGWL := 0;
+  winsGWL := 0;
+  percentageGWL := 0;
+end;
+
+procedure statsFileReadG;
+begin
+
+  if FileExists(GetMyFileG(statFileNamesG[0])) then begin
+    AssignFile(statG,GetMyFileG(statFileNamesG[0]));
+    reset(statG);
+    readln(statG , gamesGW);                               // считываем кол-во игр
+    readln(statG , winsGW);                                // считываем кол-во всех побед
+    readln(statG , percentageGW);                         // считываем процент всех побед
+    close(statG);
+  end;
+
+end;
+
+procedure statsFileReadGL;
+begin
+
+  if FileExists(GetMyFileG(statFileNamesG[VocNumberG])) then begin
+    AssignFile(statGL,GetMyFileG(statFileNamesG[VocNumberG]));
+    reset(statGL);
+    readln(statGL , gamesGWL);                               // считываем кол-во игр
+    readln(statGL , winsGWL);                                // считываем кол-во всех побед
+    readln(statGL , percentageGWL);                         // считываем процент всех побед
+    close(statGL);
+  end;
+
+end;
+
+procedure statsFileWriteWonG;
+begin
+
+  AssignFile(statG,GetMyFileG(statFileNamesG[0]));        // общая статистика
+  rewrite(statG);
+  inc(gamesGW);
+  writeln(statG , gamesGW);                                            // все игры
+  inc(winsGW);
+  writeln(statG , winsGW);                                             // победы
+  percentageGW := round (winsGW / gamesGW * 100);
+  writeln(statG , percentageGW);                                      // процент побед
+  close(statG);
+
+
+  AssignFile(statGL,GetMyFileG(statFileNamesG[VocNumberG]));  // статистика в языке
+  rewrite(statGL);
+  inc(gamesGWL);
+  writeln(statGL , gamesGWL);                                            // все игры
+  inc(winsGWL);
+  writeln(statGL , winsGWL);                                             // победы
+  percentageGWL := round (winsGWL / gamesGWL * 100);
+  writeln(statGL , percentageGWL);                                      // процент побед
+  close(statGL);
+
+end;
+
+procedure statsFileWriteLostG;
+begin
+
+  AssignFile(statG,GetMyFileG(statFileNamesG[0]));        // общая статистика
+  rewrite(statG);
+  inc(gamesGW);
+  writeln(statG , gamesGW);                                            // все игры
+  writeln(statG , winsGW);                                             // победы
+  percentageGW := round (winsGW / gamesGW * 100);
+  writeln(statG , percentageGW);                                      // процент побед
+  close(statG);
+
+  AssignFile(statGL,GetMyFileG(statFileNamesG[VocNumberG]));  // статистика в языке
+  rewrite(statGL);
+  inc(gamesGWL);
+  writeln(statGL , gamesGWL);                                            // все игры
+  writeln(statGL , winsGWL);                                             // победы
+  percentageGWL := round (winsGWL / gamesGWL * 100);
+  writeln(statGL , percentageGWL);                                      // процент побед
+  close(statGL);
+
+end;
+
+procedure statsReadAllG;
+begin
+  statsVarNullG;
+  statsLVarNullG;
+  statsFileReadG;
+  statsFileReadGL;
+end;
 
 procedure animationRightAnswer;
 begin
-  for iG := 1 to 4 do begin
+  for iG := 1 to answersQuantity do begin
     if ansRndm[iG] = wordNumber then begin
       ansButtArray[iG].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
       ansButtArray[iG].TintColor := boardNKeyTextColorsGreen[ColorsSetNumber];
@@ -98,7 +247,7 @@ end;
 
 procedure btnsAnimationStop;
 begin
-  for iG := 1 to 4 do begin
+  for iG := 1 to answersQuantity do begin
     ansButtArray[iG].TintColor := boardNKeyColorsDef[ColorsSetNumber];
     btnsRightAnswerAnimationArray[iG].Enabled := false;
   end;
@@ -110,6 +259,7 @@ begin
   {$IFDEF ANDROID}
     keysG[1].TextSettings.FontColor := boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
     keysG[1].TintColor := boardNKeyColorsDef[HeaderFooterTemplate.ColorsSetNumber];
+    keysG[1].TextSettings.Font.Size := 18;
     keysG[2].TextSettings.Font.Size := 20;
     keysG[3].TextSettings.Font.Size := 20;
     keysG[4].TextSettings.Font.Size := 18;
@@ -131,32 +281,47 @@ begin
 
 end;
 
+procedure startButtonPositionChange;
+begin
+  if (keysG[1].Enabled = true) and (keysG[1].Text = 'start') then begin
+    keysG[1].Position.Y := padG * 2;
+    keysG[1].Position.X := padG * 2;
+    keysG[1].TextSettings.FontColor := boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
+    keysG[1].TintColor := boardNKeyColorsDef[HeaderFooterTemplate.ColorsSetNumber];
+  end else begin
+    keysG[1].Position.Y := round (ansButtArray[6].Position.Y + ansButtArray[6].Height + padG * 2);
+    keysG[1].Position.X := round (screen.Width - keysG[1].Width - padG * 2);
+    keysG[1].TextSettings.FontColor := boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
+    keysG[1].TintColor := boardNKeyTextColorsYellow[HeaderFooterTemplate.ColorsSetNumber];
+    if VocNumberG = 1
+      then keysG[1].TextSettings.Font.Size := 14
+      else keysG[1].TextSettings.Font.Size := 16;
+  end;
+end;
+
 procedure topButtonsPositionsG;
 begin
 {$IFDEF ANDROID}
-
-  keysG[1].Position.Y := PadG * 2;
   for iG := 2 to 6 do begin
     keysG[iG].Height := 32;
     keysG[iG].Width := keysG[iG].Height;
     keysG[iG].Position.Y := PadG * 2;
   end;
-
   keysG[1].Width := keysG[2].Width * 2;
-  keysG[1].Position.X := PadG * 2;
-  keysG[2].Position.X := keysG[1].Position.X + keysG[1].Width + PadG;
-  keysG[3].Position.X := keysG[2].Position.X + keysG[2].Width + PadG;
-  keysG[4].Position.X := keysG[3].Position.X + keysG[3].Width + PadG;
-  keysG[5].Position.X := keysG[4].Position.X + keysG[4].Width + PadG;
+
+  keysG[2].Position.X := keysG[1].Width + PadG * 3;
+  for iG := 3 to 5 do
+    keysG[iG].Position.X := keysG[iG-1].Position.X + keysG[2].Width + PadG;
   keysG[6].Position.X := screen.Width - keysG[6].Width - PadG * 2;
 
+  startButtonPositionChange;
 {$ENDIF}
 end;
 
 procedure elementsSettingsG;
 begin
 
-  for IG := 1 to 4 do begin
+  for IG := 1 to answersQuantity do begin
     ansButtArray[iG].Width := (Screen.Width - PadG * 6) / 2;
     ansButtArray[iG].Height := 50;
     ansButtArray[iG].TextSettings.Font.Size := 20;
@@ -164,8 +329,8 @@ begin
       then ansButtArray[iG].Position.X := ansButtArray[1].Width + PadG * 4
       else ansButtArray[iG].Position.X := PadG * 2;
     if iG - 2 <= 0
-      then ansButtArray[iG].Position.Y := GuessWhatForm.Height / 2 + PadG * 10
-      else ansButtArray[iG].Position.Y := ansButtArray[1].Position.Y + ansButtArray[1].Height + PadG;
+      then ansButtArray[iG].Position.Y := Screen.Height / 2
+      else ansButtArray[iG].Position.Y := ansButtArray[iG - 2].Position.Y + ansButtArray[1].Height + PadG;
   end;
 
   GuessWhatForm.ScrollBox.Height := (ansButtArray[1].Position.Y - (keysG[2].Position.Y + keysG[2].Height) - padG * 2) / 3 * 2;
@@ -186,14 +351,13 @@ end;
 
 procedure ThemeRefreshG;
 begin
-
   GuessWhatForm.Fill.Color := HeaderFooterTemplate.bckgrndColor[HeaderFooterTemplate.ColorsSetNumber];
   GuessWhatForm.QuestionField.Color := HeaderFooterTemplate.bckgrndColor[HeaderFooterTemplate.ColorsSetNumber];
   GuessWhatForm.QuestionField.TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   GuessWhatForm.startGuess.TintColor := HeaderFooterTemplate.boardNKeyColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   GuessWhatForm.startGuess.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
 
-  for IG := 1 to 4 do begin
+  for IG := 1 to answersQuantity do begin
     ansButtArray[iG].TextSettings.FontColor := boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
     ansButtArray[iG].TintColor := boardNKeyColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   end;
@@ -202,6 +366,12 @@ begin
   TAndroidHelper.Activity.getWindow.setStatusBarColor(barsColors[HeaderFooterTemplate.ColorsSetNumber]);
   TAndroidHelper.Activity.getWindow.setNavigationBarColor(barsColors[HeaderFooterTemplate.ColorsSetNumber]);
 {$ENDIF}
+
+  if (keysG[1].Position.X = padG * 2) and (keysG[1].Position.Y = padG * 2)
+    then keysG[1].Text := 'start'
+    else keysG[1].Text := textStartButtonArray[VocNumberG];
+  for iG := 1 to 4 do
+    statsLabelsArray[iG].TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
 end;
 
 procedure LanguageChangeG;
@@ -212,25 +382,6 @@ begin
     then keysG[3].Text := '🇬🇧';
   if VocNumberG = 4
     then keysG[3].Text := '🇪🇸';
-end;
-
-function GetMyFileG(const AssetNameG : string) : string;
-begin
-{$IFDEF ANDROID}
-  Result := TPath.Combine(TPath.GetDocumentsPath, AssetNameG);
-{$ENDIF}
-
-{$IFDEF MSWINDOWS}
-  Result := TPath.Combine(TPath.GetAppPath + PathDelim, AssetNameG);
-{$ENDIF}
-
-{$IFDEF IOS}
-  Result := TPath.Combine(TPath.GetAppPath, AssetNameG);
-{$ENDIF}
-
-{$IFDEF MACOS}
-  Result := TPath.Combine(TPath.GetAppPath, AssetNameG);
-{$ENDIF}
 end;
 
 procedure vocabularyCheck;
@@ -290,9 +441,9 @@ begin
 //    then ansRndm[2] := ansRndm[1] - val
 //    else ansRndm[2] := ansRndm[1] + val;
   ansRndm[1] := wordNumber;
-  for IG := 2 to 4 do
+  for IG := 2 to answersQuantity do
     ansRndm[iG] := random (sizeG + 1);
-    for jG := 4 downto 2 do begin
+    for jG := answersQuantity downto 2 do begin
       randNumber := Random (jG-1) + 1; // выбор случайного элемента
 
       // замена элементов
@@ -303,7 +454,7 @@ begin
 
   // присваивание кнопкам слов-ответов ///////////
 
-  for IG := 1 to 4 do
+  for IG := 1 to answersQuantity do
     ansButtArray[iG].Text := answers[ansRndm[iG]];
 
 end;
@@ -345,16 +496,19 @@ end;
 procedure GuessWhatResult;
 begin
 
-  for iG := 1 to 4 do begin
+  for iG := 1 to answersQuantity do begin
     if btnPushArray[iG] = true then
       if ansRndm[iG] = wordNumber then begin
         ansButtArray[iG].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
         ansButtArray[iG].TintColor := boardNKeyTextColorsGreen[ColorsSetNumber];
         youWereWrong := false;
+        statsFileWriteWonG;
+
       end else begin
         ansButtArray[iG].TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
         ansButtArray[iG].TintColor := boardNKeyTextColorsRed[ColorsSetNumber];
         youWereWrong := true;
+        statsFileWriteLostG;
       end;
     ansButtArray[iG].HitTest := false;
   end;
@@ -363,7 +517,10 @@ begin
     then animationRightAnswer;
 
   GuessWhatForm.startGuess.Enabled := true;
+  startButtonPositionChange;
+  keysG[1].Visible := true;
 
+  statsReadAllG;
 end;
 
 procedure TGuessWhatForm.Button1Click(Sender: TObject);
@@ -390,12 +547,26 @@ begin
   GuessWhatResult;
 end;
 
+procedure TGuessWhatForm.Button5Click(Sender: TObject);
+begin
+  btnPushArray[5] := true;
+  GuessWhatResult;
+end;
+
+procedure TGuessWhatForm.Button6Click(Sender: TObject);
+begin
+  btnPushArray[6] := true;
+  GuessWhatResult;
+end;
+
 procedure TGuessWhatForm.FormActivate(Sender: TObject);
 begin
   if themeChanged
     then ThemeRefreshG;
-  if languageChangedG
-    then LanguageChangeG;
+  if languageChangedG then begin
+    LanguageChangeG;
+    statsReadAllG;
+  end;
 end;
 
 procedure TGuessWhatForm.FormCreate(Sender: TObject);
@@ -405,11 +576,15 @@ begin
   ansButtArray[2] := Button2;
   ansButtArray[3] := Button3;
   ansButtArray[4] := Button4;
+  ansButtArray[5] := Button5;
+  ansButtArray[6] := Button6;
   btnsRightAnswerAnimationArray[1] := Button1Animation;
   btnsRightAnswerAnimationArray[2] := Button2Animation;
   btnsRightAnswerAnimationArray[3] := Button3Animation;
   btnsRightAnswerAnimationArray[4] := Button4Animation;
-  for IG := 1 to 4 do
+  btnsRightAnswerAnimationArray[5] := Button5Animation;
+  btnsRightAnswerAnimationArray[6] := Button6Animation;
+  for IG := 1 to answersQuantity do
     ansButtArray[iG].HitTest := false;
   keysG[1] := startGuess;
   keysG[2] := statsG;
@@ -417,12 +592,22 @@ begin
   keysG[4] := ThemeButton;
   keysG[5] := SoundBtn;
   keysG[6] := info;
+  statsHitCounter := 0;
+  statsLabelsArray[1] := headLabelG;
+  statsLabelsArray[2] := gamesLabelG;
+  statsLabelsArray[3] := winsLabelG;
+  statsLabelsArray[4] := percentageLabelG;
+  for iG := 1 to 4 do begin
+    statsLabelsArray[iG].TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
+    statsLabelsArray[iG].TextSettings.Font.Size := 12;
+    statsLabelsArray[iG].Visible := false;
+  end;
 
   VocNumberG := 1;
   vocabularyCheck;
   questionsFill;
 
-  for IG := 1 to 4 do
+  for IG := 1 to answersQuantity do
     ansButtArray[iG].Text := '';
 
   topButtonsPropertiesG;
@@ -430,7 +615,9 @@ begin
   elementsSettingsG;
 
   StartGuessAnimation.Enabled := true;
+  keysG[1].Text := 'start';
 
+  statsReadAllG;
 end;
 
 procedure TGuessWhatForm.FormGesture(Sender: TObject;
@@ -442,12 +629,44 @@ end;
 
 procedure TGuessWhatForm.FormShow(Sender: TObject);
 begin
-
   ThemeRefreshG;
   vocabularyCheck;
-  topButtonsPropertiesG;
   elementsSettingsG;
+  startButtonPositionChange;
+end;
 
+procedure TGuessWhatForm.statsGClick(Sender: TObject);
+begin
+  if (statsHitCounter = 0) or (statsHitCounter = 1)
+    then inc (statsHitCounter)
+    else statsHitCounter := 0;
+  statsReadAllG;
+  if (statsHitCounter = 1) or (statsHitCounter = 2)
+    then for iG := 1 to 4 do
+      statsLabelsArray[iG].Visible := true;
+  if statsHitCounter = 1 then begin
+    statsLabelsArray[1].Text := commonHeadersG[VocNumberG];
+    statsLabelsArray[2].Text := GamesStatG[VocNumberG] + inttostr(gamesGW);
+    statsLabelsArray[3].Text := WinsStatG[VocNumberG] + inttostr(winsGW);
+    statsLabelsArray[4].Text := intToStr(percentageGW) + percentageStatG[VocNumberG];
+    statsLabelsArray[1].Position.Y := ansButtArray[5].Position.Y + ansButtArray[5].Height + padG * 2;
+    statsLabelsArray[1].Position.X := padG * 2;
+    for iG := 2 to 4 do begin
+      statsLabelsArray[iG].Position.Y := statsLabelsArray[iG - 1].Position.Y + statsLabelsArray[iG - 1].Height + padG;
+      statsLabelsArray[iG].Position.X := padG * 2;
+  end;
+  end;
+  if statsHitCounter = 2 then begin
+    statsLabelsArray[1].Text := langHeadersG[VocNumberG];
+    statsLabelsArray[2].Text := GamesStatG[VocNumberG] + inttostr(gamesGWL);
+    statsLabelsArray[3].Text := WinsStatG[VocNumberG] + inttostr(winsGWL);
+    statsLabelsArray[4].Text := intToStr(percentageGW) + percentageStatG[VocNumberG];
+  end;
+  if (statsHitCounter = 0)
+    then for iG := 1 to 4 do
+      statsLabelsArray[iG].Visible := false;
+  for iG := 1 to 4 do
+    statsLabelsArray[iG].TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
 end;
 
 procedure TGuessWhatForm.infoClick(Sender: TObject);
@@ -486,15 +705,16 @@ begin
   GuessWhatForm.QuestionField.TextSettings.FontColor := boardNKeyTextColorsDef[ColorsSetNumber];
 
   startGuess.Enabled := false;
+  startGuess.Text := textStartButtonArray[VocNumberG];
+  StartGuessAnimation.Enabled := false;
+  startButtonPositionChange;
+  startGuess.Visible := false;
 
-  for IG := 1 to 4 do begin
+  for IG := 1 to answersQuantity do begin
     ansButtArray[iG].HitTest := true;
     btnPushArray[iG] := false;
   end;
-
   btnsAnimationStop;
-  StartGuessAnimation.Enabled := false;
 
 end;
-
 end.

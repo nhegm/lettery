@@ -434,7 +434,7 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="gameMode.pas">
-            <Form>Form1</Form>
+            <Form>GameModeForm</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="GuessWhat.pas">

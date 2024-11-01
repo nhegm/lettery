@@ -16,9 +16,10 @@ type
     Switcher: TSwitch;
     lastStreakLabel: TLabel;
     averageLabel: TLabel;
-    fastAttemptLabel: TLabel;
+    fastAttemptLabel: TLabel;                    //  GW Stat
     procedure FormShow(Sender: TObject);
     procedure SwitcherSwitch(Sender: TObject);
+
 
   private
     { Private declarations }
@@ -54,6 +55,18 @@ const
   langHeaderRus = 'Русс стат'; langHeaderEng = 'English stat'; langHeaderLat = 'Statistica latina'; langHeaderEsp = 'Estadística en español';
   langHeaders: array [1..4] of String = (langHeaderRus, langHeaderEng, langHeaderLat, langHeaderEsp);
 
+  commonHeaderRusG = 'Общая статистика'; commonHeaderEngG = 'Common statistics'; commonHeaderLatG = 'Statistica tota'; commonHeaderEspG = 'Todas las estadísticas';
+  GamesRusG = 'Игр сыграно: '; GamesEngG = 'Games played: ';  GamesLatG = 'Ludos lusit: '; GamesEspG = 'Juegos jugados: ';
+  WinsRusG = 'Побед: '; WinsEngG = 'Wins: '; WinsLatG = 'Victoriae: '; WinsEspG = 'Victorias: ';
+  percentageRusG = 'Процент побед: '; percentageEngG = 'Aver. attempts: '; percentageLatG = 'Что-то будет'; percentageEspG = 'Intento promedio: ';
+
+  commonHeadersG: array [1..4] of String = (commonHeaderRusG, commonHeaderEngG, commonHeaderLatG, commonHeaderEspG);
+  GamesStatG: array [1..4] of String = (GamesRusG, GamesEngG, GamesLatG, GamesEspG);
+  WinsStatG: array [1..4] of String = (WinsRusG, WinsEngG, WinsLatG, WinsEspG);
+  percentageStatG: array [1..4] of String = (percentageRusG, percentageEngG, percentageLatG, percentageEspG);
+
+  langHeaderRusG = 'Русс стат'; langHeaderEngG = 'English stat'; langHeaderLatG = 'Statistica latina'; langHeaderEspG = 'Estadística en español';
+  langHeadersG: array [1..4] of String = (langHeaderRusG, langHeaderEngG, langHeaderLatG, langHeaderEspG);
 
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}

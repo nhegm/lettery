@@ -1,5 +1,7 @@
 program Lettery;
 
+
+
 uses
   System.StartUpCopy,
   FMX.Forms,
@@ -10,7 +12,7 @@ uses
   infoForm in 'infoForm.pas' {informationForm},
   langForm in 'langForm.pas' {languageForm},
   ratings in 'ratings.pas' {rateForm},
-  gameMode in 'gameMode.pas' {Form1},
+  gameMode in 'gameMode.pas' {GameModeForm},
   GuessWhat in 'GuessWhat.pas' {GuessWhatForm};
 
 {$R *.res}
@@ -25,7 +27,7 @@ begin
   Application.CreateForm(TsetForm, setForm);
   Application.CreateForm(TinformationForm, informationForm);
   Application.CreateForm(TrateForm, rateForm);
-  Application.CreateForm(TForm1, GameModeForm);
+  Application.CreateForm(TGameModeForm, GameModeForm);
   Application.CreateForm(TGuessWhatForm, GuessWhatForm);
   Application.Run;
 end.

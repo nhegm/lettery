@@ -1,0 +1,79 @@
+object statGWForm: TstatGWForm
+  Left = 0
+  Top = 0
+  Caption = 'statGW'
+  ClientHeight = 480
+  ClientWidth = 640
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object SwitcherGW: TSwitch
+    IsChecked = False
+    Position.X = 110.000000000000000000
+    Position.Y = 228.000000000000000000
+    Size.Width = 44.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'switchstyle'
+    TabOrder = 5
+    TabStop = False
+    ParentShowHint = False
+    ShowHint = False
+    OnSwitch = SwitcherGWSwitch
+  end
+  object percentageLabel: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 200.000000000000000000
+    Position.Y = 184.000000000000000000
+    Size.Width = 210.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = xFFFDF0D5
+    TextSettings.HorzAlign = Center
+    TextSettings.Trimming = None
+    Text = 'percentageLabel'
+    TabOrder = 0
+  end
+  object gamesLabel: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 200.000000000000000000
+    Position.Y = 126.000000000000000000
+    Size.Width = 210.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = xFFFDF0D5
+    TextSettings.HorzAlign = Center
+    TextSettings.Trimming = None
+    Text = 'gamesLabel'
+    TabOrder = 2
+  end
+  object headLabel: TLabel
+    AutoSize = True
+    StyledSettings = [Family, Size, Style]
+    Position.X = 192.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.HorzAlign = Center
+    TextSettings.Trimming = None
+    Text = 'headLabel'
+    TabOrder = 4
+  end
+  object winsLabel: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 200.000000000000000000
+    Position.Y = 156.000000000000000000
+    Size.Width = 210.000000000000000000
+    Size.Height = 20.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = xFFFDF0D5
+    TextSettings.HorzAlign = Center
+    TextSettings.Trimming = None
+    Text = 'winsLabel'
+    TabOrder = 1
+  end
+end
