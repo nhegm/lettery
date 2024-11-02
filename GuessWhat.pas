@@ -289,8 +289,14 @@ begin
     keysG[1].TextSettings.FontColor := boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
     keysG[1].TintColor := boardNKeyColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   end else begin
-    keysG[1].Position.Y := round (ansButtArray[6].Position.Y + ansButtArray[6].Height + padG * 2);
-    keysG[1].Position.X := round (screen.Width - keysG[1].Width - padG * 2);
+    if statsHitCounter > 1 then begin
+      keysG[1].Position.Y := ansButtArray[5].Position.Y + ansButtArray[5].Height + padG * 2;
+      keysG[1].Position.X := padG * 2;
+    end else begin
+      keysG[1].Position.Y := ansButtArray[6].Position.Y + ansButtArray[6].Height + padG * 2;
+      keysG[1].Position.X := screen.Width - keysG[1].Width - padG * 2;
+    end;
+
     keysG[1].TextSettings.FontColor := boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
     keysG[1].TintColor := boardNKeyTextColorsYellow[HeaderFooterTemplate.ColorsSetNumber];
     if VocNumberG = 1
@@ -600,6 +606,7 @@ begin
   for iG := 1 to 4 do begin
     statsLabelsArray[iG].TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
     statsLabelsArray[iG].TextSettings.Font.Size := 12;
+    statsLabelsArray[iG].Width := screen.Width - padG * 4;
     statsLabelsArray[iG].Visible := false;
   end;
 
@@ -613,6 +620,12 @@ begin
   topButtonsPropertiesG;
   topButtonsPositionsG;
   elementsSettingsG;
+  statsLabelsArray[1].Position.Y := ansButtArray[5].Position.Y + ansButtArray[5].Height + padG * 2;
+  statsLabelsArray[1].Position.X := padG * 2;
+  for iG := 2 to 4 do begin
+    statsLabelsArray[iG].Position.Y := statsLabelsArray[iG - 1].Position.Y + statsLabelsArray[iG - 1].Height + padG;
+    statsLabelsArray[iG].Position.X := padG * 2;
+  end;
 
   StartGuessAnimation.Enabled := true;
   keysG[1].Text := 'start';
@@ -649,18 +662,20 @@ begin
     statsLabelsArray[2].Text := GamesStatG[VocNumberG] + inttostr(gamesGW);
     statsLabelsArray[3].Text := WinsStatG[VocNumberG] + inttostr(winsGW);
     statsLabelsArray[4].Text := intToStr(percentageGW) + percentageStatG[VocNumberG];
-    statsLabelsArray[1].Position.Y := ansButtArray[5].Position.Y + ansButtArray[5].Height + padG * 2;
-    statsLabelsArray[1].Position.X := padG * 2;
-    for iG := 2 to 4 do begin
-      statsLabelsArray[iG].Position.Y := statsLabelsArray[iG - 1].Position.Y + statsLabelsArray[iG - 1].Height + padG;
+    for iG := 1 to 4 do begin
+      statsLabelsArray[iG].TextSettings.HorzAlign := TTextAlign.Leading;
       statsLabelsArray[iG].Position.X := padG * 2;
-  end;
+    end;
   end;
   if statsHitCounter = 2 then begin
     statsLabelsArray[1].Text := langHeadersG[VocNumberG];
     statsLabelsArray[2].Text := GamesStatG[VocNumberG] + inttostr(gamesGWL);
     statsLabelsArray[3].Text := WinsStatG[VocNumberG] + inttostr(winsGWL);
     statsLabelsArray[4].Text := intToStr(percentageGW) + percentageStatG[VocNumberG];
+    for iG := 1 to 4 do begin
+      statsLabelsArray[iG].TextSettings.HorzAlign := TTextAlign.Trailing;
+      statsLabelsArray[iG].Position.X := screen.Width - statsLabelsArray[iG].Width - padG * 2;
+    end;
   end;
   if (statsHitCounter = 0)
     then for iG := 1 to 4 do
