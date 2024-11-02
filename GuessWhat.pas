@@ -289,14 +289,8 @@ begin
     keysG[1].TextSettings.FontColor := boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
     keysG[1].TintColor := boardNKeyColorsDef[HeaderFooterTemplate.ColorsSetNumber];
   end else begin
-    if statsHitCounter > 1 then begin
-      keysG[1].Position.Y := ansButtArray[5].Position.Y + ansButtArray[5].Height + padG * 2;
-      keysG[1].Position.X := padG * 2;
-    end else begin
-      keysG[1].Position.Y := ansButtArray[6].Position.Y + ansButtArray[6].Height + padG * 2;
-      keysG[1].Position.X := screen.Width - keysG[1].Width - padG * 2;
-    end;
-
+    keysG[1].Position.Y := ansButtArray[6].Position.Y + ansButtArray[6].Height + padG * 2;
+    keysG[1].Position.X := screen.Width - keysG[1].Width - padG * 2;
     keysG[1].TextSettings.FontColor := boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
     keysG[1].TintColor := boardNKeyTextColorsYellow[HeaderFooterTemplate.ColorsSetNumber];
     if VocNumberG = 1
@@ -673,10 +667,6 @@ begin
     statsLabelsArray[2].Text := GamesStatG[VocNumberG] + inttostr(gamesGWL);
     statsLabelsArray[3].Text := WinsStatG[VocNumberG] + inttostr(winsGWL);
     statsLabelsArray[4].Text := intToStr(percentageGW) + percentageStatG[VocNumberG];
-    for iG := 1 to 4 do begin
-      statsLabelsArray[iG].TextSettings.HorzAlign := TTextAlign.Trailing;
-      statsLabelsArray[iG].Position.X := screen.Width - statsLabelsArray[iG].Width - padG * 2;
-    end;
   end;
   if (statsHitCounter = 0)
     then for iG := 1 to 4 do
