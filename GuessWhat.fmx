@@ -109,7 +109,7 @@ object GuessWhatForm: TGuessWhatForm
       StopValue = 1.000000000000000000
     end
   end
-  object SoundBtn: TButton
+  object SoundBtnG: TButton
     Position.X = 277.000000000000000000
     Position.Y = 23.000000000000000000
     Size.Width = 32.000000000000000000
@@ -118,6 +118,7 @@ object GuessWhatForm: TGuessWhatForm
     TabOrder = 82
     Text = #55357#56586' '
     TextSettings.Trimming = None
+    OnClick = SoundBtnGClick
   end
   object info: TButton
     StyledSettings = [Family]
@@ -304,5 +305,14 @@ object GuessWhatForm: TGuessWhatForm
             GestureID = sgiRight
           end>
       end>
+  end
+  object SoundPlayTimer: TTimer
+    OnTimer = SoundPlayTimerTimer
+    Left = 312
+    Top = 128
+  end
+  object MediaPlayerG: TMediaPlayer
+    Left = 288
+    Top = 328
   end
 end

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<ActiveMobileDevice>
-		<NoProfile Android="" Android64="RFCX31SDSQF"/>
+		<NoProfile Android="" Android64=""/>
 	</ActiveMobileDevice>
 	<Transactions>
     <Transaction>1899.12.30 00:00:00.000.882,=C:\Users\nhegm\Documents\Embarcadero\Studio\Projects\testApp\Unit3.pas</Transaction>

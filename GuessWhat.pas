@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Gestures,
-  FMX.Layouts, FMX.StdCtrls, FMX.Objects, FMX.Ani, FMX.Controls.Presentation, System.IOUtils
+  FMX.Layouts, FMX.StdCtrls, FMX.Objects, FMX.Ani, FMX.Controls.Presentation, System.IOUtils,
+  FMX.Media
   {$IF Defined(ANDROID)}
   ,Androidapi.Helpers
   {$ENDIF};
@@ -21,7 +22,7 @@ type
     StartGuessAnimation: TFloatAnimation;
     Lang: TButton;
     LangAnimation: TFloatAnimation;
-    SoundBtn: TButton;
+    SoundBtnG: TButton;
     info: TButton;
     Button1: TButton;
     Button2: TButton;
@@ -39,6 +40,8 @@ type
     winsLabelG: TLabel;
     percentageLabelG: TLabel;
     gamesLabelG: TLabel;
+    SoundPlayTimer: TTimer;
+    MediaPlayerG: TMediaPlayer;
     procedure FormGesture(Sender: TObject; const EventInfo: TGestureEventInfo;
       var Handled: Boolean);
     procedure FormShow(Sender: TObject);
@@ -55,6 +58,8 @@ type
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure statsGClick(Sender: TObject);
+    procedure SoundBtnGClick(Sender: TObject);
+    procedure SoundPlayTimerTimer(Sender: TObject);
   private
 
   public
@@ -70,6 +75,7 @@ var
   btnPushArray : array [1..6] of boolean;
   btnsRightAnswerAnimationArray : array [1..6] of TFloatAnimation;
   keysG: array [1..6] of TButton;
+  allButtons: array [1..12] of TButton;
   iG, jG, wordNumber, sizeG: integer;
   valTemp, randNumber: integer;                   // вспом. числа для перемешивания вариантов ответов
   fileQues , fileAnsw : string;
@@ -97,6 +103,9 @@ const
   textStartButtonArray: array [1..5] of String = (textStartButtonRus, textStartButtonEng, textStartButtonLat, textStartButtonEsp, textStartButtonFra);
 
   statFileNamesG: array [0..4] of string = ('statsG.ngm', 'statsRusG.ngm', 'statsEngG.ngm', 'statsLatG.ngm', 'statsEspG.ngm');
+
+  greetingsTextRusG = 'Нажмите на кнопку start, чтобы начать игру'; greetingsTextEngG ='push start button to play'; greetingsTextLatG = ''; greetingsTextEspG = '';
+  greetingsTextArray: array [1..4] of String = (greetingsTextRusG , greetingsTextEngG , greetingsTextLatG , greetingsTextEspG);
 
   commonHeaderRusG = 'Общая статистика'; commonHeaderEngG = 'Common statistics'; commonHeaderLatG = 'Statistica tota'; commonHeaderEspG = 'Todas las estadísticas';
   GamesRusG = 'Игр сыграно: '; GamesEngG = 'Games played: ';  GamesLatG = 'Ludos lusit: '; GamesEspG = 'Juegos jugados: ';
@@ -524,39 +533,73 @@ begin
   statsReadAllG;
 end;
 
+procedure TGuessWhatForm.SoundPlayTimerTimer(Sender: TObject);
+begin
+  GuessWhatForm.SoundPlayTimer.Enabled := False;
+  GuessWhatForm.MediaPlayerG.Stop;
+end;
+
+procedure ClickSoundPlay;
+begin
+  if GuessWhatForm.MediaPlayerG.State = TMediaState.Playing
+    then GuessWhatForm.MediaPlayerG.Stop;
+  GuessWhatForm.MediaPlayerG.FileName := GetMyFileG('standard_click.mp3');
+  GuessWhatForm.SoundPlayTimer.OnTimer := GuessWhatForm.SoundPlayTimerTimer;
+  GuessWhatForm.SoundPlayTimer.Interval := GuessWhatForm.MediaPlayerG.Duration;
+  GuessWhatForm.MediaPlayerG.Play;
+  GuessWhatForm.SoundPlayTimer.Enabled := true;
+end;
+
+procedure KbrdPushActionG;
+begin
+  if GuessWhatForm.SoundBtnG.Text = '🔊 '
+    then begin
+      ClickSoundPlay;
+      GuessWhatForm.SoundPlayTimer.OnTimer := GuessWhatForm.SoundPlayTimerTimer;
+      MainForm.kbrdSwitch.Interval := 75;
+      MainForm.kbrdSwitch.Enabled := true;
+    end;
+end;
+
 procedure TGuessWhatForm.Button1Click(Sender: TObject);
 begin
   btnPushArray[1] := true;
+  KbrdPushActionG;
   GuessWhatResult;
 end;
 
 procedure TGuessWhatForm.Button2Click(Sender: TObject);
 begin
   btnPushArray[2] := true;
+  KbrdPushActionG;
   GuessWhatResult;
 end;
 
 procedure TGuessWhatForm.Button3Click(Sender: TObject);
 begin
   btnPushArray[3] := true;
+  KbrdPushActionG;
   GuessWhatResult;
 end;
 
 procedure TGuessWhatForm.Button4Click(Sender: TObject);
 begin
   btnPushArray[4] := true;
+  KbrdPushActionG;
   GuessWhatResult;
 end;
 
 procedure TGuessWhatForm.Button5Click(Sender: TObject);
 begin
   btnPushArray[5] := true;
+  KbrdPushActionG;
   GuessWhatResult;
 end;
 
 procedure TGuessWhatForm.Button6Click(Sender: TObject);
 begin
   btnPushArray[6] := true;
+  KbrdPushActionG;
   GuessWhatResult;
 end;
 
@@ -591,8 +634,12 @@ begin
   keysG[2] := statsG;
   keysG[3] := Lang;
   keysG[4] := ThemeButton;
-  keysG[5] := SoundBtn;
+  keysG[5] := SoundBtnG;
   keysG[6] := info;
+  for iG := 1 to 12 do
+    if iG < 7
+      then allButtons[iG] := ansButtArray[iG]
+      else allButtons[iG] := keysG[iG - 6];
   statsHitCounter := 0;
   statsLabelsArray[1] := headLabelG;
   statsLabelsArray[2] := gamesLabelG;
@@ -609,8 +656,10 @@ begin
   vocabularyCheck;
   questionsFill;
 
-  for IG := 1 to answersQuantity do
+  for IG := 1 to answersQuantity do begin
+    ansButtArray[iG].Visible := false;
     ansButtArray[iG].Text := '';
+  end;
 
   topButtonsPropertiesG;
   topButtonsPositionsG;
@@ -624,7 +673,7 @@ begin
 
   StartGuessAnimation.Enabled := true;
   keysG[1].Text := 'start';
-
+  QuestionField.Text := greetingsTextArray[VocNumberG];
   statsReadAllG;
 end;
 
@@ -673,27 +722,38 @@ begin
       statsLabelsArray[iG].Visible := false;
   for iG := 1 to 4 do
     statsLabelsArray[iG].TextSettings.FontColor := HeaderFooterTemplate.boardNKeyTextColorsDef[HeaderFooterTemplate.ColorsSetNumber];
+  KbrdPushActionG;
 end;
 
 procedure TGuessWhatForm.infoClick(Sender: TObject);
 begin
   informationForm.Show;
-//  if SoundBtn.Text = '🔊 '
-//      then KbrdSoundPlay;
+  KbrdPushActionG;
 end;
 
 procedure TGuessWhatForm.LangClick(Sender: TObject);
 begin
   languageForm.Show;
-//  if SoundBtn.Text = '🔊 '
-//      then HeaderFooterTemplate.KbrdSoundPlay;
+  KbrdPushActionG;
+end;
+
+procedure TGuessWhatForm.SoundBtnGClick(Sender: TObject);
+begin
+  if SoundBtnG.Text = '🔈'
+    then begin
+      SoundBtnG.Text := '🔊 ';
+      SoundOn := 1;
+    end
+    else begin
+      SoundBtnG.Text := '🔈';
+      SoundOn := 0;
+    end
 end;
 
 procedure TGuessWhatForm.ThemeButtonClick(Sender: TObject);
 begin
   setForm.Show;
-//  if SoundBtn.Text = '🔊 '
-//    then KbrdSoundPlay;
+  KbrdPushActionG;
 end;
 
 procedure TGuessWhatForm.startGuessClick(Sender: TObject);
@@ -718,9 +778,11 @@ begin
 
   for IG := 1 to answersQuantity do begin
     ansButtArray[iG].HitTest := true;
+    ansButtArray[iG].Visible := true;
     btnPushArray[iG] := false;
   end;
   btnsAnimationStop;
 
+  KbrdPushActionG;
 end;
 end.
