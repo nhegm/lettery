@@ -339,10 +339,11 @@ begin
       else ansButtArray[iG].Position.Y := ansButtArray[iG - 2].Position.Y + ansButtArray[1].Height + PadG;
   end;
 
-  GuessWhatForm.ScrollBox.Height := (ansButtArray[1].Position.Y - (keysG[2].Position.Y + keysG[2].Height) - padG * 2) / 3 * 2;
-  GuessWhatForm.ScrollBox.Width := screen.Width - PadG * 4;
-  GuessWhatForm.QuestionField.Width := GuessWhatForm.ScrollBox.Width;
-  GuessWhatForm.ScrollBox.Position.X := PadG * 2;
+  GuessWhatForm.ScrollBox.Height := ansButtArray[1].Position.Y - (keysG[2].Position.Y + keysG[2].Height) - padG * 2;
+  GuessWhatForm.ScrollBox.Width := screen.Width;
+  GuessWhatForm.QuestionField.Width := GuessWhatForm.ScrollBox.Width - padG * 4;
+  GuessWhatForm.ScrollBox.Position.X := 0;
+  GuessWhatForm.QuestionField.Position.X := padG * 2;
   GuessWhatForm.ScrollBox.Position.Y := ansButtArray[1].Position.Y - padG - GuessWhatForm.ScrollBox.Height;
   GuessWhatForm.QuestionField.Position.Y := GuessWhatForm.ScrollBox.Position.Y + PadG;
   GuessWhatForm.QuestionField.TextSettings.Font.Size := 18;
